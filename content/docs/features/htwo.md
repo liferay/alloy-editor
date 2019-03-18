@@ -3,6 +3,8 @@ description: For that not-so-important content, use this button to turn text int
 layout: feature
 title: Heading 2
 ---
+###### For that not-so-important content, use this button to turn text into a 2nd level heading.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-h2.gif"/>
 </div>

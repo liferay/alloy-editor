@@ -1,10 +1,10 @@
 ---
 title: How to use it?
-description: The section below assumes that you are using the default UI, which is built using React. The AlloyEditor core is fully separated from the UI and creating another one based on any other framework is very easy.
+description: The section below assumes that you are using the default UI built on React. If you're using your own custom UI, these steps will be different.
 order: 2
 ---
 
-###### The section below assumes that you are using the default UI, which is built using React. The AlloyEditor core is fully separated from the UI and creating another one based on any other framework is very easy.
+###### The section below assumes that you are using the default UI built on React. If you're using your own custom UI, these steps will be different.
 
 <article id="article1">
 
@@ -23,25 +23,25 @@ order: 2
 There are a <strong>few ways</strong> to add the editor to the page:
 
 <section>
-  <span>Add the whole editor with all UI on the page</span>
+  <span>Add the whole editor with all UI on the page:</span>
 
   ```text/html
   <script src="alloy-editor/alloy-editor-all-min.js"></script>
   ```
 
-  <span>Add it on the page separating the CKEditor code from AlloyEditor. This is useful if in your project you already use CKEditor.</span>
+  <span>Add it on the page, separating the CKEditor code from AlloyEditor. This is useful if you already use CKEditor in your project:</span>
 
   ```text/html
   <script src="alloy-editor/alloy-editor-no-ckeditor-min.js"></script>
   ```
 
-  <span>Add it on the page separating the React code from AlloyEditor. This is useful if you already use React in your project.</span>
+  <span>Add it on the page, separating the React code from AlloyEditor. This is useful if you already use React in your project:</span>
 
   ```text/html
   <script src="alloy-editor/alloy-editor-no-react-min.js"></script>
   ```
 
-  <span>If you use both React and CKEditor on your page, then just include AlloyEditor's core</span>
+  <span>If you use both React and CKEditor on your page, then just include AlloyEditor's core:</span>
   ```text/html
   <script src="alloy-editor/alloy-editor-core-min.js"></script>
   ```

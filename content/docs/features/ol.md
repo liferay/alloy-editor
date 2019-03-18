@@ -3,6 +3,8 @@ description: Need an ordered list? Easily turn paragraphs into list items with t
 layout: feature
 title: Lists (Numbered)
 ---
+###### Need an ordered list? Easily turn paragraphs into list items with this button.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-ol.gif"/>
 </div>

@@ -1,16 +1,16 @@
 ---
 title: Read only mode
-description: AlloyEditor might be set to work in "read only" mode. In read only mode, changing the content will be not possible and clicking on a link will navigate to its URL instead to open a dialog for editing it.
+description: You can set AlloyEditor to "read only" mode. In read only mode, you can not edit content and links navigate to their URL instead of opening a dialog for editing them.
 order: 8
 ---
 
-###### AlloyEditor might be set to work in "read only" mode. In read only mode, changing the content will be not possible and clicking on a link will navigate to its URL instead to open a dialog for editing it.
+###### You can set AlloyEditor to "read only" mode. In read only mode, you can not edit content and links navigate to their URL instead of opening a dialog for editing them.
 
 <article id="article1">
 
 ## Passing "readOnly" configuration property to the editor
 
-The read only mode can be set by passing the <strong>readOnly</strong> property to the editor with value `true`:
+Read only mode can be set by passing the <strong>readOnly</strong> property to the editor with the value `true`:
 
 ```javascript
 var editor = AlloyEditor.editable('editable', {
@@ -18,14 +18,12 @@ var editor = AlloyEditor.editable('editable', {
 });
 ```
 
-The value of the <code>readOnly</code> property might be `true` or `false`. If set to <code>true</code> this means changes to the content won't be possible and clicking on a link will navigate to its URL instead to open a dialog for changing it.
-
-This behavior might be changed any time using the following code:
+This behavior can be changed any time by setting the nativeEditor's read only property to <code>false</code>:
 
 ```javascript
 var nativeEditor = editor.get('nativeEditor');
 nativeEditor.setReadOnly(false);
 ```
-This will make the content editable again.
+This makes the content editable again.
 
 </article>

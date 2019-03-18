@@ -4,25 +4,24 @@ description: Is there an existing CKEditor plugin you like? Chances are you will
 order: 4
 ---
 
-###### There are some CKEDITOR plugins that it add button through their UI. This tutorial is about using this kind of plugins.
+###### Some CKEDITOR plugins add buttons through their UI. This tutorial shows how to use this kind of plugin.
 
 <article id="article1">
 
-## Example to use 'font' Plugin
+## 'font' Plugin example
 
-<span class="code-header">You can download <a alt="font plugin" href="http://ckeditor.com/addon/font">font plugin</a> and, after that,
-you can paste it into <strong>plugins folder</strong>
+<span class="code-header">Download <a alt="font plugin" href="http://ckeditor.com/addon/font">font plugin</a>, and paste it into the <strong>plugins folder</strong>:
 </span>
 
-> Note: Keep in mind, if this plugin has dependencies, we need to download and to configure them too.
+> Note: Keep in mind, if this plugin has dependencies, you need to download and configure them as well.
 
 </article>
 
 <article id="article2">
 
-## Configuration AlloyEditor
+## AlloyEditor Configuration
 
-Our UI bridges allow us to use CKEDITOR plugin easier, you only need to add appropriates plugins to extraPlugins configuration and to retrieve its buttons using <strong>AlloyEditor.getButtons(['PLUGIN_NAME', MORE_BUTTONS])</strong>
+Our UI bridges make it easier for you to use CKEDITOR plugins. You just need to add the required plugins to the extraPlugins configuration and retrieve its buttons using <strong>AlloyEditor.getButtons(['PLUGIN_NAME', MORE_BUTTONS])</strong>:
 
 ```javascript
   AlloyEditor.editable('MyEditable', {
@@ -46,13 +45,13 @@ Our UI bridges allow us to use CKEDITOR plugin easier, you only need to add appr
   <img class="img img-polaroid" src="/images/guides/ckeditor_plugins.gif"/>
 </div>
 
-If you want to customize and to add other buttons to text selections you can add them like this:
+If you want to add custom buttons to text selections, you can add them like this:
 
 ```javascript
   buttons: AlloyEditor.getButtons(['font', 'bold', 'italic', ...]),
 ```
 
-Or if you prefer to keep previous buttons you can do:
+If instead you want to add custom buttons with the existing buttons, you can add them like this:
 
 ```javascript
   var selections = AlloyEditor.Selections;
@@ -79,7 +78,7 @@ Or if you prefer to keep previous buttons you can do:
 
 AlloyEditor's UI Bridge is in its early stages, so there are still some uncovered areas. For example, dialogs are not converted and will still appear with CKEditor's default look and feel.
 
-Use the new <strong>moono</strong> skin to close the gap between AlloyEditor default look and feel and CKEditor's.
+Use the new <strong>moono</strong> skin to close the gap between AlloyEditor's default look and feel and CKEditor's look and feel:
 
 ```text/html
   <link href="alloy-editor/assets/alloy-editor-moono-min.css" rel="stylesheet">

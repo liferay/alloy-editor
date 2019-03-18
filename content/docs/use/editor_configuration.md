@@ -1,10 +1,10 @@
 ---
 title: Editor Configuration
-description: AlloyEditor allows you to configure the editor in the way you prefer. You will be able to custom Toolbars, Buttons and Editor behavior!
+description: AlloyEditor is fully configurable. You can customize toolbars, buttons, and editor behavior!
 order: 5
 ---
 
-###### AlloyEditor allows you to configure the editor in the way you prefer. You will be able to custom Toolbars, Buttons and Editor behavior!
+###### AlloyEditor is fully configurable. You can customize toolbars, buttons, and editor behavior!
 
 ## Toolbar Configuration
 

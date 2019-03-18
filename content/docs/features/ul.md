@@ -3,6 +3,8 @@ description: Use this button to turn paragraphs into unordered list items.
 layout: feature
 title: Lists (Bulleted)
 ---
+###### Use this button to turn paragraphs into unordered list items.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-ul.gif"/>
 </div>

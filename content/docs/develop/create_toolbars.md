@@ -5,7 +5,7 @@ description: Adding a new toolbar is also as straightforward as adding a button.
 order: 6
 ---
 
-###### Adding a new toolbar is also as straightforward as adding a button.
+###### Adding a new toolbar is as straightforward as adding a button.
 
 <article id="article1">
 
@@ -107,7 +107,7 @@ AlloyEditor.Toolbars[ToolbarVersions.key] = AlloyEditor.ToolbarVersions = Toolba
 
 ## Using a Toolbar
 
-After creating your toolbar, you have to add it to the configuration of the editor where you want to use it.
+After creating your toolbar, you have to add it to the configuration of the editor where you want to use it:
 
 ```javascript
 var toolbars = {
@@ -122,7 +122,7 @@ var toolbars = {
 }
 ```
 
-In this example, <em>annotate</em>, <em>comment</em>, <em>acceptChanges</em> and <em>rejectChanges</em> will be the buttons that will be loaded on the toolbar, and that will help us handle document version changes. Read our <a href="/docs/develop/create/create_buttons.html">Create Buttons</a> Guide to know how to do this!
+In this example, the <em>annotate</em>, <em>comment</em>, <em>acceptChanges</em> and <em>rejectChanges</em> buttons will be loaded on the toolbar, which will help us handle document version changes. Read our <a href="/docs/develop/create/create_buttons.html">Create Buttons</a> Guide to learn how to create awesome buttons like this!
 
 </article>
 

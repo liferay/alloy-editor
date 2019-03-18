@@ -1,8 +1,10 @@
 ---
-description: Use this button if you need to align an image to the right on the text.
+description: Use this button if you need to align an image to the right of the text.
 layout: feature
 title: Image Alignment - Right
 ---
+###### Use this button if you need to align an image to the right of the text.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-imagealignright.gif"/>
 </div>

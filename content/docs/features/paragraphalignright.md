@@ -1,8 +1,10 @@
 ---
-description: Are you feeling adventurous? Or is that an address you want to show? Align any text you want to the right with this button!
+description: Are you feeling adventurous, or is there an address you want to show? Use this button to align text to the right!
 layout: feature
 title: Text Alignment - Right
 ---
+###### Are you feeling adventurous, or is there an address you want to show? Use this button to align text to the right!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-paragraphalignright.gif"/>
 </div>

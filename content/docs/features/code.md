@@ -3,6 +3,8 @@ description: Keep your inner geek happy using this button to show preformatted t
 layout: feature
 title: Code
 ---
+###### Keep your inner geek happy using this button to show preformatted text.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-code.gif"/>
 </div>

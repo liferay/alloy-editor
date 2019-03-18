@@ -3,6 +3,8 @@ description: Let others see you! You can use this button to take pictures from y
 layout: feature
 title: Camera
 ---
+###### Let others see you! You can use this button to take pictures from your device and directly attach them to your document.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-camera.gif"/>
 </div>

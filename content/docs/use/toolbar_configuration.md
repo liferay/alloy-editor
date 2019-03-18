@@ -1,16 +1,16 @@
 ---
 title: Toolbar configuration
-description: AlloyEditor allows you to configure the Toolbars in the way you prefer. You will be able to remove some of the existing Toolbars, to add your own or to reorder the buttons in each Toolbar
+description: AlloyEditor's toolbars are completely configurable. You can remove some of the existing toolbars, add your own, and even reorder the buttons in each Toolbar.
 order: 6
 ---
 
-###### AlloyEditor allows you to configure the Toolbars in the way you prefer. You will be able to remove some of the existing Toolbars, to add your own or to reorder the buttons in each Toolbar
+###### AlloyEditor's toolbars are completely configurable. You can remove some of the existing toolbars, add your own, and even reorder the buttons in each toolbar
 
 <article id="article1">
 
 ## Default Configuration
 
-This is the default editor toolbars configuration
+This is the default configuration for the editor's toolbars:
 
 ```javascript
 var toolbars = {
@@ -25,7 +25,7 @@ var toolbars = {
 };
 ```
 
-where <code>AlloyEditor.Selections</code> is
+<code>AlloyEditor.Selections</code> has the value below:
 
 ```javascript
 var Selections = [{
@@ -49,9 +49,9 @@ var Selections = [{
 }];
 ```
 
-The configuration above represents two toolbars - for adding content (images, code, etc.) and modify content based on the current selection type. You may remove any of those and the toolbar won't be shown when user makes the corresponding selection.
+The configuration above represents two toolbars - one for adding content (images, code, etc.) and one for modifying content based on the current selection type. You can remove any of these features, and the toolbar won't be shown when a user makes the corresponding selection.
 
-To remove the toolbar for adding content, just <strong>remove</strong> the property <em>add</em>
+To remove the toolbar for adding content, <strong>remove</strong> the property <em>add</em>:
 
 ```javascript
 var toolbars = {
@@ -68,9 +68,9 @@ var toolbars = {
 
 ## Configuring Buttons
 
-In the default UI, which uses React, some of the buttons accept configuration parameters so you can tailor them to suit your needs.
+Some of the buttons in the default UI, which is built with React, accept configuration parameters that let you customize them.
 
-Here is an example of a custom configuration for the <em>Styles</em> button inside a text selection
+Here is an example of a custom configuration for the <em>Styles</em> button inside a text selection:
 
 ```javascript
 var Selections = [{
@@ -88,7 +88,7 @@ var Selections = [{
 }];
 ```
 
-In this case a different array of styles is passed to the Styles button, so they will be shown when user selects a text instead of the default ones.
+In this case, a custom array of styles is passed to the Styles button, so they will be shown when a user selects text instead of the default ones.
 
 </article>
 
@@ -96,7 +96,7 @@ In this case a different array of styles is passed to the Styles button, so they
 
 ## Reordering Buttons
 
-If you are not happy with the order of the buttons, you can just reorder them in the toolbar configuration. They will follow the order in which you specify them. For example, if you want the <em>table</em> button to appear before the <em>hline</em> button in the <em>Add</em> toolbar, you just need to do the following:
+If you are not happy with the order of the buttons, you can just reorder them in the toolbar configuration. They will follow the order in which you specify them. For example, if you want the <em>table</em> button to appear before the <em>hline</em> button in the <em>Add</em> toolbar, use the configuration below:
 
 ```javascript
 var toolbars = {
@@ -107,6 +107,6 @@ var toolbars = {
 };
 ```
 
-If you remove a button from the buttons property of a toolbar, or from the selections in Styles toolbar, then this button won't be available when the toolbar gets visible.
+If you remove a button from the buttons property of a toolbar, or from the selections in Styles toolbar, the button won't be available when the toolbar is displayed.
 
 </article>

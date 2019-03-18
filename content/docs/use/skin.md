@@ -10,7 +10,7 @@ order: 9
 
 ## Skin Architecture
 
-AlloyEditor skins are organized according to the following principles:
+AlloyEditor skins are organized according to these principles:
 
 <strong>Variables</strong>
 
@@ -22,7 +22,7 @@ A skin is created by combining one or more components together. Different skins 
 
 <strong>Structure vs Skin</strong>
 
-All styling is separated into structure and skin. Structure represents everything that affects the sizing and position of the elements. Meanwhile, skin represents all the purely cosmetic changes.
+Styling is separated into structure and skin. Structure represents everything that affects the sizing and position of the elements, while skin represents all the purely cosmetic changes.
 
 </article>
 
@@ -30,7 +30,7 @@ All styling is separated into structure and skin. Structure represents everythin
 
 ## Skins Overview
 
-At this moment, you can use any of the following skins out of the box:
+You can use these skins out of the box:
 
 <strong>Ocean (default)</strong>
 

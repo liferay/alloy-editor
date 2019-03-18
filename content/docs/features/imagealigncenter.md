@@ -3,6 +3,9 @@ description: Use this button if you need to center an image.
 layout: feature
 title: Image Alignment - Center
 ---
+
+###### Use this button if you need to center an image.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-imagealigncenter.gif"/>
 </div>

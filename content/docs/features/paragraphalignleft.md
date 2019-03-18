@@ -3,6 +3,8 @@ description: For the vintage writers out there, this button gives you left text 
 layout: feature
 title: Text Alignment - Left
 ---
+###### For the vintage writers out there, this button gives you left text alignment... as it should be.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-paragraphalignleft.gif"/>
 </div>

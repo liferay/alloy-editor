@@ -3,6 +3,8 @@ description: You're probably a mathematician eager to exponentiate a base if you
 layout: feature
 title: Superscript
 ---
+###### You're probably a mathematician eager to exponentiate a base if you need this button.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-superscript.gif"/>
 </div>

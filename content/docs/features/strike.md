@@ -3,6 +3,8 @@ description: Strike through those small judgement lapses with this button!
 layout: feature
 title: Strike
 ---
+###### Strike through those small judgement lapses with this button!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-strike.gif"/>
 </div>

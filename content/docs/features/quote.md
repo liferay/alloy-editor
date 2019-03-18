@@ -3,6 +3,8 @@ description: Give credit to other authors by properly quoting their words with t
 layout: feature
 title: Quote
 ---
+###### Give credit to other authors by properly quoting their words with this button.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-quote.gif"/>
 </div>

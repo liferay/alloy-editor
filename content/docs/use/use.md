@@ -4,7 +4,7 @@ description: Develop description.
 order: 1
 ---
 
-###### The section below assumes that you are using the default UI, which is built using React. The AlloyEditor core is fully separated from the UI and creating another one based on any other framework is very easy.
+###### The section below assumes that you are using the default UI built on React. The AlloyEditor core is fully separated from the UI, so creating a UI based on another framework is very easy.
 
 <article id="article1">
 
@@ -41,12 +41,12 @@ If you downloaded it via Bower:
 
 ## Use AlloyEditor
 
-<span class="code-header">Invoke the <code>editable</code> static method on AlloyEditor passing the ID of the node you want to edit</span>
+<span class="code-header">Invoke the <code>editable</code> static method on AlloyEditor, passing the ID of the node you want to edit:</span>
 
 ```javascript
 AlloyEditor.editable('myContentEditable');
 ```
 
-And that is everything you need to get started!
+That's everything you need to get started!
 
 </article>

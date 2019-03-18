@@ -1,8 +1,10 @@
 ---
-intro: Use this button to highlight an important content.
+intro: Use this button to highlight important content.
 layout: feature
 title: Link
 ---
+###### Use this button to highlight important content.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-link.gif"/>
 </div>

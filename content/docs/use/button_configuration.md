@@ -1,16 +1,16 @@
 ---
 title: Button configuration
-description: Changing the default configuration of the buttons is possible by passing configuration attributes to them and it will affect only the button behavior, without affecting their position in the Toolbars. Both configuring the Toolbars and the buttons can be used giving maximum flexibility.
+description: You can pass configuration attributes to a button to change its default behavior, without affecting its position in the toolbar. You can combine this with a custom toolbar configuration to have maximum flexibility in your configuration.
 order: 7
 ---
 
-###### Changing the default configuration of the buttons is possible by passing configuration attributes to them and it will affect only the button behavior, without affecting their position in the Toolbars. Both configuring the Toolbars and the buttons can be used giving maximum flexibility.
+###### You can pass configuration attributes to a button to change its default behavior, without affecting its position in the toolbar. You can combine this with a custom toolbar configuration to have maximum flexibility in your configuration.
 
 <article id="article1">
 
 ## Passing configuration options to the buttons
 
-The buttons are configured via a common <strong>buttonCfg</strong> property, like this:
+Buttons are configured via a common <strong>buttonCfg</strong> property, like this:
 
 ```javascript
 var editor = AlloyEditor.editable('editable', {
@@ -22,6 +22,6 @@ var editor = AlloyEditor.editable('editable', {
 });
 ```
 
-The <code>buttonCfg</code> is the property which contains the configurations for the different buttons. In this example, <code>bold</code> is the name of the button, which has to be configured and <code>tabIndex</code> is the property with the new value of 1 (by default 0). Each button has a static property <strong>key</strong> which value is the button name as should be passed to the configuration.
+The example above creates a configuration for a button named <code>bold</code> with a <code>tabIndex</code> property set to 1 (default 0). You must pass the button's static <strong>key</strong> property (the button's name) in the configuration.
 
 </article>
