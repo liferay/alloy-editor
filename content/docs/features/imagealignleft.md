@@ -1,8 +1,10 @@
 ---
-description: Use this button if you need to align an image to the left on the text.
+description: Use this button if you need to align an image to the left of the text.
 layout: feature
 title: Image Alignment - Left
 ---
+###### Use this button if you need to align an image to the left of the text.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-imagealignleft.gif"/>
 </div>

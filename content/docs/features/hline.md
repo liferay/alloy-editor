@@ -3,6 +3,8 @@ description: Create a horizontal line with this button.
 layout: feature
 title: Horizontal Line
 ---
+###### Create a horizontal line with this button.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-hline.gif"/>
 </div>

@@ -3,6 +3,8 @@ description: No longer need this table? Get rid of it with this button in just o
 layout: feature
 title: Table - Remove
 ---
+###### No longer need this table? Get rid of it with this button in just one click!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-tableremove.gif"/>
 </div>

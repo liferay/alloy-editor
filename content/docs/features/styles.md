@@ -3,6 +3,8 @@ description: Use this button to highlight important content.
 layout: feature
 title: Styles
 ---
+###### Use this button to highlight important content.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-styles.gif"/>
 </div>

@@ -3,6 +3,8 @@ description: Add a link using autocomplete.
 layout: feature
 title: Link AutoComplete
 ---
+###### Add a link using autocomplete.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-linkautocomplete.gif"/>
 </div>

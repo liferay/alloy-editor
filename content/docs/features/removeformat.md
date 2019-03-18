@@ -1,8 +1,10 @@
 ---
-description: If you're a minimalist, you can use this button to strip any styling from your content
+description: If you're a minimalist, you can use this button to strip any styling from your content.
 layout: feature
 title: Remove Format
 ---
+###### If you're a minimalist, you can use this button to strip any styling from your content.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-removeformat.gif"/>
 </div>

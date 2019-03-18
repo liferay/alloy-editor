@@ -1,8 +1,10 @@
 ---
-description: For those headers or footers of yours... use this button to center them in the document.
+description: Use this button to center your headers or footers in the document.
 layout: feature
 title: Text Alignment - Centered
 ---
+###### Use this button to center your headers or footers in the document.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-bold.gif"/>
 </div>

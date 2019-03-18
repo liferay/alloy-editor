@@ -3,6 +3,8 @@ description: You ought to be a chemist if you need this button to specify the nu
 layout: feature
 title: Subscript
 ---
+###### You ought to be a chemist if you need this button to specify the number of atoms in a chemical formula!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-subscript.gif"/>
 </div>

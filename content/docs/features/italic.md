@@ -1,8 +1,10 @@
 ---
-intro: Use this button to emphasize an important content.
+intro: Use this button to emphasize important content.
 layout: feature
 title: Italic
 ---
+###### Use this button to emphasize important content.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-bold.gif"/>
 </div>

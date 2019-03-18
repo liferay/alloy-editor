@@ -1,8 +1,10 @@
 ---
-description: Do you hate mismatching lines? Use this button to justify your text content!
+description: Do you hate mismatching lines? Use this button to justify your text!
 layout: feature
 title: Text Alignment - Justified
 ---
+###### Do you hate mismatching lines? Use this button to justify your text!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-paragraphalignjustify.gif"/>
 </div>

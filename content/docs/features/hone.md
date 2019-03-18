@@ -1,8 +1,10 @@
 ---
-description: Got any important text? Turn it into a big header with this button!
+description: Have important text that you want to emphasize? Turn it into a big header with this button!
 layout: feature
 title: Heading 1
 ---
+###### Have important text that you want to emphasize? Turn it into a big header with this button!
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-h1.gif"/>
 </div>

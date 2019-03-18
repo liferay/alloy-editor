@@ -3,6 +3,8 @@ description: Use this button to work with table cells (add, remove, merge, split
 layout: feature
 title: Table - Cells
 ---
+###### Use this button to work with table cells (add, remove, merge, split...).
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-tablecell.gif"/>
 </div>

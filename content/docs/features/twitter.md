@@ -1,8 +1,10 @@
 ---
-description: Did you just write the latest Trending Topic? You can use this button to allow your readers to share your thoughts via Twitter.
+description: Did you just write the latest Trending Topic? You can use this button to let your readers share your thoughts on Twitter.
 layout: feature
 title: Twitter
 ---
+###### Did you just write the latest Trending Topic? You can use this button to let your readers share your thoughts on Twitter.
+
 <div class="thumbnail">
   <img class="img img-polaroid" src="/images/features/button-twitter.gif"/>
 </div>

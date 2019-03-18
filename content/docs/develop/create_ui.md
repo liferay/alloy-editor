@@ -1,17 +1,19 @@
 ---
 layout: develop
 title: Create entirely new UI
-description: You don't like React? You prefer jQuery? Or you are JavaScript ninja and prefer writing vanilla JS? Welcome on board. You'll see how straightforward it is to create a whole new UI for AlloyEditor.
+description: Is React not your thing? Perhaps you prefer JQuery. Are you a JavaScript ninja and prefer writing vanilla JS instead? Welcome on board. You'll see how straightforward it is to create a whole new UI for AlloyEditor.
 order: 7
 ---
 
-###### You don't like React? You prefer jQuery? Or you are JavaScript ninja and prefer writing vanilla JS? Welcome on board. You'll see how straightforward it is to create a whole new UI for AlloyEditor.
+###### Is React not your thing? Perhaps you prefer JQuery. Are you a JavaScript ninja and prefer writing vanilla JS instead? Welcome on board. You'll see how straightforward it is to create a whole new UI for AlloyEditor.
 
 <article id="article1">
 
-## Get ready to build AlloyEditor
+## Create UI folder
 
-Follow the instructions in our <a href="guids/how_to_build_it">How to build it</a> Guide to know how to change and build AlloyEditor.
+Follow the instructions in our <a href="guids/how_to_build_it">How to build it</a> Guide to learn how to modify and build AlloyEditor.
+
+Follow these steps to create your UI:
 
 </article>
 
@@ -27,7 +29,7 @@ Create a new directory under <code>src/ui</code> with the name of your UI <small
 
 ## Create Build
 
-Create a subfolder, called <code>gulp-tasks</code> and a <code>build.js</code> file with your custom build steps. You can check out the [Gulp Project](http://gulpjs.com/) or some of the existing tasks for extra insight into the build system.
+Create a subfolder called <code>gulp-tasks</code> and a <code>build.js</code> file with your custom build steps. You can check out the [Gulp Project](http://gulpjs.com/) or some of the existing tasks for extra insight into the build system.
 
 </article>
 
@@ -35,13 +37,13 @@ Create a subfolder, called <code>gulp-tasks</code> and a <code>build.js</code> f
 
 ## Build your UI
 
-<span class="code-header">In order to build AlloyEditor using your brand new UI (jquery), run</span>
+Build AlloyEditor with your brand new UI (jquery in the example) by running the command below:
 
 ```text/x-sh
 gulp --ui jquery
 ```
 
-That is everything. How will you structure the directories, which modules will you use, will you load Buttons and Toolbars on demand, what gulp tasks will you add - these questions are entirely up to you. The good news is that you won't start from scratch entirely. You still will be able to use the core of AlloyEditor, as well as the API from CKEditor.
+There you have it. How will you structure the directories? Which modules will you use? Will you load Buttons and Toolbars on demand? What gulp tasks will you add? These questions are entirely up to you. The good news is that you won't start from scratch entirely. You will still be able to use the core of AlloyEditor, as well as the API from CKEditor.
 
 Once you are ready with the UI, please send us a pull request and we will merge it!
 

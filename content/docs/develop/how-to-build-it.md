@@ -12,7 +12,7 @@ Using your browser, navigate to http://nodejs.org and install NodeJS.
 
 ## Install Gulp
 
-Open a terminal on your computer and execute
+Open a terminal on your computer and execute the command below:
 
 ```bash
 [sudo] npm install -g gulp
@@ -30,7 +30,7 @@ After that, follow the instructions to clone the project into your computer.
 
 ## Install AlloyEditor dependencies
 
-Navigate to the AlloyEditor project in your computer and execute
+Navigate to the AlloyEditor project you cloned locally and install the dependencies:
 
 ```bash
 [sudo] npm install
@@ -40,12 +40,12 @@ Navigate to the AlloyEditor project in your computer and execute
 
 ## Build AlloyEditor
 
-Navigate to the AlloyEditor project in your computer and execute
+Navigate to the AlloyEditor project you cloned locally and run the command below:
 
 ```bash
 gulp build
 ```
 
 <p class="small text-center mt-5">
-    There are other gulp tasks you can use like <strong>release</strong> to generate a bundled zip file, or <strong>watch</strong> if you're in development mode
+    There are other gulp tasks you can use, like <strong>release</strong> to generate a bundled zip file, or <strong>watch</strong> if you're in development mode.
 </p>
