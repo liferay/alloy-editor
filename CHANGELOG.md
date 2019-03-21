@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.0.0-beta.3](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.3) (2019-03-21)
+[Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.2...v2.0.0-beta.3)
+
+**Fixed bugs:**
+
+- Fix getImageAlignment for IE11 [\#1185](https://github.com/liferay/alloy-editor/pull/1185) ([julien](https://github.com/julien)])
+
+
 ## [v2.0.0-beta.2](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.2) (2019-03-15)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.1...v2.0.0-beta.2)
 
