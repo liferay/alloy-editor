@@ -13,6 +13,7 @@ const All = merge(common.config, config, {
 	},
 	devServer: {
 		contentBase: './dist',
+		host: '0.0.0.0',
 		port: 9000,
 		publicPath: '/alloy-editor',
 	},
