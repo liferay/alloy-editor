@@ -101,6 +101,13 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 			imageAlignment = centeredImage ? IMAGE_ALIGNMENT.CENTER : null;
 		}
 
+		if (!CKEDITOR.env.edge && CKEDITOR.env.ie) {
+			const p = image.findOne('p');
+			if (p) {
+				imageAlignment = p.getStyle('text-align');
+			}
+		}
+
 		return imageAlignment;
 	};
 
