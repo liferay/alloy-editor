@@ -66,7 +66,7 @@ module.exports = {
 	},
 	noCkeditor: {
 		...base,
-		entry: './src/adapter/main.js',
+		entry: './scripts/build/with-react.js',
 		output: {
 			library: 'AlloyEditor',
 			libraryTarget: 'window',
