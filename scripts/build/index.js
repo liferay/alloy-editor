@@ -8,4 +8,3 @@ if (typeof window !== 'undefined') {
 }
 
 export {AlloyEditor};
-export default AlloyEditor;

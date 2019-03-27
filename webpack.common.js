@@ -68,7 +68,6 @@ module.exports = {
 		...base,
 		entry: './scripts/build/with-react.js',
 		output: {
-			library: 'AlloyEditor',
 			libraryTarget: 'window',
 			path: toAbsolute('./dist/alloy-editor'),
 		},
@@ -77,7 +76,6 @@ module.exports = {
 		...base,
 		entry: './scripts/build/index.js',
 		output: {
-			library: 'AlloyEditor',
 			libraryTarget: 'umd',
 			path: toAbsolute('./dist/alloy-editor'),
 		},
