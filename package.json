@@ -57,6 +57,7 @@
   "scripts": {
     "build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js build:assets",
     "build": "gulp --gulpfile scripts/build/gulp/gulpfile.js --release",
+    "ci": "yarn build && yarn testSaucelabs",
     "dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "format": "prettier --write -- '*.js' '{scripts,src,test}/**/*.{js,jsx}'",
     "format:changed": "git ls-files -mz *.js -- 'scripts/*.js' 'src/*.js' 'src/*.jsx' 'test/*.js' 'test/*.jsx' | xargs -0 prettier --write --",
@@ -65,7 +66,7 @@
     "lint:changed": "git ls-files -mz 'src/*.js' 'src/*.jsx' | xargs -0 eslint",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
     "lint:quiet": "eslint --quiet 'src/**/*.{js,jsx}'",
-    "prepublishOnly": "npm run format:check && npm run test",
+    "prepublishOnly": "yarn format:check && yarn test",
     "start": "webpack-dev-server --config webpack.dev.js",
     "test": "karma start karma.js",
     "test:debug": "karma start karma.js --debug",

@@ -11,8 +11,8 @@
  *
  * This nasty monkey-patch replaces all that with equivalent code that does
  * the same without any `setTimeout` calls. Note the `toString()` check here
- * ensures that we only apply inside debug runs in the browser (`npm run
- * test:debug`) and not in command-line runs (`npm run test`).
+ * ensures that we only apply inside debug runs in the browser (`yarn
+ * test:debug`) and not in command-line runs (`yarn test`).
  */
 if (
 	window.__karma__ &&

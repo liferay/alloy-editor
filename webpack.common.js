@@ -4,7 +4,7 @@ const path = require('path');
  * Turns a root-relative path into an absolute one.
  *
  * This ensures that webpack works identically when invoked from the
- * top-level (eg. with `npm run webpack` or from a subdirectory (eg.
+ * top-level (eg. with `yarn webpack` or from a subdirectory (eg.
  * from a file under `scripts/gulp`).
  */
 function toAbsolute(rootRelativePath) {
