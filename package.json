@@ -60,6 +60,7 @@
     "dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
     "format": "prettier --write -- '*.js' '{scripts,src,test}/**/*.{js,jsx}'",
     "format:changed": "git ls-files -mz *.js -- 'scripts/*.js' 'src/*.js' 'src/*.jsx' 'test/*.js' 'test/*.jsx' | xargs -0 prettier --write --",
+    "format:check": "prettier --list-different -- '*.js' '{scripts,src,test}/**/*.{js,jsx}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:changed": "git ls-files -mz 'src/*.js' 'src/*.jsx' | xargs -0 eslint",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
