@@ -55,8 +55,8 @@ echo
 echo "You should now check that everything is still working with"
 echo "the new build. ie:"
 echo
-echo "    npm run build && npm run test"
-echo "    npm run start # check demo"
+echo "    yarn build && yarn test"
+echo "    yarn start # check demo"
 echo
 echo "Don't forget to commit the result!"
 echo
