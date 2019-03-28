@@ -315,6 +315,12 @@ export default WrappedComponent =>
 				ReactDOM.findDOMNode(this)
 			);
 
+			domElement.once('transitionend', () => {
+				domElement.setStyles({
+					pointerEvents: '',
+				});
+			});
+
 			domElement.setStyles({
 				left: startPoint[0] + 'px',
 				top: startPoint[1] + 'px',
@@ -324,7 +330,7 @@ export default WrappedComponent =>
 
 			domElement.removeClass('alloy-editor-invisible');
 
-			this._animate(function() {
+			this._animationFrameId = window.requestAnimationFrame(() => {
 				domElement.addClass('ae-toolbar-transition');
 				domElement.addClass('alloy-editor-visible');
 				domElement.setStyles({
@@ -333,14 +339,6 @@ export default WrappedComponent =>
 					opacity: 1,
 				});
 			});
-
-			if (domElement.$) {
-				domElement.$.addEventListener('transitionend', () => {
-					domElement.setStyles({
-						pointerEvents: '',
-					});
-				});
-			}
 		}
 
 		/**
@@ -446,23 +444,6 @@ export default WrappedComponent =>
 					left: xy[0] + 'px',
 					top: xy[1] + 'px',
 				});
-			}
-		}
-
-		/**
-		 * Requests an animation frame, if possible, to simulate an animation.
-		 *
-		 * @instance
-		 * @memberof WidgetPosition
-		 * @method _animate
-		 * @param {Function} callback The function to be executed on the scheduled frame.
-		 * @protected
-		 */
-		_animate(callback) {
-			if (window.requestAnimationFrame) {
-				this._animationFrameId = window.requestAnimationFrame(callback);
-			} else {
-				callback();
 			}
 		}
 	};
