@@ -315,6 +315,12 @@ export default WrappedComponent =>
 				ReactDOM.findDOMNode(this)
 			);
 
+			domElement.on('transitionend', () => {
+				domElement.setStyles({
+					pointerEvents: '',
+				});
+			});
+
 			domElement.setStyles({
 				left: startPoint[0] + 'px',
 				top: startPoint[1] + 'px',
@@ -333,14 +339,6 @@ export default WrappedComponent =>
 					opacity: 1,
 				});
 			});
-
-			if (domElement.$) {
-				domElement.$.addEventListener('transitionend', () => {
-					domElement.setStyles({
-						pointerEvents: '',
-					});
-				});
-			}
 		}
 
 		/**
