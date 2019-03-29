@@ -35,7 +35,7 @@ export default WrappedComponent =>
 		 * @method cancelAnimation
 		 */
 		cancelAnimation() {
-			if (window.cancelAnimationFrame) {
+			if (this._animationFrameId) {
 				window.cancelAnimationFrame(this._animationFrameId);
 			}
 		}
@@ -315,12 +315,6 @@ export default WrappedComponent =>
 				ReactDOM.findDOMNode(this)
 			);
 
-			domElement.once('transitionend', () => {
-				domElement.setStyles({
-					pointerEvents: '',
-				});
-			});
-
 			domElement.setStyles({
 				left: startPoint[0] + 'px',
 				top: startPoint[1] + 'px',
@@ -338,6 +332,12 @@ export default WrappedComponent =>
 					top: endPoint[1] + 'px',
 					opacity: 1,
 				});
+
+				setTimeout(() => {
+					domElement.setStyles({
+						pointerEvents: '',
+					});
+				}, 100);
 			});
 		}
 
