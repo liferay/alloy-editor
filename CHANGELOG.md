@@ -4,8 +4,6 @@
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.4...v2.0.0-beta.5)
 
-## v2.0.0-beta.5 (2019-03-29)
-
 - fix: Use setTimeout instead of transitionend (#1195)
 
 ## [v2.0.0-beta.4](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.4) (2019-03-28)
@@ -16,13 +14,6 @@
 - fix: Adds AlloyEditor.React ([\#1190](https://github.com/liferay/alloy-editor/pull/1190))
 - feat: Use "yarn" instead of "npm" (#1143) ([\#1192](https://github.com/liferay/alloy-editor/pull/1192))
 - chore: Clean up redundant script names (#1187) ([\#1188](https://github.com/liferay/alloy-editor/pull/1188))
-
-## v2.0.0-beta.4 (2019-03-28)
-
-- Fix pointerEvents on firefox (and IE) (#1193)
-- fix: Adds AlloyEditor.React (#1190)
-- feat: Use "yarn" instead of "npm" (#1143) (#1192)
-- chore: Clean up redundant script names (#1187) (#1188)
 
 ## [v2.0.0-beta.3](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.3) (2019-03-21)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.2...v2.0.0-beta.3)
