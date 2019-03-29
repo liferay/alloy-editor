@@ -333,11 +333,12 @@ export default WrappedComponent =>
 					opacity: 1,
 				});
 
+				// 150ms to match transition-duration for .ae-toolbar-transition:
 				setTimeout(() => {
 					domElement.setStyles({
 						pointerEvents: '',
 					});
-				}, 100);
+				}, 150);
 			});
 		}
 
