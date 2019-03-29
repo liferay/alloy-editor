@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.0.0-beta.5](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.5) (2019-03-29)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.4...v2.0.0-beta.5)
+
+## v2.0.0-beta.5 (2019-03-29)
+
+- fix: Use setTimeout instead of transitionend (#1195)
+
 ## [v2.0.0-beta.4](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.4) (2019-03-28)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.3...v2.0.0-beta.4)
