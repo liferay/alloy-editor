@@ -13,38 +13,48 @@ This branch of the [alloy-editor](https://github.com/liferay/alloy-editor.git) r
 
 - Clone the `website` branch of the *alloy-editor* repository :
 
-  ```sh
-  git clone git@github.com:liferay/alloy-editor.git -b website
-  ```
+```sh
+git clone git@github.com:liferay/alloy-editor.git -b website
+```
 
 - Install the dependencies
 
-  ```sh
-  yarn
-  ```
+```sh
+yarn
+```
 
 # Development
 
 - Start a local development server with:
 
-  ```sh
-  npm start
-  ```
+```sh
+yarn start
+```
 
-  Open http://localhost:8000 in your favorite browser to view the website
+Open http://localhost:8000 in your favorite browser to view the website
 
 
 - Build the production version of the site with:
 
-  ```sh
-  npm run build
-  ```
+```sh
+yarn build
+```
 
 - To view the "production build" of the website, you can use:
 
-  ```sh
-  npm run serve
-  ```
+```sh
+yarn serve
+```
+# Deployment
 
+You'll need [the WeDeploy command-line tool](https://help.wedeploy.com/command-line-tool/how-can-i-install-the-cli-tool):
 
+```sh
+# Download and install the tool, if you don't have it already:
+curl -O https://cdn.wedeploy.com/cli/latest/wedeploy.sh
+sh wedeploy.sh
 
+# After building, run the tool from the "public" directory:
+cd public
+we deploy -p alloyeditor
+```

@@ -23,7 +23,6 @@
   "scripts": {
     "build": "gatsby build",
     "copy:alloyeditor": "cp -r node_modules/alloyeditor/dist/alloy-editor static/",
-    "deploy": "gatsby build && gh-pages -d public -b wedeploy",
     "dev": "npm run copy:alloyeditor && rimraf public .cache && gatsby develop",
     "format": "prettier --write -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
     "format:check": "prettier --list-different -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
@@ -83,7 +82,6 @@
     "eslint": "^5.13.0",
     "eslint-config-liferay": "^3.0.0",
     "eslint-plugin-react": "^7.12.4",
-    "gh-pages": "2.0.1",
     "globby": "8.0.1",
     "prettier": "^1.16.4",
     "rimraf": "2.6.2"
