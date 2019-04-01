@@ -50,7 +50,6 @@ class Index extends Component {
 						name="twitter:image:alt"
 						content="AlloyEditor presentation"
 					/>
-
 				</Helmet>
 
 				<main className="content">
