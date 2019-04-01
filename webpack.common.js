@@ -34,7 +34,7 @@ const base = {
 module.exports = {
 	config: {
 		...base,
-		entry: './scripts/build/index.js',
+		entry: './scripts/build/with-all.js',
 		output: {
 			path: toAbsolute('./dist/alloy-editor'),
 		},
@@ -74,7 +74,7 @@ module.exports = {
 	},
 	noReact: {
 		...base,
-		entry: './scripts/build/index.js',
+		entry: './scripts/build/with-ckeditor.js',
 		output: {
 			libraryTarget: 'umd',
 			path: toAbsolute('./dist/alloy-editor'),
