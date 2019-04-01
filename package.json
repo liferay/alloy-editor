@@ -22,11 +22,11 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "checkFormat": "prettier --list-different -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
     "copy:alloyeditor": "cp -r node_modules/alloyeditor/dist/alloy-editor static/",
     "deploy": "gatsby build && gh-pages -d public -b wedeploy",
     "dev": "npm run copy:alloyeditor && rimraf public .cache && gatsby develop",
     "format": "prettier --write -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
+    "format:check": "prettier --list-different -- '*.js' '{plugins,src}/**/*.{js,jsx}'",
     "lint": "eslint '{plugins,src}/**/*.{js,jsx}'",
     "lint:changed": "git ls-files -mz '{plugins,src}/*.js' 'src/*.jsx' | xargs -0 eslint",
     "lint:fix": "eslint --fix '{plugins,src}/**/*.{js,jsx}'",
