@@ -10,37 +10,48 @@ Using your browser, navigate to http://nodejs.org and install NodeJS.
 
 <div class="mt-5"></div>
 
-## Install Gulp
+## Download AlloyEditor
 
-Open a terminal on your computer and execute the command below:
+Use the __Clone__ or __Fork__ buttons in our [Github Repository page](https://github.com/liferay/alloy-editor) to get a copy of AlloyEditor.
 
-```bash
-[sudo] npm install -g gulp
-```
-
-<div class="mt-5"></div>
-
-## Fork AlloyEditor
-
-Use the __Fork__ button in our [Github Repository page](https://github.com/liferay/alloy-editor) to get a copy of alloyEditor.
-
-After that, follow the instructions to clone the project into your computer.
+After that, follow the instructions to clone (download) the project onto your computer.
 
 <div class="mt-5"></div>
 
 ## Install AlloyEditor dependencies
 
-Navigate to the AlloyEditor project you cloned locally and install the dependencies:
+Open a terminal on your computer and navigate to the AlloyEditor project you cloned locally.
+
+### For AlloyEditor 2.0 and above
 
 ```bash
-[sudo] npm install
+yarn install # or "npm install", if you don't have Yarn
+```
+
+### For AlloyEditor versions prior to 2.0
+
+```bash
+npm install -g gulp # or "sudo npm install -g gulp"
+npm install
 ```
 
 <div class="mt-5"></div>
 
 ## Build AlloyEditor
 
-Navigate to the AlloyEditor project you cloned locally and run the command below:
+Navigate to the AlloyEditor project you cloned locally and run the commands below.
+
+### For AlloyEditor 2.0 and above
+
+```bash
+yarn build # or "npm run build" if you don't have Yarn
+```
+
+<p class="small text-center mt-5">
+  There are other scripts that you an use, like **yarn start** (**npm run start**) to run a live-reloading demo, or **yarn test** (**npm test**).
+</p>
+
+### For AlloyEditor versions prior to 2.0
 
 ```bash
 gulp build
