@@ -1,3 +1,10 @@
+## [v2.0.0-beta.6](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.6) (2019-04-01)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.5...v2.0.0-beta.6)
+
+- fix: make React available on AlloyEditor in "all" build variant (#1189, #1200) ([\#1201](https://github.com/liferay/alloy-editor/pull/1201))
+- fix: missing PropTypes on AlloyEditor.React (#1200) ([\#1199](https://github.com/liferay/alloy-editor/pull/1199))
+
 ## [v2.0.0-beta.5](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.5) (2019-03-29)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.4...v2.0.0-beta.5)
