@@ -7,8 +7,6 @@ order: 5
 
 ###### AlloyEditor bundles a couple of gorgeous skins that you can use out of the box. However, if you would like to have a skin that reflects your app's look and feel, you can create your own skin.
 
-</article>
-
 <article id="article1">
 
 ## Create skin folders
