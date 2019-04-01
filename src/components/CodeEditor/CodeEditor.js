@@ -15,7 +15,6 @@ import * as ClayCharts from 'clay-charts';
 
 import {LiveEditor, LiveProvider} from 'react-live';
 
-// eslint-disable-next-line
 const compileES6 = code =>
 	Babel.transform(code, {presets: [BabelPresetMetalJsx]}).code;
 
@@ -151,6 +150,7 @@ class CodeEditor extends Component {
 				]
 			);
 		} catch (error) {
+			// eslint-disable-next-line no-console
 			console.error(error);
 
 			this.setState({
@@ -171,6 +171,7 @@ class CodeEditor extends Component {
 				code,
 			};
 		} catch (error) {
+			// eslint-disable-next-line no-console
 			console.error(error);
 
 			const showBabelErrorMessage = !window.Babel;
@@ -184,7 +185,7 @@ class CodeEditor extends Component {
 	}
 
 	_onChange(code) {
-		this.setState(state => this._updateState(code));
+		this.setState(_state => this._updateState(code));
 	}
 }
 

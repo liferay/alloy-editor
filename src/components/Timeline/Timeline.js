@@ -8,7 +8,7 @@ class Timeline extends Component {
 	}
 
 	render() {
-		let updates = this.props.data;
+		const updates = this.props.data;
 
 		updates.sort(this._compareVersions);
 

@@ -3,16 +3,16 @@ import Tabs from 'metal-tabs';
 
 class CodeTabs {
 	constructor() {
-		let className = 'code-container';
+		const className = 'code-container';
 
 		let tabGroupsData = [];
-		let elements = Array.prototype.slice.call(
+		const elements = Array.prototype.slice.call(
 			document.querySelectorAll(`.${className}`)
 		);
 		elements.forEach(element => {
 			tabGroupsData.push({
 				label: this._getTabLabelFromElement(element),
-				element: element,
+				element,
 			});
 
 			if (
@@ -42,8 +42,8 @@ class CodeTabs {
 	}
 
 	_renderTabs(data) {
-		let container = dom.buildFragment('<div class="tabContainer"></div>');
-		let tabsComponent = new Tabs(
+		const container = dom.buildFragment('<div class="tabContainer"></div>');
+		const tabsComponent = new Tabs(
 			{
 				elementClasses: 'nav-code-tabs',
 				tabs: data,
@@ -52,7 +52,7 @@ class CodeTabs {
 		);
 
 		tabsComponent.on('changeRequest', event => {
-			let currentTab = event.state.tab;
+			const currentTab = event.state.tab;
 			this._hideAll(tabsComponent.tabs);
 			this._show(tabsComponent.tabs[currentTab].element);
 		});

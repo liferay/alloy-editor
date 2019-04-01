@@ -56,7 +56,7 @@ export default class Updates extends Component {
 								<h1 className="">Updates</h1>
 
 								<h2 className="h3 font-weight-light">
-									Check out what's new
+									Check out what&#39;s new
 								</h2>
 							</div>
 

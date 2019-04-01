@@ -17,7 +17,7 @@ const getSection = data => {
 		);
 	});
 
-	let rootElements = elements.filter(path => path.isRoot);
+	const rootElements = elements.filter(path => path.isRoot);
 
 	return rootElements
 		.map(path => toSectionItem(path, elements))

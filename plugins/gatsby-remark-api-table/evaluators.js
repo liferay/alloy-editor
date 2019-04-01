@@ -48,7 +48,7 @@ function UnionType(type) {
 		.join('/');
 }
 
-function UndefinedLiteral(type) {
+function UndefinedLiteral(_type) {
 	return 'undefined';
 }
 

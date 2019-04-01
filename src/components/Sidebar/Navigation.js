@@ -29,7 +29,7 @@ class Navigation extends Component {
 		const {sectionList, location, depth = 0} = this.props;
 
 		return sectionList.map((section, index) => {
-			let style = classNames('nav-item', {
+			const style = classNames('nav-item', {
 				active: this._isActive(section) === true,
 			});
 

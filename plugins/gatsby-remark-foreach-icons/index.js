@@ -72,7 +72,7 @@ module.exports = ({markdownAST}) => {
 					}
 				}
 
-				let icon = langCode + '-' + countryCode;
+				const icon = langCode + '-' + countryCode;
 
 				return {
 					name: lang + ` (${icon.toLowerCase()})`,
