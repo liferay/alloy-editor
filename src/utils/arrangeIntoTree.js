@@ -12,7 +12,7 @@ function findWhere(array, key, value) {
 }
 
 function arrangeIntoTree(paths) {
-	let tree = [];
+	const tree = [];
 
 	for (let i = 0; i < paths.length; i++) {
 		const node = paths[i];
@@ -24,7 +24,7 @@ function arrangeIntoTree(paths) {
 		const path = node.link.split('/').filter(elem => elem);
 		let currentLevel = tree || [];
 		for (let j = 0; j < path.length; j++) {
-			let part = path[j];
+			const part = path[j];
 
 			// Last part of the path, just add it to the current level
 			if (j === path.length - 1) {
@@ -32,16 +32,16 @@ function arrangeIntoTree(paths) {
 				break;
 			}
 
-			let existingPath = findWhere(currentLevel || [], 'id', part);
+			const existingPath = findWhere(currentLevel || [], 'id', part);
 
 			// If the path exist, navigate, if not, create it and navigate
 			if (existingPath) {
 				currentLevel = existingPath.items || [];
 			} else {
-				let nodePart = paths.find(elem =>
+				const nodePart = paths.find(elem =>
 					elem.link.endsWith(`/${part}/index`)
 				);
-				let newPart = {
+				const newPart = {
 					id: part,
 					items: [],
 					title: nodePart.title,

@@ -1,7 +1,6 @@
 const path = require('path');
 const docs = require('documentation');
 const evaluateInstance = require('./visit');
-const fs = require('fs');
 const visit = require('unist-util-visit');
 
 function generateTr(item) {
@@ -15,7 +14,7 @@ function generateTr(item) {
 }
 
 module.exports = ({markdownAST}) => {
-	let markdownHtmlNodes = [];
+	const markdownHtmlNodes = [];
 
 	visit(markdownAST, 'html', node => {
 		if (node.value.includes('[APITable')) {

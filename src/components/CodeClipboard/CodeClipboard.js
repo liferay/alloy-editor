@@ -9,7 +9,7 @@ class CodeClipboard {
 
 		this.clayTooltip = new ClayTooltip(new SingletonEnforcer());
 		this.clayClipboard = new Clipboard({
-			selector: selector,
+			selector,
 			text: delegateTarget => {
 				delegateTarget.setAttribute('title', 'Copied');
 

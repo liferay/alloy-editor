@@ -206,10 +206,10 @@ class Index extends Component {
 											<p className="mt-4">
 												AlloyEditor comes out of the box
 												with as much editing power as
-												you'll probably ever need, but
-												we plan to keep on adding new
-												features so you can edit your
-												content in any way you can
+												you&#39;ll probably ever need,
+												but we plan to keep on adding
+												new features so you can edit
+												your content in any way you can
 												imagine.
 											</p>
 
@@ -285,13 +285,13 @@ class Index extends Component {
 
 										<div className="col-12 col-md-10">
 											<p className="mt-5 mt-md-0">
-												"The new AlloyEditor is so
+												&quot;The new AlloyEditor is so
 												intuitive, simple, and useful
-												that you won't realize you are
-												actually using an editor. Just
-												focus on the content while
+												that you won&#39;t realize you
+												are actually using an editor.
+												Just focus on the content while
 												AlloyEditor takes care of all
-												the rest."
+												the rest.&quot;
 											</p>
 
 											<p className="small font-weight-bold">

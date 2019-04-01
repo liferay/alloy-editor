@@ -7,7 +7,8 @@ const getMetaRedirect = require('./getMetaRedirect');
 async function writeRedirectsFile(redirects, folder, pathPrefix) {
 	if (!redirects.length) return;
 
-	for (const redirect of redirects) {
+	for (let i; i < redirects.length; i++) {
+		const redirect = redirects[i];
 		const {fromPath, toPath} = redirect;
 
 		if (fromPath.endsWith('index.html')) continue;
@@ -22,7 +23,9 @@ async function writeRedirectsFile(redirects, folder, pathPrefix) {
 
 		try {
 			fileExists = await exists(FILE_PATH);
-		} catch (err) {}
+		} catch (err) {
+			// Swallow.
+		}
 
 		if (!fileExists) {
 			try {
