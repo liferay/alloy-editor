@@ -7,6 +7,7 @@ if (typeof window !== 'undefined') {
 	window.AlloyEditor = AlloyEditor;
 	AlloyEditor.React = React;
 	AlloyEditor.React.PropTypes = PropTypes;
+	AlloyEditor.VERSION = require('../../package.json').version;
 }
 
 export {AlloyEditor};
