@@ -27,6 +27,12 @@ const base = {
 				include: toAbsolute('./src'),
 				loader: 'babel-loader',
 			},
+			{
+				test: /scripts\/build\/version\.js$/,
+				use: {
+					loader: 'val-loader',
+				},
+			},
 		],
 	},
 };
