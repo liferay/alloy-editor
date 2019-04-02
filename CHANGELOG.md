@@ -4,10 +4,6 @@
 
 - Fix toolbar location for images ([\#1218](https://github.com/liferay/alloy-editor/pull/1218))
 
-## v1.5.23 (2019-04-02)
-
-- Fix toolbar location for images (#1218)
-
 ## [v1.5.22](https://github.com/liferay/alloy-editor/tree/v1.5.22) (2019-03-13)
 [Full Changelog](https://github.com/liferay/alloy-editor/compare/v1.5.21...v1.5.22)
 
