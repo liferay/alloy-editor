@@ -5,7 +5,7 @@ import * as AlloyEditor from '../../src/adapter/main';
 if (typeof window !== 'undefined') {
 	window.CKEDITOR.disableAutoInline = true;
 	window.AlloyEditor = AlloyEditor;
-	AlloyEditor.VERSION = require('../../package.json').version;
+	AlloyEditor.VERSION = require('./version');
 }
 
 export {AlloyEditor};
