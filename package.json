@@ -1,6 +1,6 @@
 {
   "name": "alloyeditor",
-  "version": "1.5.22",
+  "version": "1.5.23",
   "description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
   "devDependencies": {
     "babel-preset-es2015": "6.3.13",

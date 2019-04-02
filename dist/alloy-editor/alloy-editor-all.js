@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.22
+ * AlloyEditor v1.5.23
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -29964,8 +29964,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var selectionData = payload.selectionData ? payload.selectionData : payload.editorEvent ? payload.editorEvent.data.selectionData : null;
 
         if (selectionData && selectionData.element) {
-            centerToolbar(this, selectionData.element.getClientRect());
+            var nativeEditor = payload.editor.get('nativeEditor');
+            var uiNode = nativeEditor.config.uiNode;
 
+            var scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+            var rect = selectionData.element.getClientRect();
+            rect.top += scrollTop;
+
+            centerToolbar(this, rect);
             return true;
         }
     };
