@@ -1,3 +1,10 @@
+## [v2.0.0-beta.7](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.7) (2019-04-04)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.6...v2.0.0-beta.7)
+
+- chore: Update to latest clay-css (#1220) ([\#1221](https://github.com/liferay/alloy-editor/pull/1221))
+- fix: Add VERSION constant to AlloyEditor ([\#1216](https://github.com/liferay/alloy-editor/pull/1216))
+
 ## [v2.0.0-beta.6](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.6) (2019-04-01)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.5...v2.0.0-beta.6)
