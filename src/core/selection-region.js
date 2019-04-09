@@ -276,11 +276,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 				return region;
 			}
 
-			let bottom = 0;
 			let clientRects;
-			let left = Infinity;
-			let right = -Infinity;
-			let top = Infinity;
 
 			if (nativeSelection.createRange) {
 				clientRects = nativeSelection.createRange().getClientRects();
@@ -291,60 +287,33 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 						: [];
 			}
 
-			if (clientRects.length === 0) {
-				region = this.getCaretRegion();
-			} else {
-				for (let i = 0, length = clientRects.length; i < length; i++) {
-					const item = clientRects[i];
+			region = this.getCaretRegion();
 
-					if (item.left < left) {
-						left = item.left;
-					}
+			const scrollPos = new CKEDITOR.dom.window(
+				window
+			).getScrollPosition();
 
-					if (item.right > right) {
-						right = item.right;
-					}
+			if (clientRects.length) {
+				const endRect = clientRects[clientRects.length - 1];
+				const startRect = clientRects[0];
 
-					if (item.top < top) {
-						top = item.top;
-					}
+				region.endRect = {
+					bottom: scrollPos.y + endRect.bottom,
+					height: endRect.height,
+					left: scrollPos.x + endRect.left,
+					right: scrollPos.x + endRect.right,
+					top: scrollPos.y + endRect.top,
+					width: endRect.width,
+				};
 
-					if (item.bottom > bottom) {
-						bottom = item.bottom;
-					}
-				}
-
-				const scrollPos = new CKEDITOR.dom.window(
-					window
-				).getScrollPosition();
-
-				region.bottom = scrollPos.y + bottom;
-				region.left = scrollPos.x + left;
-				region.right = scrollPos.x + right;
-				region.top = scrollPos.y + top;
-
-				if (clientRects.length) {
-					const endRect = clientRects[clientRects.length - 1];
-					const startRect = clientRects[0];
-
-					region.endRect = {
-						bottom: scrollPos.y + endRect.bottom,
-						height: endRect.height,
-						left: scrollPos.x + endRect.left,
-						right: scrollPos.x + endRect.right,
-						top: scrollPos.y + endRect.top,
-						width: endRect.width,
-					};
-
-					region.startRect = {
-						bottom: scrollPos.y + startRect.bottom,
-						height: startRect.height,
-						left: scrollPos.x + startRect.left,
-						right: scrollPos.x + startRect.right,
-						top: scrollPos.y + startRect.top,
-						width: startRect.width,
-					};
-				}
+				region.startRect = {
+					bottom: scrollPos.y + startRect.bottom,
+					height: startRect.height,
+					left: scrollPos.x + startRect.left,
+					right: scrollPos.x + startRect.right,
+					top: scrollPos.y + startRect.top,
+					width: startRect.width,
+				};
 			}
 
 			return region;
