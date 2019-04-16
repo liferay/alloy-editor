@@ -79,7 +79,7 @@
 					'right:auto;' +
 					'}' +
 					'.cke_widget_wrapper:hover .cke_image_resizer,' +
-					'.cke_image_resizer.cke_image_resizing{' +
+					'.cke_image_resizing>.cke_image_resizer{' +
 					'display:block' +
 					'}' +
 					// Expand widget wrapper when linked inline image.
