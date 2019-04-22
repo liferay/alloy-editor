@@ -114,8 +114,8 @@ class ButtonColor extends React.Component {
 					onClick={toggleDropdown}
 					role="combobox"
 					tabIndex={tabIndex}>
-					<span className={activeColorClass}>
-						<ButtonIcon symbol="text-editor" />
+					<span>
+						<ButtonIcon symbol="color-picker" />
 					</span>
 				</button>
 				{expanded && <ButtonStylesList {...buttonStylesProps} />}
