@@ -189,16 +189,6 @@ class ButtonColor extends React.Component {
 		return (
 			this.props.styles || [
 				{
-					name: AlloyEditor.Strings.normal,
-					style: {
-						element: 'span',
-						attributes: {
-							class: 'text-body',
-						},
-					},
-					styleFn: this._applyStyle.bind(this, ''),
-				},
-				{
 					name: AlloyEditor.Strings.primary,
 					style: {
 						element: 'span',
@@ -207,16 +197,6 @@ class ButtonColor extends React.Component {
 						},
 					},
 					styleFn: this._applyStyle.bind(this, 'text-primary'),
-				},
-				{
-					name: AlloyEditor.Strings.disabled,
-					style: {
-						element: 'span',
-						attributes: {
-							class: 'text-secondary',
-						},
-					},
-					styleFn: this._applyStyle.bind(this, 'text-secondary'),
 				},
 				{
 					name: AlloyEditor.Strings.success,
@@ -257,6 +237,66 @@ class ButtonColor extends React.Component {
 						},
 					},
 					styleFn: this._applyStyle.bind(this, 'text-info'),
+				},
+				{
+					name: AlloyEditor.Strings.dark,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-dark',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-dark'),
+				},
+				{
+					name: AlloyEditor.Strings.darkGray,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-gray-dark',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-gray-dark'),
+				},
+				{
+					name: AlloyEditor.Strings.secondary,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-secondary',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-secondary'),
+				},
+				{
+					name: AlloyEditor.Strings.light,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-dark',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-light'),
+				},
+				{
+					name: AlloyEditor.Strings.lighter,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-dark',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-lighter'),
+				},
+				{
+					name: AlloyEditor.Strings.white,
+					style: {
+						element: 'span',
+						attributes: {
+							class: 'text-dark',
+						},
+					},
+					styleFn: this._applyStyle.bind(this, 'text-white'),
 				},
 			]
 		);
