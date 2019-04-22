@@ -1,4 +1,3 @@
-import {window, document} from 'browser-monads';
 import React, {Component} from 'react';
 import {Link} from 'gatsby';
 import classnames from 'classnames';
@@ -6,15 +5,17 @@ import classnames from 'classnames';
 class LayoutNav extends Component {
 	constructor() {
 		super();
-		this._rootNode = window || document;
+		this._window = typeof window !== 'undefined' && window;
+		this._document = typeof document !== 'undefined' && document;
+		this._rootNode = this._window || this._document;
 		this._addScroll = this._addScroll.bind(this);
 	}
 
 	_getScrollTop() {
-		if (this._rootNode === window) {
+		if (this._rootNode === this._window) {
 			return this._rootNode.pageYOffset;
 		}
-		if (this._rootNode === document) {
+		if (this._rootNode === this._document) {
 			return this._rootNode.defaultView.pageYOffset;
 		}
 	}
