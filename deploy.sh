@@ -12,6 +12,16 @@ if ! git diff --quiet; then
   exit 1
 fi
 
+echo "Updating remotes to get latest gh-pages commit"
+git remote update
+
+/bin/echo -n "Identifying upstream remote name: "
+REMOTE=$(git remote -v | grep liferay/alloy-editor | head -1 | awk '{print $1}')
+echo "$REMOTE"
+
+echo "Updating gh-pages to point at: $(git rev-parse --short $REMOTE/gh-pages)"
+echo "Previous value: $(git rev-parse --short gh-pages)"
+git branch -f gh-pages $REMOTE/gh-pages
 
 TOP="$(git rev-parse --show-toplevel)"
 echo "Working from top level: $TOP"
@@ -51,4 +61,4 @@ echo "Restoring index to prior state"
 git reset HEAD
 
 echo
-echo "Now run 'git push upstream gh-pages'"
+echo "Now run 'git push $REMOTE gh-pages'"
