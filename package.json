@@ -75,6 +75,7 @@
     "react-dom": "16.6.3",
     "react-helmet": "5.2.0",
     "react-live": "1.12.0",
+    "svg4everybody": "2.1.9",
     "wedeploy": "4.5.1",
     "wowjs": "1.1.3"
   },
