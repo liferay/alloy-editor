@@ -47,14 +47,7 @@ yarn serve
 ```
 # Deployment
 
-You'll need [the WeDeploy command-line tool](https://help.wedeploy.com/command-line-tool/how-can-i-install-the-cli-tool):
-
 ```sh
-# Download and install the tool, if you don't have it already:
-curl -O https://cdn.wedeploy.com/cli/latest/wedeploy.sh
-sh wedeploy.sh
-
-# After building, run the tool from the "public" directory:
-cd public
-we deploy -p alloyeditor
+# After `yarn build`:
+./deploy.sh
 ```
