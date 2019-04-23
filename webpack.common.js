@@ -17,7 +17,10 @@ function toAbsolute(rootRelativePath) {
  */
 function toTestRegExp(file) {
 	return new RegExp(
-		file.split('/').join(path.sep).replace(/\\/g, '\\')
+		file
+			.split('/')
+			.join(path.sep)
+			.replace(/\\/g, '\\')
 	);
 }
 
