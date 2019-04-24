@@ -10,10 +10,13 @@ before_script:
 - gem install sass
 - gem install compass
 
+install:
+- yarn
+
 language: node_js
 
 node_js:
 - "11"
 
 script:
-- npm run testSaucelabs
+- yarn testSaucelabs
