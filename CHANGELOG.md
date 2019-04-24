@@ -5,8 +5,8 @@
 - fix: Fix issues with video resizing and alignment ([\#1246](https://github.com/liferay/alloy-editor/pull/1246))
 - chore: make Travis use Node v11 (#1237) ([\#1238](https://github.com/liferay/alloy-editor/pull/1238))
 - fix: console errors in Windows-based build (#1228) ([\#1236](https://github.com/liferay/alloy-editor/pull/1236))
-- LPS-93288 Modified color list ([\#1235](https://github.com/liferay/alloy-editor/pull/1235))
-- #1224 cke_image_resizing class is added to containing parent span for… ([\#1225](https://github.com/liferay/alloy-editor/pull/1225))
+- feat: change icon and color used in button-color button
+- fix: css issues with resizer in IE11
 
 ## [v2.0.0-beta.7](https://github.com/liferay/alloy-editor/tree/v2.0.0-beta.7) (2019-04-04)
 
