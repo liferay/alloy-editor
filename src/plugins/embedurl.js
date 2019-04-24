@@ -310,6 +310,8 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 
 					data.url = iframe.attributes.src;
 
+					delete element.attributes.style;
+
 					const embedContent = generateEmbedContent(
 						data.url,
 						element.getOuterHtml()
@@ -321,9 +323,8 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 
 					upcastWidget = widgetFragment.children[0];
 
-					upcastWidget.attributes['data-styles'] = JSON.stringify(
-						element.styles
-					);
+					upcastWidget.attributes['data-styles'] =
+						element.attributes['data-styles'];
 					upcastWidget.removeClass('embed-responsive');
 					upcastWidget.removeClass('embed-responsive-16by9');
 
@@ -437,9 +438,15 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 
 					embedContent.attributes.class =
 						'embed-responsive embed-responsive-16by9';
-					embedContent.attributes.style = CKEDITOR.tools.writeCssText(
-						widget.parent.styles
+
+					embedContent.attributes['data-styles'] = JSON.stringify(
+						CKEDITOR.tools.parseCssText(
+							widget.parent.attributes.style
+						)
 					);
+
+					embedContent.attributes.style =
+						widget.parent.attributes.style;
 
 					return embedContent;
 				},

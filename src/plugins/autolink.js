@@ -123,6 +123,10 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		_getLastWord(editor) {
 			const range = editor.getSelection().getRanges()[0];
 
+			if (!range) {
+				return;
+			}
+
 			const offset = range.startOffset;
 
 			let previousText = '';
