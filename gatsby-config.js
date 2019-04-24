@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
 	plugins: [
+		'gatsby-plugin-catch-links',
 		'gatsby-plugin-meta-redirect',
 		{
 			resolve: 'gatsby-plugin-sass',
