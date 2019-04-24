@@ -59,9 +59,9 @@ class ButtonEmbedVideoEdit extends React.Component {
 
 		this.setState({
 			all: undefined,
-			old: undefined,
 			keys: undefined,
 			new: newState,
+			old: undefined,
 		});
 	}
 
