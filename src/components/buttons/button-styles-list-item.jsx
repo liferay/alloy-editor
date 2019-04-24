@@ -88,7 +88,11 @@ class ButtonStylesListItem extends React.Component {
 		// However, this is consistent with other editors implementations of this feature.
 		this.context.editor.get('nativeEditor').execCommand('removeFormat');
 
-		this.applyStyle();
+		if (this.props.styleFn) {
+			this.props.styleFn();
+		} else {
+			this.applyStyle();
+		}
 	};
 }
 

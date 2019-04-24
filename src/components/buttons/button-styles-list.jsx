@@ -152,6 +152,7 @@ class ButtonStylesList extends React.Component {
 							activeStyle={this.props.activeStyle}
 							name={item.name}
 							style={item.style}
+							styleFn={item.styleFn}
 						/>
 					</li>
 				);
