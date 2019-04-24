@@ -11,6 +11,14 @@ function toAbsolute(rootRelativePath) {
 	return path.join(__dirname, rootRelativePath);
 }
 
+/**
+ * For windows compatibility, we need to use windows path separators for webpack
+ * "test" properties.
+ */
+function toTestRegExp(file) {
+	return new RegExp(path.normalize(file).replace(/\\/g, '\\'));
+}
+
 const base = {
 	/**
 	 * https://webpack.js.org/configuration/entry-context/
@@ -28,7 +36,7 @@ const base = {
 				loader: 'babel-loader',
 			},
 			{
-				test: /scripts\/build\/version\.js$/,
+				test: toTestRegExp('scripts/build/version.js'),
 				use: {
 					loader: 'val-loader',
 				},
