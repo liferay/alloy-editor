@@ -55,7 +55,14 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 * @method componentWillReceiveProps
 	 */
 	componentWillReceiveProps() {
-		this.replaceState(this.getInitialState());
+		const newState = this.getInitialState();
+
+		this.setState({
+			all: undefined,
+			keys: undefined,
+			new: newState,
+			old: undefined,
+		});
 	}
 
 	/**
