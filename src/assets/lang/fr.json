@@ -12,12 +12,16 @@
 	"columns": "Colonnes",
 	"confirm": "Confirmer",
 	"danger": "Danger",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "Supprimer l'intégration",
 	"disabled": "Désactivé",
 	"editLink": "Veuillez saisir ou coller le lien ici",
 	"enterValidUrl": "Veuillez saisir une url valide",
 	"image": "Insérer une image",
 	"info": "Info",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "Lien",
 	"linkTargetBlank": "_blank (nouvel onglet)",
 	"linkTargetDefault": "par défaut",
@@ -31,8 +35,10 @@
 	"removeImage": "Supprimer l'image",
 	"removeLink": "Supprimer le lien",
 	"rows": "Lignes",
+	"secondary": "Secondary",
 	"success": "Réussite",
 	"table": "Insérer un tableau",
 	"videoPlaybackDisabled": "La lecture de vidéo est désactivée en mode édition",
-	"warning": "Attention"
+	"warning": "Attention",
+	"white": "White"
 }

@@ -12,12 +12,16 @@
 	"columns": "列",
 	"confirm": "確認",
 	"danger": "危険",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "埋め込み動画を削除",
 	"disabled": "無効",
 	"editLink": "リンクをここに入力するか貼り付けてください",
 	"enterValidUrl": "有効なURLを入力してください",
 	"image": "画像を挿入",
 	"info": "情報",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "リンク",
 	"linkTargetBlank": "_blank（新しいタブ）",
 	"linkTargetDefault": "デフォルト",
@@ -31,8 +35,10 @@
 	"removeImage": "画像を削除",
 	"removeLink": "リンクを削除",
 	"rows": "行",
+	"secondary": "Secondary",
 	"success": "成功",
 	"table": "テーブルを挿入",
 	"videoPlaybackDisabled": "編集モードでは動画再生は無効化されています",
-	"warning": "警告"
+	"warning": "警告",
+	"white": "White"
 }
