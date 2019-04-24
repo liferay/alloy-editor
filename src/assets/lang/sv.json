@@ -12,12 +12,16 @@
 	"columns": "Kolumner",
 	"confirm": "Bekräfta",
 	"danger": "Fara",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "Ta bort inbäddning",
 	"disabled": "Inaktiverad",
 	"editLink": "Ange eller klistra in länken här",
 	"enterValidUrl": "Ange en giltig url",
 	"image": "Infoga bild",
 	"info": "Information",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "Länk",
 	"linkTargetBlank": "_blank (ny flik)",
 	"linkTargetDefault": "standard",
@@ -31,8 +35,10 @@
 	"removeImage": "Ta bort bild",
 	"removeLink": "Ta bort länk",
 	"rows": "Rader",
+	"secondary": "Secondary",
 	"success": "Lyckades",
 	"table": "Infoga tabell",
 	"videoPlaybackDisabled": "Videouppspelning är inaktiverat i redigeringsläge",
-	"warning": "Varning"
+	"warning": "Varning",
+	"white": "White"
 }
