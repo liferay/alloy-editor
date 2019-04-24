@@ -12,12 +12,16 @@
 	"columns": "Spalten",
 	"confirm": "Bestätigen",
 	"danger": "Gefahr",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "Einbettung löschen",
 	"disabled": "Deaktiviert",
 	"editLink": "Tippen Sie hier den Link ein oder fügen Sie ihn ein",
 	"enterValidUrl": "Bitte geben Sie eine gültige URL ein",
 	"image": "Bild einfügen",
 	"info": "Info",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "Link",
 	"linkTargetBlank": "_blank (neuer Tab)",
 	"linkTargetDefault": "Standardeinstellung",
@@ -31,8 +35,10 @@
 	"removeImage": "Bild entfernen",
 	"removeLink": "Link entfernen",
 	"rows": "Zeilen",
+	"secondary": "Secondary",
 	"success": "Fertig",
 	"table": "Tabelle einfügen",
 	"videoPlaybackDisabled": "Die Videowiedergabe ist im Bearbeitungsmodus deaktiviert",
-	"warning": "Warnhinweis"
+	"warning": "Warnhinweis",
+	"white": "White"
 }
