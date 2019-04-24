@@ -6,7 +6,7 @@ order: 2
 
 ###### The section below assumes that you are using the default UI built on React. If you're using your own custom UI, these steps will be different.
 
-<article id="article1">
+<article id="add-css">
 
 ## Add AlloyEditor's CSS to the page
 
@@ -16,7 +16,7 @@ order: 2
 
 </article>
 
-<article id="article2">
+<article id="add-js">
 
 ## Add AlloyEditor's JS to the page
 
@@ -42,15 +42,27 @@ There are a <strong>few ways</strong> to add the editor to the page:
   ```
 
   <span>If you use both React and CKEditor on your page, then just include AlloyEditor's core:</span>
+
   ```text/html
   <script src="alloy-editor/alloy-editor-core-min.js"></script>
   ```
-</section>
 
+</section>
 
 </article>
 
-<article id="article3">
+<article id="polyfilling">
+
+## Polyfilling older browsers
+
+To work properly on older browsers such as IE11 you will need to ensure that you have the appropriate polyfills in your environment. These are:
+
+- In order to correctly display icons, an SVG polyfill such as [svg4everybody](https://www.npmjs.com/package/svg4everybody).
+- To provide `Symbol`, which is needed by React, a polyfill like [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill).
+
+</article>
+
+<article id="making-editable">
 
 ## Invoke the static editable method of AlloyEditor
 
@@ -59,7 +71,7 @@ AlloyEditor.editable('myContentEditable');
 ```
 </article>
 
-<article id="article4">
+<article id="getting-content">
 
 ## Retrieve the content from the editor
 

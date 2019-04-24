@@ -72,7 +72,7 @@ class Index extends Component {
 									</p>
 
 									<p className="small font-weight-bold mt-5">
-										Supported browsers: IE9+, Edge, Chrome,
+										Supported browsers: IE11, Edge, Chrome,
 										Firefox, Safari
 									</p>
 

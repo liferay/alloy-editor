@@ -35,6 +35,8 @@ If you downloaded it via Bower:
 <script src="bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js"></script>
 ```
 
+Note that if you intend to use AlloyEditor on older browsers such as IE you may need to make [some polyfills available in your environment](how_to_use_it.html#polyfilling).
+
 </article>
 
 <article id="article3">
