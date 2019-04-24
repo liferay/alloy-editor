@@ -12,12 +12,16 @@
 	"columns": "Kolommen",
 	"confirm": "Bevestigen",
 	"danger": "Gevaar",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "Insluiting verwijderen",
 	"disabled": "Uitgeschakeld",
 	"editLink": "Link hier invoeren of plakken",
 	"enterValidUrl": "Voer een geldige URL in",
 	"image": "Afbeelding invoegen",
 	"info": "Info",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "Link",
 	"linkTargetBlank": "_blank (nieuw tabblad)",
 	"linkTargetDefault": "standaard",
@@ -31,8 +35,10 @@
 	"removeImage": "Afbeelding verwijderen",
 	"removeLink": "Link verwijderen",
 	"rows": "Rijen",
+	"secondary": "Secondary",
 	"success": "Geslaagd",
 	"table": "Tabel invoegen",
 	"videoPlaybackDisabled": "Video afspelen is uitgeschakeld in de bewerkingsmodus",
-	"warning": "Waarschuwing"
+	"warning": "Waarschuwing",
+	"white": "White"
 }
