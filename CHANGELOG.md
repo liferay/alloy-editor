@@ -1,3 +1,9 @@
+## [v2.0.1](https://github.com/liferay/alloy-editor/tree/v2.0.1) (2019-04-26)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0...v2.0.1)
+
+- fix: Remove format only where styleFn does not exist ([\#1249](https://github.com/liferay/alloy-editor/pull/1249))
+
 ## [v2.0.0](https://github.com/liferay/alloy-editor/tree/v2.0.0) (2019-04-24)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0-beta.7...v2.0.0)
