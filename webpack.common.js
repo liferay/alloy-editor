@@ -16,7 +16,7 @@ function toAbsolute(rootRelativePath) {
  * "test" properties.
  */
 function toTestRegExp(file) {
-	return new RegExp(path.normalize(file).replace(/\\/g, '\\'));
+	return new RegExp(path.normalize(file).replace(/\\/g, '\\\\'));
 }
 
 const base = {
