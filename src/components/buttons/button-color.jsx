@@ -85,15 +85,11 @@ class ButtonColor extends React.Component {
 	render() {
 		let activeColor = AlloyEditor.Strings.normal;
 
-		let activeColorClass = 'text-body';
-
 		const colors = this._getColors();
 
 		colors.some(item => {
 			if (this._checkActive(item.style)) {
 				activeColor = item.name;
-
-				activeColorClass = item.style.attributes.class;
 			}
 		});
 
