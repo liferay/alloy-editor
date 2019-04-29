@@ -1,3 +1,10 @@
+## [v2.0.2](https://github.com/liferay/alloy-editor/tree/v2.0.2) (2019-04-29)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.1...v2.0.2)
+
+- chore: fix lint ([\#1253](https://github.com/liferay/alloy-editor/pull/1253))
+- fix: backslash escaping on Windows builds (#1251) ([\#1252](https://github.com/liferay/alloy-editor/pull/1252))
+
 ## [v2.0.1](https://github.com/liferay/alloy-editor/tree/v2.0.1) (2019-04-26)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.0...v2.0.1)

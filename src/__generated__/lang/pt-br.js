@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Colunas",
 	"confirm": "Confirmar",
 	"danger": "Perigo",
+	"dark": "Escuro",
+	"darkGray": "Cinza escuro",
 	"deleteEmbed": "Excluir inserção",
 	"disabled": "Desativado",
 	"editLink": "Digite ou cole o link aqui",
 	"enterValidUrl": "Insira um url válido",
 	"image": "Inserir imagem",
 	"info": "Informações",
+	"light": "Claro",
+	"lighter": "Mais claro",
 	"link": "Link",
 	"linkTargetBlank": "_blank (nova aba)",
 	"linkTargetDefault": "padrão",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Remover imagem",
 	"removeLink": "Remover link",
 	"rows": "Linhas",
+	"secondary": "Secundário",
 	"success": "Sucesso",
 	"table": "Inserir tabela",
 	"videoPlaybackDisabled": "A reprodução de vídeo é desativada no modo edição",
-	"warning": "Aviso"
+	"warning": "Aviso",
+	"white": "Branco"
 };

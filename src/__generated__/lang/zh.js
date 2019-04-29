@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "列",
 	"confirm": "确认",
 	"danger": "危险",
+	"dark": "深色",
+	"darkGray": "深灰",
 	"deleteEmbed": "删除嵌入式链接",
 	"disabled": "已禁用",
 	"editLink": "在此处输入或粘贴链接",
 	"enterValidUrl": "请输入一个有效 url",
 	"image": "插入图像",
 	"info": "信息",
+	"light": "浅色",
+	"lighter": "略淡",
 	"link": "链接",
 	"linkTargetBlank": "_blank（新选项卡）",
 	"linkTargetDefault": "默认",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "移除图像",
 	"removeLink": "移除链接",
 	"rows": "行",
+	"secondary": "辅助",
 	"success": "成功",
 	"table": "插入表",
 	"videoPlaybackDisabled": "视频播放功能在处于编辑模式时将禁用",
-	"warning": "警告"
+	"warning": "警告",
+	"white": "白色"
 };

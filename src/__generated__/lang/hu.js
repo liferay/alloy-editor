@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Oszlopok",
 	"confirm": "Megerősítés",
 	"danger": "Veszély",
+	"dark": "Sötét",
+	"darkGray": "Sötétszürke",
 	"deleteEmbed": "Beágyazás törlése",
 	"disabled": "Letiltva",
 	"editLink": "Írja vagy illessze be a hivatkozást ide",
 	"enterValidUrl": "Adjon meg érvényes URL-címet",
 	"image": "Kép behelyezése",
 	"info": "Info",
+	"light": "Világos",
+	"lighter": "Világosabb",
 	"link": "Hivatkozás",
 	"linkTargetBlank": "_blank (új fül)",
 	"linkTargetDefault": "alapértelmezés",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Kép eltávolítása",
 	"removeLink": "Hivatkozás eltávolítása",
 	"rows": "Sorok",
+	"secondary": "Másodlagos",
 	"success": "Sikerült",
 	"table": "Táblázat behelyezése",
 	"videoPlaybackDisabled": "Szerkesztési módban nem engedélyezett a videó lejátszása",
-	"warning": "Figyelmeztetés"
+	"warning": "Figyelmeztetés",
+	"white": "Fehér"
 };

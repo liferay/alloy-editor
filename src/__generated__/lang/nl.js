@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Kolommen",
 	"confirm": "Bevestigen",
 	"danger": "Gevaar",
+	"dark": "Donker",
+	"darkGray": "Donkergrijs",
 	"deleteEmbed": "Insluiting verwijderen",
 	"disabled": "Uitgeschakeld",
 	"editLink": "Link hier invoeren of plakken",
 	"enterValidUrl": "Voer een geldige URL in",
 	"image": "Afbeelding invoegen",
 	"info": "Info",
+	"light": "Licht",
+	"lighter": "Lichter",
 	"link": "Link",
 	"linkTargetBlank": "_blank (nieuw tabblad)",
 	"linkTargetDefault": "standaard",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Afbeelding verwijderen",
 	"removeLink": "Link verwijderen",
 	"rows": "Rijen",
+	"secondary": "Secundair",
 	"success": "Geslaagd",
 	"table": "Tabel invoegen",
 	"videoPlaybackDisabled": "Video afspelen is uitgeschakeld in de bewerkingsmodus",
-	"warning": "Waarschuwing"
+	"warning": "Waarschuwing",
+	"white": "Wit"
 };

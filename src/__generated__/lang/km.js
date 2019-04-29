@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Cols",
 	"confirm": "Confirm",
 	"danger": "Danger",
+	"dark": "Dark",
+	"darkGray": "Dark Gray",
 	"deleteEmbed": "Delete embed",
 	"disabled": "Disabled",
 	"editLink": "Type or paste link here",
 	"enterValidUrl": "Please enter a valid url",
 	"image": "Insert Image",
 	"info": "Info",
+	"light": "Light",
+	"lighter": "Lighter",
 	"link": "Link",
 	"linkTargetBlank": "_blank (new tab)",
 	"linkTargetDefault": "default",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Remove Image",
 	"removeLink": "Remove link",
 	"rows": "Rows",
+	"secondary": "Secondary",
 	"success": "Success",
 	"table": "Insert Table",
 	"videoPlaybackDisabled": "Video playback is disabled during edit mode",
-	"warning": "Warning"
+	"warning": "Warning",
+	"white": "White"
 };

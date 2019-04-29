@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "أعمدة",
 	"confirm": "تأكيد",
 	"danger": "خطر",
+	"dark": "داكن",
+	"darkGray": "رمادي داكن",
 	"deleteEmbed": "حذف المدمج",
 	"disabled": "تعطيل",
 	"editLink": "اكتب أو الصق الرابط هنا",
 	"enterValidUrl": "الرجاء إدخال عنوان url صالح",
 	"image": "أدخل الصورة",
 	"info": "معلومات",
+	"light": "فاتح",
+	"lighter": "فاتح إضافي",
 	"link": "الرابط",
 	"linkTargetBlank": "_فارغ (علامة تبويب جديدة)",
 	"linkTargetDefault": "افتراضي",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "إزالة الصورة",
 	"removeLink": "إزالة الرابط",
 	"rows": "الصفوف",
+	"secondary": "ثانوي",
 	"success": "تم بنجاح",
 	"table": "إدراج جدول",
 	"videoPlaybackDisabled": "يتم تعطيل عرض الفيديو أثناء وضع التحرير",
-	"warning": "تحذير"
+	"warning": "تحذير",
+	"white": "أبيض"
 };

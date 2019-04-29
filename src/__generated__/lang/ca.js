@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Columnes",
 	"confirm": "Confirma",
 	"danger": "Perill",
+	"dark": "Fosc",
+	"darkGray": "Gris fosc",
 	"deleteEmbed": "Esborra la incrustació",
 	"disabled": "Deshabilitat",
 	"editLink": "Escriviu o enganxeu l'enllaç aquí",
 	"enterValidUrl": "Introduïu un url vàlid",
 	"image": "Inseriu imatge",
 	"info": "Informació",
+	"light": "Clar",
+	"lighter": "Més clar",
 	"link": "Enllaç",
 	"linkTargetBlank": "_blank (nova pestanya)",
 	"linkTargetDefault": "per defecte",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Suprimeix la imatge",
 	"removeLink": "Suprimeix l'enllaç",
 	"rows": "Files",
+	"secondary": "Secundari",
 	"success": "Fet",
 	"table": "Insereix taula",
 	"videoPlaybackDisabled": "La reproducció del vídeo està deshabilitada durant el mode d'edició",
-	"warning": "Avís"
+	"warning": "Avís",
+	"white": "Blanc"
 };

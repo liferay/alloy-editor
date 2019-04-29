@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Kolumner",
 	"confirm": "Bekräfta",
 	"danger": "Fara",
+	"dark": "Mörk",
+	"darkGray": "Mörkgrå",
 	"deleteEmbed": "Ta bort inbäddning",
 	"disabled": "Inaktiverad",
 	"editLink": "Ange eller klistra in länken här",
 	"enterValidUrl": "Ange en giltig url",
 	"image": "Infoga bild",
 	"info": "Information",
+	"light": "Ljus",
+	"lighter": "Ljusare",
 	"link": "Länk",
 	"linkTargetBlank": "_blank (ny flik)",
 	"linkTargetDefault": "standard",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Ta bort bild",
 	"removeLink": "Ta bort länk",
 	"rows": "Rader",
+	"secondary": "Sekundär",
 	"success": "Lyckades",
 	"table": "Infoga tabell",
 	"videoPlaybackDisabled": "Videouppspelning är inaktiverat i redigeringsläge",
-	"warning": "Varning"
+	"warning": "Varning",
+	"white": "Vit"
 };

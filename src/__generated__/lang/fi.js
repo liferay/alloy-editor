@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "Sarakkeet",
 	"confirm": "Vahvista",
 	"danger": "Vaara",
+	"dark": "Tumma",
+	"darkGray": "Tumman Harmaa",
 	"deleteEmbed": "Poista upotettu",
 	"disabled": "Poista käytöstä",
 	"editLink": "Kirjoita tai liitä linkki tähän",
 	"enterValidUrl": "Anna kelvollinen url",
 	"image": "Lisää Kuva",
 	"info": "Tietoja",
+	"light": "Kirkas",
+	"lighter": "Kirkkaampi",
 	"link": "Linkki",
 	"linkTargetBlank": "_blank (uusi välilehti)",
 	"linkTargetDefault": "default",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "Poista Kuva",
 	"removeLink": "Poista linkki",
 	"rows": "Rivit",
+	"secondary": "Toissijainen",
 	"success": "Onnistui",
 	"table": "Lisää Taulukko",
 	"videoPlaybackDisabled": "Videotoisto on estetty muokkaustilan aikana",
-	"warning": "Varoitus"
+	"warning": "Varoitus",
+	"white": "Valkoinen"
 };

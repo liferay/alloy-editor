@@ -67,12 +67,16 @@ AlloyEditor.Strings = {
 	"columns": "列",
 	"confirm": "確認",
 	"danger": "危険",
+	"dark": "暗い",
+	"darkGray": "暗いグレー",
 	"deleteEmbed": "埋め込み動画を削除",
 	"disabled": "無効",
 	"editLink": "リンクをここに入力するか貼り付けてください",
 	"enterValidUrl": "有効なURLを入力してください",
 	"image": "画像を挿入",
 	"info": "情報",
+	"light": "明るい",
+	"lighter": "より明るい",
 	"link": "リンク",
 	"linkTargetBlank": "_blank（新しいタブ）",
 	"linkTargetDefault": "デフォルト",
@@ -85,8 +89,10 @@ AlloyEditor.Strings = {
 	"removeImage": "画像を削除",
 	"removeLink": "リンクを削除",
 	"rows": "行",
+	"secondary": "セカンダリ",
 	"success": "成功",
 	"table": "テーブルを挿入",
 	"videoPlaybackDisabled": "編集モードでは動画再生は無効化されています",
-	"warning": "警告"
+	"warning": "警告",
+	"white": "白"
 };
