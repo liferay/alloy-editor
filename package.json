@@ -70,7 +70,8 @@
 		"start": "webpack-dev-server --config webpack.dev.js",
 		"test": "karma start karma.js",
 		"test:debug": "karma start karma.js --debug",
-		"test:saucelabs": "karma start karma-saucelabs.js"
+		"test:saucelabs": "karma start karma-saucelabs.js",
+		"version": "yarn build"
 	},
 	"repository": {
 		"type": "git",
