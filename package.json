@@ -57,7 +57,7 @@
 	"scripts": {
 		"build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js build:assets",
 		"build": "gulp --gulpfile scripts/build/gulp/gulpfile.js --release",
-		"ci": "yarn build && yarn testSaucelabs",
+		"ci": "yarn build && yarn test:saucelabs",
 		"dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
 		"format": "prettier --write -- '*.{js,json}' '{scripts,src,test}/**/*.{js,jsx}'",
 		"format:changed": "git ls-files -mz *.js *.json -- '*.js' '*.json' 'scripts/*.js' 'src/*.js' 'src/*.jsx' 'test/*.js' 'test/*.jsx' | xargs -0 prettier --write --",
@@ -70,7 +70,7 @@
 		"start": "webpack-dev-server --config webpack.dev.js",
 		"test": "karma start karma.js",
 		"test:debug": "karma start karma.js --debug",
-		"testSaucelabs": "karma start karma-saucelabs.js"
+		"test:saucelabs": "karma start karma-saucelabs.js"
 	},
 	"repository": {
 		"type": "git",
