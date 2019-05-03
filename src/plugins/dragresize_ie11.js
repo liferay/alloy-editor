@@ -443,6 +443,10 @@
                 if ( editor.filter.checkFeature( this.features.dimension ) && editor.config.ae_dragresize_ie11_disableResizer !== true )
                     setupResizer( this );
 
+                const dragHandlerStyle = this.dragHandlerContainer.$.style;
+                dragHandlerStyle.setAttribute('backgroundColor', 'rgba(255, 255, 255, 1');
+                dragHandlerStyle.setAttribute('opacity', '1');
+
                 this.shiftState = helpers.stateShifter( this.editor );
 
                 // Add widget editing option to its context menu.
