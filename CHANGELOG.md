@@ -1,3 +1,10 @@
+## [v2.0.3](https://github.com/liferay/alloy-editor/tree/v2.0.3) (2019-05-03)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.1...v2.0.3)
+
+- fix: improve drag handler visibility on IE (#1255) ([\#1256](https://github.com/liferay/alloy-editor/pull/1256))
+- feat: prevent publication with stale version number ([\#1258](https://github.com/liferay/alloy-editor/pull/1258))
+
 ## [v2.0.2](https://github.com/liferay/alloy-editor/tree/v2.0.2) (2019-04-29)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.1...v2.0.2)
