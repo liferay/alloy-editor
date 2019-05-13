@@ -96,7 +96,7 @@ function checkAnnotatedTag() {
 	}
 
 	const tag = stdout.toString().trim();
-	if (tag !== version) {
+	if (tag !== `v${version}`) {
 		throw new Error(
 			`Expected current HEAD to be tagged as v${version} but it was ${tag}`
 		);
