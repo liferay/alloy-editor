@@ -1,7 +1,11 @@
 /**
- * Verifies that the built "dist" file has the correct version number.
+ * Pre-publish check script that verifies that:
+ *
+ * - The built "dist" file has the correct version number.
+ * - An annotated (not lightweight) tag exists pointing at the current commit.
  */
 
+const child_process = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -36,7 +40,7 @@ function log(...args) {
 	console.log(...args);
 }
 
-function check() {
+function checkDistVersionNumber() {
 	if (!fs.existsSync(FILE)) {
 		throw new Error(`File ${FILE} does not exist`);
 	}
@@ -76,4 +80,30 @@ function check() {
 	throw new Error(`Failed to find version string in ${FILE}`);
 }
 
-check();
+function checkAnnotatedTag() {
+	const {version} = require('../../package.json');
+
+	const {error, signal, status, stdout} = child_process.spawnSync('git', [
+		'describe',
+		'--exact-match',
+	]);
+
+	if (error || signal || status) {
+		const command = `git tag -m v${version} v${version}`;
+		throw new Error(
+			`Expected current HEAD to have an annotated tag; try running \`${command}\``
+		);
+	}
+
+	const tag = stdout.toString().trim();
+	if (tag !== version) {
+		throw new Error(
+			`Expected current HEAD to be tagged as v${version} but it was ${tag}`
+		);
+	}
+
+	log(`✅ Found annotated version tag v${version}`);
+}
+
+checkDistVersionNumber();
+checkAnnotatedTag();
