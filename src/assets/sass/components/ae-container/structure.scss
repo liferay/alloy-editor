@@ -7,10 +7,6 @@
 
     *, *:after, *:before {
         box-sizing: inherit;
-        color: inherit;
-    }
-    input, textarea, keygen, select, button {
-        color: initial;
     }
 
     .ae-container, [class^=ae-container-], .ae-button, .ae-toolbar-element, label {
