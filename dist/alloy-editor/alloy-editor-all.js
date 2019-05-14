@@ -1,5 +1,5 @@
 /**
- * AlloyEditor v1.5.23
+ * AlloyEditor v1.5.24
  *
  * Copyright 2014-present, Liferay, Inc.
  * All rights reserved.
@@ -25251,7 +25251,7 @@ CKEDITOR.config.image2_captionedClass = 'image';
             // Bottom-right corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_se{' + 'bottom:-5px;' + 'cursor:se-resize;' + 'left:auto;' + 'right:-5px;' + '}' +
             // Bottom-left corner style of the resizer.
-            '.cke_image_resizer.cke_image_resizer_sw{' + 'bottom:-5px;' + 'cursor:sw-resize;' + 'left:-5px;' + 'right:auto;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizer.cke_image_resizing{' + 'display:block' + '}' +
+            '.cke_image_resizer.cke_image_resizer_sw{' + 'bottom:-5px;' + 'cursor:sw-resize;' + 'left:-5px;' + 'right:auto;' + '}' + '.cke_widget_wrapper:hover .cke_image_resizer,' + '.cke_image_resizing>.cke_image_resizer{' + 'display:block' + '}' +
             // Expand widget wrapper when linked inline image.
             '.cke_widget_wrapper>a{' + 'display:inline-block' + '}');
         },
@@ -25604,6 +25604,10 @@ CKEDITOR.config.image2_captionedClass = 'image';
                 // Setup dynamic image resizing with mouse.
                 // Don't initialize resizer when dimensions are disallowed (#11004).
                 if (editor.filter.checkFeature(this.features.dimension) && editor.config.ae_dragresize_ie11_disableResizer !== true) setupResizer(this);
+
+                var dragHandlerStyle = this.dragHandlerContainer.$.style;
+                dragHandlerStyle.setAttribute('backgroundColor', 'rgba(255, 255, 255, 1');
+                dragHandlerStyle.setAttribute('opacity', '1');
 
                 this.shiftState = helpers.stateShifter(this.editor);
 
