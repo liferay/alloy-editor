@@ -1,3 +1,10 @@
+## [v2.0.4](https://github.com/liferay/alloy-editor/tree/v2.0.4) (2019-05-14)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.3...v2.0.4)
+
+- fix: Remove unneeded styles ([\#1267](https://github.com/liferay/alloy-editor/pull/1267))
+- fix: tag should contain a "v" ([\#1265](https://github.com/liferay/alloy-editor/pull/1265))
+
 ## [v2.0.3](https://github.com/liferay/alloy-editor/tree/v2.0.3) (2019-05-03)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.1...v2.0.3)
