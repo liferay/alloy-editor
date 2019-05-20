@@ -1,3 +1,9 @@
+## [v2.0.5](https://github.com/liferay/alloy-editor/tree/v2.0.5) (2019-05-20)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.4...v2.0.5)
+
+- fix: update color for label ([\#1270](https://github.com/liferay/alloy-editor/pull/1270))
+
 ## [v2.0.4](https://github.com/liferay/alloy-editor/tree/v2.0.4) (2019-05-14)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.3...v2.0.4)
