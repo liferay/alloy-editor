@@ -1,3 +1,9 @@
+## [v2.0.6](https://github.com/liferay/alloy-editor/tree/v2.0.6) (2019-05-27)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.5...v2.0.6)
+
+- fix: add aria-label and title attributes for the image and video buttons ([\#1272](https://github.com/liferay/alloy-editor/pull/1272))
+
 ## [v2.0.5](https://github.com/liferay/alloy-editor/tree/v2.0.5) (2019-05-20)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.4...v2.0.5)
