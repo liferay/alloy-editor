@@ -16,10 +16,12 @@ class ButtonItemSelectorImage extends React.Component {
 	render() {
 		return (
 			<button
+				aria-label={AlloyEditor.Strings.image}
 				className="ae-button"
 				data-type="button-image"
 				onClick={this._handleClick}
-				tabIndex={this.props.tabIndex}>
+				tabIndex={this.props.tabIndex}
+				title={AlloyEditor.Strings.image}>
 				<ButtonIcon symbol="picture" />
 			</button>
 		);

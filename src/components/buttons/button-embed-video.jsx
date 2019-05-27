@@ -46,10 +46,12 @@ class ButtonEmbedVideo extends React.Component {
 		} else {
 			return (
 				<button
+					aria-label={AlloyEditor.Strings.video}
 					className="ae-button"
 					data-type="button-embed-video"
 					onClick={this.props.requestExclusive}
-					tabIndex={this.props.tabIndex}>
+					tabIndex={this.props.tabIndex}
+					title={AlloyEditor.Strings.video}>
 					<ButtonIcon symbol="video" />
 				</button>
 			);
