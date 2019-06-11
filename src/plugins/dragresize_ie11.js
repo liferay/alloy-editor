@@ -986,7 +986,11 @@
 
 			const image = wrapper.$.querySelector('img');
 
-			image.removeAttribute('style');
+			const imageStyles = image.getAttribute('style');
+			const widthStyles = /(width:.+?;)/g.exec(imageStyles);
+			const widthStyle = widthStyles[0];
+
+			image.setAttribute('style', widthStyle);
 		}
 	}
 
