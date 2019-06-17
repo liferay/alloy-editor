@@ -1,3 +1,12 @@
+## [v1.5.24](https://github.com/liferay/alloy-editor/tree/v1.5.24) (2019-06-17)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.23...v1.5.24)
+
+- fix: make IE preserve other browsers' image width styling ([\#1278](https://github.com/liferay/alloy-editor/pull/1278))
+- fix: improve drag handler visibility on IE (#1255) ([\#1259](https://github.com/liferay/alloy-editor/pull/1259))
+- chore: remove package-lock.json (#1241) ([\#1242](https://github.com/liferay/alloy-editor/pull/1242))
+- chore: Update lock file ([\#1226](https://github.com/liferay/alloy-editor/pull/1226))
+
 ## [v1.5.23](https://github.com/liferay/alloy-editor/tree/v1.5.23) (2019-04-02)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.22...v1.5.23)
