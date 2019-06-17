@@ -97,7 +97,7 @@
             });
         });
 
-        describe('image', function() {
+        xdescribe('image', function() {
             var imageTest = AlloyEditor.SelectionTest.image;
 
             beforeEach(function() {
