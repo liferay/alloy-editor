@@ -1,3 +1,9 @@
+## [v2.0.7](https://github.com/liferay/alloy-editor/tree/v2.0.7) (2019-06-17)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.6...v2.0.7)
+
+- fix(ie): make IE preserve other browsers' image width styling (#1275) ([\#1276](https://github.com/liferay/alloy-editor/pull/1276))
+
 ## [v2.0.6](https://github.com/liferay/alloy-editor/tree/v2.0.6) (2019-05-27)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.5...v2.0.6)
