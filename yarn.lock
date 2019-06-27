@@ -1869,10 +1869,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-clay-css@^2.11.1:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.12.0.tgz#984163b32848a17691a76b99cdeaa3aef5653c5c"
-  integrity sha512-Jwh7oiZ3VSvJPC0OMXwfJe1IBUkaD/w5IOtLkkv+4E8z8JXG7m4C+iACxJxunJsPxnC66SgWt9Lq2RbZUvv87w==
+clay-css@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.16.1.tgz#8bc85f28b80c28eb650847944201069196ca2183"
+  integrity sha512-8QJjIuyViu1Y/8SmAcdOSFVguZTXdfV+TrkbdJ9KwhSvnqxsrfXumIWAt8nI8byZlWLULqLRQgjkFkENSF0/0Q==
 
 cli-cursor@^2.1.0:
   version "2.1.0"

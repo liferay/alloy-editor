@@ -89,7 +89,7 @@
 	},
 	"homepage": "http://alloyeditor.com",
 	"dependencies": {
-		"clay-css": "^2.11.1",
+		"clay-css": "^2.16.1",
 		"prop-types": "^15.6.2",
 		"react": "^16.8.3",
 		"react-dom": "^16.8.3",
