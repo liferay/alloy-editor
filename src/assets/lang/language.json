@@ -3,6 +3,7 @@
 	"ariaUpdateManyToolbars": "{toolbars} toolbars are available. Press ALT+F10 to focus.",
 	"ariaUpdateNoToolbar": "No toolbars are available",
 	"ariaUpdateOneToolbar": "{toolbars} toolbar is available. Press ALT+F10 to focus.",
+	"audio": "Insert Audio",
 	"camera": "Insert Image from Camera",
 	"cameraDisabled": "The browser does not support this action, or it is available on https only (Chrome).",
 	"cite": "Cite",
