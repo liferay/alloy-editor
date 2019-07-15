@@ -987,10 +987,13 @@
 			const image = wrapper.$.querySelector('img');
 
 			const imageStyles = image.getAttribute('style');
-			const widthStyles = /(width:.+?;)/g.exec(imageStyles);
-			const widthStyle = widthStyles[0];
 
-			image.setAttribute('style', widthStyle);
+			if (imageStyles) {
+				const widthStyles = /(width:.+?;)/g.exec(imageStyles);
+				const widthStyle = widthStyles[0];
+
+				image.setAttribute('style', widthStyle);
+			}
 		}
 	}
 
