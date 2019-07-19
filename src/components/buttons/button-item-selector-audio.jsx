@@ -16,10 +16,12 @@ class ButtonItemSelectorAudio extends React.Component {
 	render() {
 		return (
 			<button
+				aria-label={AlloyEditor.Strings.audio}
 				className="ae-button"
 				data-type="button-audio"
 				onClick={this._handleClick}
-				tabIndex={this.props.tabIndex}>
+				tabIndex={this.props.tabIndex}
+				title={AlloyEditor.Strings.audio}>
 				<ButtonIcon symbol="audio" />
 			</button>
 		);

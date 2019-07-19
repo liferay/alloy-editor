@@ -16,10 +16,12 @@ class ButtonItemSelectorVideo extends React.Component {
 	render() {
 		return (
 			<button
+				aria-label={AlloyEditor.Strings.video}
 				className="ae-button"
 				data-type="button-video"
 				onClick={this._handleClick}
-				tabIndex={this.props.tabIndex}>
+				tabIndex={this.props.tabIndex}
+				title={AlloyEditor.Strings.video}>
 				<ButtonIcon symbol="video" />
 			</button>
 		);
