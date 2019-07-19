@@ -161,6 +161,7 @@ if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
             recordScreenshots: false,
             startConnect: true,
             connectOptions: {
+                'no-ssl-bump-domains': 'all',
                 port: 5757,
                 logfile: 'sauce_connect.log'
             }
