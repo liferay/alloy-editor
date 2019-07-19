@@ -60,6 +60,9 @@
     "type": "git",
     "url": "https://github.com/liferay/alloy-editor.git"
   },
+  "resolutions": {
+    "selenium-webdriver": "4.0.0-alpha.1"
+  },
   "keywords": [
     "editor",
     "wysiwyg"
