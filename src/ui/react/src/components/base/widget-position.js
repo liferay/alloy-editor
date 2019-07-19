@@ -210,15 +210,14 @@
                     top: endPoint[1] + 'px',
                     opacity: 1
                 });
+				
+				// 150ms to match transition-duration for .ae-toolbar-transition:
+				setTimeout(() => {
+					domElement.setStyles({
+						pointerEvents: '',
+					});
+				}, 150);
             });
-
-            if (domElement.$) {
-                domElement.$.addEventListener('transitionend', () => {
-                    domElement.setStyles({
-                        pointerEvents: '',
-                    });
-                })
-            }
         },
 
         /**
