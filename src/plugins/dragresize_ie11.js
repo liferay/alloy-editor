@@ -893,10 +893,13 @@
             var image = wrapper.$.querySelector('img');
 
             var imageStyles = image.getAttribute('style');
-            var widthStyles = /(width:.+?;)/g.exec(imageStyles);
-            var widthStyle = widthStyles[0];
 
-            image.setAttribute('style', widthStyle);
+            if (imageStyles) {
+                var widthStyles = /(width:.+?;)/g.exec(imageStyles);
+                var widthStyle = widthStyles[0];
+
+                image.setAttribute('style', widthStyle);
+            }
         }
     }
 
