@@ -27,7 +27,8 @@ class ButtonRemoveImage extends React.Component {
 				aria-label={AlloyEditor.Strings.removeImage}
 				aria-pressed={cssClass.indexOf('pressed') !== -1}
 				className={cssClass}
-				onClick={this.execCommand}>
+				onClick={this.execCommand}
+				title={AlloyEditor.Strings.removeImage}>
 				<ButtonIcon symbol="times-circle" />
 			</button>
 		);
