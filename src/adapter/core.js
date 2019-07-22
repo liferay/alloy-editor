@@ -687,7 +687,13 @@ extend(
 				validator: '_validateToolbars',
 				value: {
 					add: {
-						buttons: ['image', 'embed', 'camera', 'hline', 'table'],
+						buttons: [
+							'imageFromFile',
+							'embed',
+							'camera',
+							'hline',
+							'table',
+						],
 						tabIndex: 2,
 					},
 					styles: {

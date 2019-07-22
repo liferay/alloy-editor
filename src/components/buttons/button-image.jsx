@@ -18,7 +18,7 @@ class ButtonImage extends React.Component {
 	 * @property {String} key
 	 * @static
 	 */
-	static key = 'image';
+	static key = 'imageFromFile';
 
 	constructor(props) {
 		super(props);
@@ -87,7 +87,7 @@ class ButtonImage extends React.Component {
 	 * @method _onInputChange
 	 * @protected
 	 */
-	_onInputChange() {
+	_onInputChange = () => {
 		const inputEl = this.fileInput.current;
 
 		// On IE11 the function might be called with an empty array of
@@ -127,7 +127,7 @@ class ButtonImage extends React.Component {
 		reader.readAsDataURL(file);
 
 		inputEl.value = '';
-	}
+	};
 }
 
 export default ButtonImage;
