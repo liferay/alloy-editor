@@ -1,3 +1,11 @@
+## [v1.5.25](https://github.com/liferay/alloy-editor/tree/v1.5.25) (2019-07-22)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.24...v1.5.25)
+
+- fix(ie): add a check for 'imageStyles' before accessing (#1289) ([\#1294](https://github.com/liferay/alloy-editor/pull/1294))
+- fix(firefox): broken table toolbar (#1283) ([\#1293](https://github.com/liferay/alloy-editor/pull/1293))
+- fix: broken CI on 1.x branch ([\#1292](https://github.com/liferay/alloy-editor/pull/1292))
+
 ## [v1.5.24](https://github.com/liferay/alloy-editor/tree/v1.5.24) (2019-06-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.23...v1.5.24)

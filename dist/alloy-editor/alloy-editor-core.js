@@ -4787,10 +4787,13 @@ CKEDITOR.config.image2_captionedClass = 'image';
             var image = wrapper.$.querySelector('img');
 
             var imageStyles = image.getAttribute('style');
-            var widthStyles = /(width:.+?;)/g.exec(imageStyles);
-            var widthStyle = widthStyles[0];
 
-            image.setAttribute('style', widthStyle);
+            if (imageStyles) {
+                var widthStyles = /(width:.+?;)/g.exec(imageStyles);
+                var widthStyle = widthStyles[0];
+
+                image.setAttribute('style', widthStyle);
+            }
         }
     }
 
@@ -10914,15 +10917,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     top: endPoint[1] + 'px',
                     opacity: 1
                 });
-            });
 
-            if (domElement.$) {
-                domElement.$.addEventListener('transitionend', function () {
+                // 150ms to match transition-duration for .ae-toolbar-transition:
+                setTimeout(function () {
                     domElement.setStyles({
                         pointerEvents: ''
                     });
-                });
-            }
+                }, 150);
+            });
         },
 
         /**
