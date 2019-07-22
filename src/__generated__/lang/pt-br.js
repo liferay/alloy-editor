@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "As barras de tarefas {toolbars} estão disponíveis. Aperte ALT+F10 para focalizar.",
 	"ariaUpdateNoToolbar": "Não há barras de ferramentas disponíveis",
 	"ariaUpdateOneToolbar": "A barra de tarefas {toolbars} está disponível. Aperte ALT+F10 para focalizar.",
+	"audio": "Insert Audio",
 	"camera": "Inserir imagem da câmera",
 	"cameraDisabled": "O navegador não suporta esta ação, ou ela está disponível apenas em https (Chrome).",
 	"cite": "Citar",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Secundário",
 	"success": "Sucesso",
 	"table": "Inserir tabela",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "A reprodução de vídeo é desativada no modo edição",
 	"warning": "Aviso",
 	"white": "Branco"

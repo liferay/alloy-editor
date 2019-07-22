@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} verktygsfält är tillgängliga. Tryck på ALT+F10 för att fokusera.",
 	"ariaUpdateNoToolbar": "Inga verktygsfält är tillgängliga",
 	"ariaUpdateOneToolbar": "{toolbars} verktygsfält är tillgängligt. Tryck på ALT+F10 för att fokusera.",
+	"audio": "Insert Audio",
 	"camera": "Infoga bild från kamera",
 	"cameraDisabled": "Webbläsaren stöder inte den här åtgärden eller är endast tillgänglig på https (Chrome).",
 	"cite": "Citat",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Sekundär",
 	"success": "Lyckades",
 	"table": "Infoga tabell",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "Videouppspelning är inaktiverat i redigeringsläge",
 	"warning": "Varning",
 	"white": "Vit"

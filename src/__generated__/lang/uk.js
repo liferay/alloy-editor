@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} toolbars are available. Press ALT+F10 to focus.",
 	"ariaUpdateNoToolbar": "No toolbars are available",
 	"ariaUpdateOneToolbar": "{toolbars} toolbar is available. Press ALT+F10 to focus.",
+	"audio": "Insert Audio",
 	"camera": "Insert Image from Camera",
 	"cameraDisabled": "The browser does not support this action, or it is available on https only (Chrome).",
 	"cite": "Cite",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Secondary",
 	"success": "Success",
 	"table": "Insert Table",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "Video playback is disabled during edit mode",
 	"warning": "Warning",
 	"white": "White"

@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "تتوفر أشرطة أدوات {toolbars}. اضغط على ALT+F10 للتركيز.",
 	"ariaUpdateNoToolbar": "لا توجد أشرطة أدوات متوفرة",
 	"ariaUpdateOneToolbar": "يتوفر شريط أدوات {toolbars}. اضغط على ALT+F10 للتركيز.",
+	"audio": "Insert Audio",
 	"camera": "إدراج صورة من الكاميرا",
 	"cameraDisabled": "لا يدعم المتصفح هذا الإجراء، أو أنه متوفر على https فقط (Chrome).",
 	"cite": "الموقع",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "ثانوي",
 	"success": "تم بنجاح",
 	"table": "إدراج جدول",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "يتم تعطيل عرض الفيديو أثناء وضع التحرير",
 	"warning": "تحذير",
 	"white": "أبيض"

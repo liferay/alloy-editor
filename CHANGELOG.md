@@ -1,3 +1,12 @@
+## [v2.0.8](https://github.com/liferay/alloy-editor/tree/v2.0.8) (2019-07-22)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.7...v2.0.8)
+
+- fix: make demo insert-image button work again (#1291) ([\#1296](https://github.com/liferay/alloy-editor/pull/1296))
+- fix: missing tooltip on remove-image button (#1286) ([\#1295](https://github.com/liferay/alloy-editor/pull/1295))
+- fix(a11y): add aria-label and title attributes for the audio and video button (#1281) ([\#1282](https://github.com/liferay/alloy-editor/pull/1282))
+- fix(ie): add a check for 'imageStyles' before accessing (#1289) ([\#1290](https://github.com/liferay/alloy-editor/pull/1290))
+
 ## [v2.0.7](https://github.com/liferay/alloy-editor/tree/v2.0.7) (2019-06-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.6...v2.0.7)

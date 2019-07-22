@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} 个工具栏可用。按 ALT+F10 可以显示。",
 	"ariaUpdateNoToolbar": "没有可用的工具栏",
 	"ariaUpdateOneToolbar": "{toolbars} 个工具栏可用。按 ALT+F10 可以显示。",
+	"audio": "Insert Audio",
 	"camera": "从相机插入图像",
 	"cameraDisabled": "浏览器不支持此操作，或者此操作仅支持 https (Chrome)。",
 	"cite": "引用",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "辅助",
 	"success": "成功",
 	"table": "插入表",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "视频播放功能在处于编辑模式时将禁用",
 	"warning": "警告",
 	"white": "白色"

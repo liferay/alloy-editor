@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} eszköztár áll rendelkezésre. Fókuszáláshoz nyomja meg az ALT+F10 kombinációt.",
 	"ariaUpdateNoToolbar": "Nincs rendelkezésre álló eszköztár",
 	"ariaUpdateOneToolbar": "{toolbars} eszköztár áll rendelkezésre. Fókuszáláshoz nyomja meg az ALT+F10 kombinációt.",
+	"audio": "Insert Audio",
 	"camera": "Kép behelyezése kamerából",
 	"cameraDisabled": "A böngésző nem támogatja ezt a műveletet, vagy csak https esetén elérhető (Chrome).",
 	"cite": "Idézni",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Másodlagos",
 	"success": "Sikerült",
 	"table": "Táblázat behelyezése",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "Szerkesztési módban nem engedélyezett a videó lejátszása",
 	"warning": "Figyelmeztetés",
 	"white": "Fehér"

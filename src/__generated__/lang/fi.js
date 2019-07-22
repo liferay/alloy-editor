@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} -työkalupalkit ovat käytettävissä. Paina ALT+F10 tarkentaaksesi.",
 	"ariaUpdateNoToolbar": "Työkalupalkkeja ei ole käytettävissä",
 	"ariaUpdateOneToolbar": "{toolbars} -työkalupalkki on käytettävissä. Paina ALT+F10 tarkentaaksesi.",
+	"audio": "Insert Audio",
 	"camera": "Lisää Kuva Kamerasta",
 	"cameraDisabled": "Selain ei tue tätä toimintoa, tai se on satavana vain https-yhteydellä (Chrome).",
 	"cite": "Lainaa",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Toissijainen",
 	"success": "Onnistui",
 	"table": "Lisää Taulukko",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "Videotoisto on estetty muokkaustilan aikana",
 	"warning": "Varoitus",
 	"white": "Valkoinen"

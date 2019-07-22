@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "{toolbars} werkbalken beschikbaar. Druk op ALT+F10 om in te stellen.",
 	"ariaUpdateNoToolbar": "Geen werkbalken beschikbaar",
 	"ariaUpdateOneToolbar": "{toolbars} werkbalk beschikbaar. Druk op ALT+F10 om in te stellen.",
+	"audio": "Insert Audio",
 	"camera": "Afbeelding invoegen van camera",
 	"cameraDisabled": "De browser ondersteunt deze handeling niet, of de handeling is beperkt tot https (Chrome).",
 	"cite": "Citeer",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Secundair",
 	"success": "Geslaagd",
 	"table": "Tabel invoegen",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "Video afspelen is uitgeschakeld in de bewerkingsmodus",
 	"warning": "Waarschuwing",
 	"white": "Wit"

@@ -58,6 +58,7 @@ AlloyEditor.Strings = {
 	"ariaUpdateManyToolbars": "Les barres d'eines {toolbars} estan disponibles. Premeu ALT+F10 per enfocar.",
 	"ariaUpdateNoToolbar": "No hi ha cap barra d'eines disponible",
 	"ariaUpdateOneToolbar": "La barra d'eines {toolbars} està disponible. Premeu ALT+F10 per enfocar.",
+	"audio": "Insert Audio",
 	"camera": "Insereix una imatge des de la càmera",
 	"cameraDisabled": "El navegador no admet aquesta acció, o només està disponible a https (Chrome).",
 	"cite": "Cita",
@@ -92,6 +93,7 @@ AlloyEditor.Strings = {
 	"secondary": "Secundari",
 	"success": "Fet",
 	"table": "Insereix taula",
+	"video": "Insert Video",
 	"videoPlaybackDisabled": "La reproducció del vídeo està deshabilitada durant el mode d'edició",
 	"warning": "Avís",
 	"white": "Blanc"
