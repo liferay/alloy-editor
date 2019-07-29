@@ -989,10 +989,15 @@
 			const imageStyles = image.getAttribute('style');
 
 			if (imageStyles) {
+				const heightStyles = /(height:.+?;)/g.exec(imageStyles);
+				const heightStyle = heightStyles[0];
+
 				const widthStyles = /(width:.+?;)/g.exec(imageStyles);
 				const widthStyle = widthStyles[0];
 
-				image.setAttribute('style', widthStyle);
+				const styles = heightStyle + widthStyle;
+
+				image.setAttribute('style', styles);
 			}
 		}
 	}
