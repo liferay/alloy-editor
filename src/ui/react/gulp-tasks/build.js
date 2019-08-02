@@ -155,7 +155,11 @@ gulp.task('clean-api', function(callback) {
 });
 
 gulp.task('clean-dist', function(callback) {
-    del(distFolder).then(function() {
+    del([
+        path.join(distFolder, '**'),
+        `!${distFolder}`,
+        `!${path.join(distFolder, '.gitignore')}`
+    ]).then(function() {
         callback();
     });
 });
