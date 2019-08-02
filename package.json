@@ -53,6 +53,7 @@
   },
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
+    "prepublishOnly": "gulp clean && gulp release",
     "test": "gulp test",
     "testSaucelabs": "gulp test:saucelabs"
   },
