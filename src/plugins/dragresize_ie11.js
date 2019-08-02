@@ -895,10 +895,16 @@
             var imageStyles = image.getAttribute('style');
 
             if (imageStyles) {
+                var heightStyles = /(height:.+?;)/g.exec(imageStyles);
+                var heightStyle = heightStyles[0];
+
                 var widthStyles = /(width:.+?;)/g.exec(imageStyles);
                 var widthStyle = widthStyles[0];
 
                 image.setAttribute('style', widthStyle);
+                var styles = heightStyle + widthStyle;
+
+                image.setAttribute('style', styles);
             }
         }
     }
