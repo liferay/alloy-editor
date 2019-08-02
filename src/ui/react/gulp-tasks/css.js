@@ -1,7 +1,6 @@
 'use strict';
 
 var concat = require('gulp-concat');
-var del = require('del');
 var es = require('event-stream');
 var fs = require('fs');
 var gulp = require('gulp');
@@ -64,7 +63,7 @@ gulp.task('join-css', function() {
 });
 
 gulp.task('build-css', function(callback) {
-    runSequence('generate-fonts', 'sass2css', 'join-css', 'clean-fonts', callback);
+    runSequence('generate-fonts', 'sass2css', 'join-css', callback);
 });
 
 gulp.task('minimize-css', function() {
@@ -74,12 +73,4 @@ gulp.task('minimize-css', function() {
             suffix: '-min'
         }))
         .pipe(gulp.dest(path.join(editorDistFolder, 'assets')));
-});
-
-gulp.task('clean-fonts', function(callback) {
-    del([
-        path.join(editorDistFolder, 'assets/css')
-    ]).then(function() {
-        callback();
-    });
 });

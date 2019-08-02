@@ -13,14 +13,12 @@ var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var template = require('gulp-template');
 var uglify = require('gulp-uglify');
-var yuidoc = require('gulp-yuidoc-relative');
 var zip = require('gulp-zip');
 
 var rootDir = path.join(__dirname, '..', '..', '..', '..');
 var reactDir = path.join(rootDir, 'src', 'ui', 'react');
 var pkg = require(path.join(rootDir, 'package.json'));
 
-var apiFolder = path.join(rootDir, 'api');
 var distFolder = path.join(rootDir, 'dist');
 var editorDistFolder = path.join(distFolder, 'alloy-editor');
 
@@ -43,32 +41,9 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        'clean-dist',
-        [
-            'build-css',
-            'build-js',
-            'copy-languages'
-        ],
-        [
-            'copy-md',
-            'create-alloy-editor-all',
-            'create-alloy-editor-no-ckeditor',
-            'create-alloy-editor-no-react'
-        ],
-        'build-demo',
-        'post-cleanup',
-        callback
-    );
-});
-
-gulp.task('release', function(callback) {
-    runSequence(
-        'clean-api',
-        'clean-dist',
         'create-react-all',
         'create-react-with-addons-all',
         [
-            'build-api',
             'build-css',
             'build-js',
             'copy-languages'
@@ -95,29 +70,11 @@ gulp.task('release', function(callback) {
     );
 });
 
-gulp.task('build-api', function() {
-    var parseOpts = {
-        project: {
-            name: pkg.name,
-            description: pkg.description,
-            version: pkg.version,
-            url: pkg.homepage
-        }
-    };
-
-    var renderOpts = {
-        themedir: path.join(rootDir, 'api-theme')
-    };
-
-    gulp.src([
-        path.join(rootDir, 'src/core/**/*.js'),
-        path.join(rootDir, 'src/plugins/autolink.js'),
-        path.join(rootDir, 'src/plugins/drop-images.js'),
-        path.join(rootDir, 'src/plugins/placeholder.js'),
-        path.join(reactDir, 'src/**/*.js*')
-    ])
-    .pipe(yuidoc(parseOpts, renderOpts))
-    .pipe(gulp.dest(apiFolder));
+gulp.task('build-api', function(done) {
+    // For API docs, see:
+    // - Published website: https://alloyeditor.com/
+    // - Website source: https://github.com/liferay/alloy-editor/tree/website
+    done();
 });
 
 gulp.task('build-demo', function() {
@@ -148,14 +105,12 @@ gulp.task('build-js', function(callback) {
     ], 'wrap-alloy-editor-core', callback);
 });
 
-gulp.task('clean-api', function(callback) {
-    del(apiFolder).then(function() {
-        callback();
-    });
-});
-
-gulp.task('clean-dist', function(callback) {
-    del(distFolder).then(function() {
+gulp.task('clean', function(callback) {
+    del([
+        path.join(distFolder, '**'),
+        `!${distFolder}`,
+        `!${path.join(distFolder, '.gitignore')}`
+    ]).then(function() {
         callback();
     });
 });
@@ -353,15 +308,24 @@ gulp.task('minimize-react', function() {
 
 gulp.task('post-cleanup', function(callback) {
     del([
+        // Unwanted CKEditor files.
         path.join(editorDistFolder, 'adapters'),
+        path.join(editorDistFolder, 'CHANGES.md'),
+        path.join(editorDistFolder, 'samples'),
+
+        // Intermediate artefacts created during "build-js" (see this file).
         path.join(editorDistFolder, 'alloy-editor-main*.js'),
         path.join(editorDistFolder, 'alloy-editor-ui*.js'),
-        path.join(editorDistFolder, 'CHANGES.md'),
-        path.join(editorDistFolder, 'samples')
+
+        // Intermediate artefacts created by/for "sass2css" and "join-css" (see
+        // "css.js").
+        path.join(editorDistFolder, 'assets/css')
     ]).then(function() {
         callback();
     });
 });
+
+gulp.task('release', ['build']);
 
 gulp.task('watch', ['build'], function () {
     gulp.watch('src/**/*', ['build']);

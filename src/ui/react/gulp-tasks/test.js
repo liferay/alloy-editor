@@ -19,7 +19,7 @@ var languageFiles = require('../_languages.js');
 
 gulp.task('prepare-files', function(done) {
     runSequence(
-        'clean-dist', 'create-output-dir', [
+        'create-output-dir', [
             'build-css',
             'copy-ckeditor',
             'copy-core-files',

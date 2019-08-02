@@ -1,9 +1,9 @@
-node_modules
+*sublime*
 .font-cache
 .sass-cache
-*sublime*
-test-results.xml
-sauce_connect.log
+.vscode
 coverage
 jsconfig.json
-.vscode
+node_modules
+sauce_connect.log
+test-results.xml
