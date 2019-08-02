@@ -308,11 +308,18 @@ gulp.task('minimize-react', function() {
 
 gulp.task('post-cleanup', function(callback) {
     del([
+        // Unwanted CKEditor files.
         path.join(editorDistFolder, 'adapters'),
+        path.join(editorDistFolder, 'CHANGES.md'),
+        path.join(editorDistFolder, 'samples'),
+
+        // Intermediate artefacts created during "build-js" (see this file).
         path.join(editorDistFolder, 'alloy-editor-main*.js'),
         path.join(editorDistFolder, 'alloy-editor-ui*.js'),
-        path.join(editorDistFolder, 'CHANGES.md'),
-        path.join(editorDistFolder, 'samples')
+
+        // Intermediate artefacts created by/for "sass2css" and "join-css" (see
+        // "css.js").
+        path.join(editorDistFolder, 'assets/css')
     ]).then(function() {
         callback();
     });
