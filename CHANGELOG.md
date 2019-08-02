@@ -1,3 +1,10 @@
+## [v1.5.26](https://github.com/liferay/alloy-editor/tree/v1.5.26) (2019-08-02)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.25...v1.5.26)
+
+- refactor: make build/release process more deterministic ([\#1303](https://github.com/liferay/alloy-editor/pull/1303))
+- test: remove flaky debounce tests ([\#1304](https://github.com/liferay/alloy-editor/pull/1304))
+
 ## [v1.5.25](https://github.com/liferay/alloy-editor/tree/v1.5.25) (2019-07-22)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.24...v1.5.25)
