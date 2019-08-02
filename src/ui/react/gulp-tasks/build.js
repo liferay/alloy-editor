@@ -43,7 +43,6 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        'clean-dist',
         [
             'build-css',
             'build-js',
@@ -63,8 +62,6 @@ gulp.task('build', function(callback) {
 
 gulp.task('release', function(callback) {
     runSequence(
-        'clean-api',
-        'clean-dist',
         'create-react-all',
         'create-react-with-addons-all',
         [
@@ -148,13 +145,7 @@ gulp.task('build-js', function(callback) {
     ], 'wrap-alloy-editor-core', callback);
 });
 
-gulp.task('clean-api', function(callback) {
-    del(apiFolder).then(function() {
-        callback();
-    });
-});
-
-gulp.task('clean-dist', function(callback) {
+gulp.task('clean', function(callback) {
     del([
         path.join(distFolder, '**'),
         `!${distFolder}`,

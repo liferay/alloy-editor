@@ -28,7 +28,7 @@ gulp.task('create-output-dir', function(callback) {
 
 gulp.task('prepare-files', function(done) {
     runSequence(
-        'clean-dist', 'create-output-dir', [
+        'create-output-dir', [
             'copy-ckeditor', 'copy-files'
         ], done);
 });
