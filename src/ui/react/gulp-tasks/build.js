@@ -41,25 +41,6 @@ function errorHandler(error) {
 
 gulp.task('build', function(callback) {
     runSequence(
-        [
-            'build-css',
-            'build-js',
-            'copy-languages'
-        ],
-        [
-            'copy-md',
-            'create-alloy-editor-all',
-            'create-alloy-editor-no-ckeditor',
-            'create-alloy-editor-no-react'
-        ],
-        'build-demo',
-        'post-cleanup',
-        callback
-    );
-});
-
-gulp.task('release', function(callback) {
-    runSequence(
         'create-react-all',
         'create-react-with-addons-all',
         [
@@ -336,6 +317,8 @@ gulp.task('post-cleanup', function(callback) {
         callback();
     });
 });
+
+gulp.task('release', ['build']);
 
 gulp.task('watch', ['build'], function () {
     gulp.watch('src/**/*', ['build']);
