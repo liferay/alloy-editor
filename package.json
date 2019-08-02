@@ -51,6 +51,9 @@
     "walk": "2.3.9",
     "yargs": "6.6.0"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "main": "dist/alloy-editor/alloy-editor-no-react.js",
   "scripts": {
     "prepublishOnly": "gulp clean && gulp release",
