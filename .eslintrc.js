@@ -59,9 +59,12 @@ module.exports = {
 				],
 			},
 		],
-		'babel/no-invalid-this': 'error',
+		'babel/no-invalid-this': 'warn',
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'off',
+		'react/display-name': 'warn',
+		'react/no-find-dom-node': 'warn',
+		'react/no-string-refs': 'warn',
 		'react/prop-types': 'warn',
 		'valid-jsdoc': 'warn',
 	},
@@ -73,5 +76,6 @@ module.exports = {
 	globals: {
 		AlloyEditor: true,
 		CKEDITOR: true,
+		Liferay: true,
 	},
 };
