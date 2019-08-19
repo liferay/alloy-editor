@@ -992,12 +992,12 @@
 				let styles = '';
 
 				const heightStyles = /(height:.+?;)/g.exec(imageStyles);
-				if (heightStyles && heightStyles.length) {
+				if (heightStyles) {
 					styles += heightStyles[0];
 				}
 
 				const widthStyles = /(width:.+?;)/g.exec(imageStyles);
-				if (widthStyles && widthStyles.length) {
+				if (widthStyles) {
 					styles += widthStyles[0];
 				}
 
