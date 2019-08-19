@@ -1,3 +1,11 @@
+## [v2.0.9](https://github.com/liferay/alloy-editor/tree/v2.0.9) (2019-08-19)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.8...v2.0.9)
+
+- feat: run formatting and lint checks in CI ([\#1308](https://github.com/liferay/alloy-editor/pull/1308))
+- fix: check whether height and width style exist before using ([\#1307](https://github.com/liferay/alloy-editor/pull/1307))
+- fix: make IE also preserve other browers' image height styling ([\#1298](https://github.com/liferay/alloy-editor/pull/1298))
+
 ## [v2.0.8](https://github.com/liferay/alloy-editor/tree/v2.0.8) (2019-07-22)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.7...v2.0.8)
