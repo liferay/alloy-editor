@@ -58,7 +58,7 @@
 		"build:assets": "gulp --gulpfile scripts/build/gulp/gulpfile.js build:assets",
 		"build": "gulp --gulpfile scripts/build/gulp/gulpfile.js --release",
 		"check:version": "node scripts/publish/check.js",
-		"ci": "yarn build && yarn test:saucelabs",
+		"ci": "yarn format:check && yarn build && yarn test:saucelabs",
 		"dev": "gulp --gulpfile scripts/build/gulp/gulpfile.js",
 		"format": "prettier --write -- '*.{js,json}' '{scripts,src,test}/**/*.{js,jsx}'",
 		"format:changed": "git ls-files -mz *.js *.json -- '*.js' '*.json' 'scripts/*.js' 'src/*.js' 'src/*.jsx' 'test/*.js' 'test/*.jsx' | xargs -0 prettier --write --",
