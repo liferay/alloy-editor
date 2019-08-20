@@ -895,10 +895,19 @@
             var imageStyles = image.getAttribute('style');
 
             if (imageStyles) {
-                var widthStyles = /(width:.+?;)/g.exec(imageStyles);
-                var widthStyle = widthStyles[0];
+            	var styles = '';
 
-                image.setAttribute('style', widthStyle);
+            	var heightStyles = /(height:.+?;)/.exec(imageStyles);
+            	if (heightStyles) {
+                	styles += heightStyles[0];
+                }
+
+                var widthStyles = /(width:.+?;)/.exec(imageStyles);
+                if (widthStyles) {
+                	styles += widthStyles[0];
+                }
+
+                image.setAttribute('style', styles);
             }
         }
     }
