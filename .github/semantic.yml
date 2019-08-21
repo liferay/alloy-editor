@@ -1,0 +1,7 @@
+---
+# Configuration for the Semantic Pull Request bot.
+# https://github.com/probot/semantic-pull-requests
+
+allowMergeCommits: true
+
+titleAndCommits: true
