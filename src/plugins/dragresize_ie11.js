@@ -494,6 +494,8 @@
 					'rgba(255, 255, 255, 1'
 				);
 				dragHandlerStyle.setAttribute('opacity', '1');
+                dragHandlerStyle.setAttribute('left', '5px');
+                dragHandlerStyle.setAttribute('top', '5px');
 
 				this.shiftState = helpers.stateShifter(this.editor);
 
