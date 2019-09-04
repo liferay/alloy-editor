@@ -349,6 +349,15 @@
 				)
 					this.data.align = 'none';
 
+				if (
+					(this.data.align === 'left' ||
+						this.data.align === 'right') &&
+					!this.wrapper.$.contains('float') &&
+					!this.oldData
+				) {
+					this.data.align = 'none';
+				}
+
 				// Convert the internal form of the widget from the old state to the new one.
 				this.shiftState({
 					widget: this,
@@ -1510,7 +1519,9 @@
 		if (imageAlignment === 'left' || imageAlignment === 'right') {
 			widget.wrapper.removeStyle('float');
 		} else if (imageAlignment === 'center') {
-			widget.editor.execCommand('justifyleft');
+			const imageCenter = widget.wrapper.$.querySelector('p');
+
+			imageCenter.style.textAlign = '';
 			widget.editor.execCommand('justifyleft');
 		}
 	};
