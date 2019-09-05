@@ -1,5 +1,4 @@
-Alloy Editor
-==================
+# Alloy Editor
 
 Alloy Editor is a modern WYSIWYG editor built on top of CKEditor, designed to create modern and gorgeous web content.
 
@@ -7,27 +6,28 @@ Works on IE9+, Chrome, Firefox and Safari.
 
 ## Demo
 
-* [Embedded self-guided demo](http://alloyeditor.com)
-* [Screencasts and code samples for specific features](https://alloyeditor.com/docs/features/)
+-   [Embedded self-guided demo](http://alloyeditor.com)
+-   [Screencasts and code samples for specific features](https://alloyeditor.com/docs/features/)
 
 ## Features
 
-* Smart toolbars appear right near the selected text and offer different functionality based on context
-* Easily add your own buttons (see the "marquee" example in [the docs](https://alloyeditor.com/docs/develop/create/create_buttons.html))
-* Paste images from clipboard, or Drag&Drop them from another application
-* Insert images from the device's camera!
-* Paste rich text from any web page and preserve its formatting
-* The full styling power of CKEditor...
-* ...with a much more modern UI
-* The core is fully separated from the UI
-* The example UI is built with React
-* Plugin architecture
+-   Smart toolbars appear right near the selected text and offer different functionality based on context
+-   Easily add your own buttons (see the "marquee" example in [the docs](https://alloyeditor.com/docs/develop/create/create_buttons.html))
+-   Paste images from clipboard, or Drag&Drop them from another application
+-   Insert images from the device's camera!
+-   Paste rich text from any web page and preserve its formatting
+-   The full styling power of CKEditor...
+-   ...with a much more modern UI
+-   The core is fully separated from the UI
+-   The example UI is built with React
+-   Plugin architecture
 
 ## Documentation
 
 Look for documentation and examples on [http://alloyeditor.com/](http://alloyeditor.com/)
 
 ### License
+
 [LGPL License](LICENSE.md)
 
 [![Build Status](https://travis-ci.org/liferay/alloy-editor.svg)](https://travis-ci.org/liferay/alloy-editor)
