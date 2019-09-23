@@ -1,19 +1,19 @@
 import '../core';
+
 import '../plugins';
 
 import '../components/uibridge';
 
-import EditorContext from './editor-context';
-import extend from '../oop/oop';
-import Lang from '../oop/lang';
-import Base from '../oop/base';
-import Selections from '../selections/selections';
-import UI from '../components/main.jsx';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 import {removeImageCommand} from '../commands';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+import UI from '../components/main.jsx';
+import Base from '../oop/base';
+import Lang from '../oop/lang';
+import extend from '../oop/oop';
+import Selections from '../selections/selections';
+import EditorContext from './editor-context';
 
 const EMBED_VIDEO_WIDTH = 560;
 const EMBED_VIDEO_HEIGHT = 315;
@@ -92,7 +92,7 @@ extend(
 
 			editor.once(
 				'contentDom',
-				function() {
+				() => {
 					this._addReadOnlyLinkClickListener(editor);
 
 					const editable = editor.editable();
@@ -114,7 +114,7 @@ extend(
 					}
 
 					editable.addClass('ae-editable');
-				}.bind(this)
+				}
 			);
 
 			this._editor = editor;

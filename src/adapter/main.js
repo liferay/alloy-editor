@@ -1,16 +1,14 @@
-import Core from './core';
-import Lang from '../oop/lang';
-
 import Buttons from '../components/buttons';
 import Toolbars from '../components/toolbars';
-
+import Attribute from '../oop/attribute';
+import Lang from '../oop/lang';
+import extend from '../oop/oop';
 import SelectionGetArrowBoxClasses from '../selections/selection-arrowbox';
-import Selections from '../selections/selections';
 import SelectionSetPosition from '../selections/selection-position';
 import SelectionTest from '../selections/selection-test';
+import Selections from '../selections/selections';
+import Core from './core';
 
-import Attribute from '../oop/attribute';
-import extend from '../oop/oop';
 import '../plugins';
 
 // An object containing all currently registered plugins in AlloyEditor.
@@ -101,7 +99,7 @@ const loadLanguageResources = function(callback) {
 		if (AlloyEditor.Strings) {
 			setTimeout(callback, 0);
 		} else {
-			AlloyEditor.once('languageResourcesLoaded', function() {
+			AlloyEditor.once('languageResourcesLoaded', () => {
 				setTimeout(callback, 0);
 			});
 		}
@@ -196,7 +194,7 @@ const loadLanguageResources = function(callback) {
 
 		CKEDITOR.scriptLoader.load(
 			AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'),
-			function(loaded) {
+			(loaded) => {
 				if (loaded) {
 					AlloyEditor.fire('languageResourcesLoaded');
 				}
@@ -285,7 +283,7 @@ const regexBasePath = /(^|.*[\\/])(?:alloy-editor[^/]+|alloy-editor)\.js(?:\?.*|
  */
 const getButtons = function(buttons) {
 	return function() {
-		return buttons.reduce(function(acc, val) {
+		return buttons.reduce((acc, val) => {
 			val = BRIDGE_BUTTONS[val] || [val];
 			return acc.concat(val);
 		}, []);

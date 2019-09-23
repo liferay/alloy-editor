@@ -23,7 +23,7 @@ function debounce(callback, timeout, context, args = []) {
 
 		clearTimeout(debounceHandle);
 
-		debounceHandle = setTimeout(function() {
+		debounceHandle = setTimeout(() => {
 			callback.apply(callContext, [...callArgs, ...args]);
 		}, timeout);
 	};

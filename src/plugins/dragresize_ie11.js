@@ -100,7 +100,7 @@
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
-			editor.on('selectionChange', function(_event) {
+			editor.on('selectionChange', (_event) => {
 				const selection = editor.getSelection();
 
 				if (selection) {
@@ -1315,7 +1315,7 @@
 		}
 
 		// Calculate values of size variables and mouse offsets.
-		resizer.on('mousedown', function(evt) {
+		resizer.on('mousedown', (evt) => {
 			const image = widget.parts.image;
 
 			// The x-coordinate of the mouse relative to the screen
@@ -1532,12 +1532,12 @@
 
 			// This command will be manually refreshed along with
 			// other commands after exec.
-			execCallbacks.push(function() {
+			execCallbacks.push(() => {
 				command.refresh(editor, editor.elementPath());
 			});
 
 			if (value in {right: 1, left: 1, center: 1}) {
-				command.on('exec', function(evt) {
+				command.on('exec', (evt) => {
 					const widget = getFocusedWidget(editor);
 
 					if (widget) {

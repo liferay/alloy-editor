@@ -33,7 +33,7 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		init(editor) {
 			editor.once(
 				'contentDom',
-				function() {
+				() => {
 					const editable = editor.editable();
 
 					editable.attachListener(
@@ -45,7 +45,7 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 							editor,
 						}
 					);
-				}.bind(this)
+				}
 			);
 		},
 

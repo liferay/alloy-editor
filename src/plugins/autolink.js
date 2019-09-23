@@ -43,7 +43,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		init(editor) {
 			editor.once(
 				'contentDom',
-				function() {
+				() => {
 					const editable = editor.editable();
 
 					editable.attachListener(
@@ -55,12 +55,12 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 							editor,
 						}
 					);
-				}.bind(this)
+				}
 			);
 
 			editor.on(
 				'paste',
-				function(event) {
+				(event) => {
 					if (event.data.method === 'paste') {
 						if (
 							event.data.dataValue.indexOf('<') > -1 ||
@@ -83,7 +83,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 
 						event.data.dataValue = event.data.dataValue.replace(
 							RegExp(REGEX_URL, 'gim'),
-							function(url) {
+							(url) => {
 								if (instance._isValidURL(url)) {
 									if (instance._isValidEmail(url)) {
 										return (
@@ -106,7 +106,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 							}
 						);
 					}
-				}.bind(this)
+				}
 			);
 		},
 

@@ -34,7 +34,7 @@ CKEDITOR.tools.jsonp = function(
 	}
 
 	CKEDITOR._.jsonpCallbacks[callbackKey] = function(response) {
-		setTimeout(function() {
+		setTimeout(() => {
 			cleanUp();
 
 			callback(response);
@@ -43,7 +43,7 @@ CKEDITOR.tools.jsonp = function(
 
 	let scriptElement = new CKEDITOR.dom.element('script');
 	scriptElement.setAttribute('src', urlTemplate.output(urlParams));
-	scriptElement.on('error', function() {
+	scriptElement.on('error', () => {
 		cleanUp();
 
 		if (errorCallback) {

@@ -42,7 +42,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		init(editor) {
 			editor.once(
 				'contentDom',
-				function() {
+				() => {
 					const editable = editor.editable();
 
 					editable.attachListener(
@@ -84,7 +84,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 							editor,
 						}
 					);
-				}.bind(this)
+				}
 			);
 		},
 
@@ -247,7 +247,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		_processFile(file, editor) {
 			const reader = new FileReader();
 
-			reader.addEventListener('loadend', function() {
+			reader.addEventListener('loadend', () => {
 				const bin = reader.result;
 
 				const el = CKEDITOR.dom.element.createFromHtml(

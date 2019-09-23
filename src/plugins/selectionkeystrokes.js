@@ -18,9 +18,9 @@ if (!CKEDITOR.plugins.get('ae_selectionkeystrokes')) {
 		 */
 		init(editor) {
 			if (editor.config.selectionKeystrokes) {
-				editor.config.selectionKeystrokes.forEach(function(
+				editor.config.selectionKeystrokes.forEach((
 					selectionKeystroke
-				) {
+				) => {
 					const command = new CKEDITOR.command(editor, {
 						exec(editor) {
 							editor.fire('editorInteraction', {
