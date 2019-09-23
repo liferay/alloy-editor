@@ -74,7 +74,11 @@ class ButtonLinkEditBrowse extends React.Component {
 			: '';
 
 		const changeLinkCallback = selectedItem => {
-			this._updateLink(selectedItem.value, linkTarget, selectedItem.href);
+			this._updateLink(
+				selectedItem.value,
+				linkTarget,
+				selectedItem.title
+			);
 		};
 
 		if (Lang.isFunction(browseLinkCallback)) {
