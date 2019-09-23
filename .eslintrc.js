@@ -5,15 +5,13 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
-	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaVersion: 2018,
 		ecmaFeatures: {
 			jsx: true,
 		},
 	},
-	extends: ['plugin:react/recommended', 'liferay', 'prettier'],
-	plugins: ['babel'],
+	extends: ['liferay/react'],
 	rules: {
 		'require-jsdoc': 'warn',
 		'new-cap': [
@@ -59,9 +57,8 @@ module.exports = {
 				],
 			},
 		],
-		'babel/no-invalid-this': 'warn',
 		'no-inner-declarations': 'off',
-		'no-invalid-this': 'off',
+		'no-invalid-this': 'warn',
 		'react/display-name': 'warn',
 		'react/no-find-dom-node': 'warn',
 		'react/no-string-refs': 'warn',
