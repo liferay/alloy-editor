@@ -1,3 +1,11 @@
+## [v2.10.0](https://github.com/liferay/alloy-editor/tree/v2.10.0) (2019-09-23)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.9...v2.10.0)
+
+-   fix: send the correct arguments to the \_updateLink method ([\#1326](https://github.com/liferay/alloy-editor/pull/1326))
+-   feat: format Markdown files with Prettier ([\#1319](https://github.com/liferay/alloy-editor/pull/1319))
+-   feat: configure Semantic Pull Requests bot ([\#1310](https://github.com/liferay/alloy-editor/pull/1310))
+
 ## [v2.0.9](https://github.com/liferay/alloy-editor/tree/v2.0.9) (2019-08-19)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.8...v2.0.9)
