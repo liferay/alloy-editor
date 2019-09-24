@@ -64,6 +64,7 @@ module.exports = {
 		'react/no-find-dom-node': 'warn',
 		'react/no-string-refs': 'warn',
 		'react/prop-types': 'warn',
+		'sort-keys': 'warn',
 		'valid-jsdoc': 'warn',
 	},
 	settings: {
