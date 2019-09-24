@@ -1,9 +1,10 @@
+import React from 'react';
+
 import ButtonCommand from '../base/button-command';
 import ButtonKeystroke from '../base/button-keystroke';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonStyle from '../base/button-style';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * The ButtonBold class provides functionality for styling an selection with strong (bold) style.

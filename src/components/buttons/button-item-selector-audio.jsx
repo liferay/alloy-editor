@@ -1,6 +1,7 @@
+import React from 'react';
+
 import ButtonCommand from '../base/button-command';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * @class ButtonItemSelectorAudio

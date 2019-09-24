@@ -1,7 +1,8 @@
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
-import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonStyles class provides functionality for styling a selection with a list of

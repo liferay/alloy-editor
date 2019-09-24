@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ButtonIcon from './button-icon.jsx';
+
 import ButtonProps from '../base/button-props';
 import ButtonStateClasses from '../base/button-state-classes';
+import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 
 /**
@@ -166,7 +167,7 @@ class ButtonSpacing extends React.Component {
 		if (elementPath && elementPath.lastElement) {
 			styleConfig.attributes.class
 				.split(' ')
-				.forEach(function(className) {
+				.forEach((className) => {
 					active =
 						active && elementPath.lastElement.hasClass(className);
 				});

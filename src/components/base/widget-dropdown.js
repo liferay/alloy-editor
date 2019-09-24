@@ -1,5 +1,6 @@
-import Lang from '../../oop/lang';
 import ReactDOM from 'react-dom';
+
+import Lang from '../../oop/lang';
 
 /**
  * Provides functionality for managing different dropdowns inside a widget.

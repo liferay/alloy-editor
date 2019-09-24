@@ -1,6 +1,7 @@
+import React from 'react';
+
 import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang';
-import React from 'react';
 
 /**
  * ToolbarButtons provides a list of buttons which have to be displayed
@@ -59,14 +60,14 @@ export default WrappedComponent =>
 
 			const toolbarButtons = this.filterExclusive(
 				buttons
-					.filter(function(button) {
+					.filter((button) => {
 						return (
 							button &&
 							(AlloyEditor.Buttons[button] ||
 								AlloyEditor.Buttons[button.name])
 						);
 					})
-					.map(function(button) {
+					.map((button) => {
 						if (Lang.isString(button)) {
 							buttonProps[button] = buttonCfg[button];
 							button = AlloyEditor.Buttons[button];

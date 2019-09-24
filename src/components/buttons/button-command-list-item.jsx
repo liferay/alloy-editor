@@ -1,5 +1,6 @@
-import ButtonCommand from '../base/button-command';
 import React from 'react';
+
+import ButtonCommand from '../base/button-command';
 
 /**
  * The ButtonCommandListItem class is a UI class that renders a ButtonCommand that can be used inside

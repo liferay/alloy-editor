@@ -1,6 +1,7 @@
+import React from 'react';
+
 import ButtonIcon from './button-icon.jsx';
 import ButtonTableEdit from './button-table-edit.jsx';
-import React from 'react';
 
 /**
  * The ButtonTable class provides functionality for creating and editing a table in a document. ButtonTable

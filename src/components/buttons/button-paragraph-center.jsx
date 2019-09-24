@@ -1,8 +1,9 @@
-import ButtonCommand from '../base/button-command';
-import ButtonCommandActive from '../base/button-command-active';
-import ButtonIcon from './button-icon.jsx';
-import ButtonStateClasses from '../base/button-state-classes';
 import React from 'react';
+
+import ButtonCommandActive from '../base/button-command-active';
+import ButtonCommand from '../base/button-command';
+import ButtonStateClasses from '../base/button-state-classes';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonParagraphCenter class provides functionality for centering a paragraph.

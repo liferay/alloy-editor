@@ -1,13 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import Lang from '../../oop/lang';
 import ToolbarButtons from '../base/toolbar-buttons';
 import WidgetArrowBox from '../base/widget-arrow-box';
 import WidgetDropdown from '../base/widget-dropdown';
 import WidgetExclusive from '../base/widget-exclusive';
 import WidgetFocusManager from '../base/widget-focus-manager';
 import WidgetPosition from '../base/widget-position';
-import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang';
 
 /**
  * The ToolbarStyles class hosts the buttons for styling a text selection.
@@ -97,7 +98,7 @@ class ToolbarStyles extends React.Component {
 			});
 
 			const hasGroups =
-				buttonsGroup.filter(function(button) {
+				buttonsGroup.filter((button) => {
 					return Array.isArray(button);
 				}).length > 0;
 
@@ -117,11 +118,11 @@ class ToolbarStyles extends React.Component {
 					role="toolbar"
 					tabIndex="-1">
 					<div className={className}>
-						{buttonsGroup.map(function(value, index) {
+						{buttonsGroup.map((value, index) => {
 							if (Array.isArray(value)) {
 								return (
 									<div className="ae-row" key={index}>
-										{value.map(function(button) {
+										{value.map((button) => {
 											return button;
 										})}
 									</div>

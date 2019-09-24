@@ -1,12 +1,13 @@
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import Lang from '../../oop/lang';
 import ButtonCfgProps from '../base/button-props';
+import WidgetDropdown from '../base/widget-dropdown';
+import WidgetFocusManager from '../base/widget-focus-manager';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkAutocompleteList from './button-link-autocomplete-list.jsx';
 import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
-import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang';
-import WidgetDropdown from '../base/widget-dropdown';
-import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonLinkEdit class provides functionality for creating and editing a link in a document.
@@ -199,7 +200,7 @@ class ButtonLinkEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._updateLink}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon symbol="check" className="ae-icon-svg-check" />
+					<ButtonIcon className="ae-icon-svg-check" symbol="check" />
 				</button>
 			</div>
 		);

@@ -1,6 +1,7 @@
+import React from 'react';
+
 import ButtonCameraImage from './button-camera-image.jsx';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * The ButtonCamera class renders in two different ways:

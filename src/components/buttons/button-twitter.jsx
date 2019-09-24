@@ -1,7 +1,8 @@
-import ButtonIcon from './button-icon.jsx';
-import ButtonStateClasses from '../base/button-state-classes';
-import EditorContext from '../../adapter/editor-context';
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import ButtonStateClasses from '../base/button-state-classes';
+import ButtonIcon from './button-icon.jsx';
 
 const MAX_TWEET_LENGTH = 280;
 

@@ -1,7 +1,8 @@
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonCommandsList from './button-commands-list.jsx';
 import ButtonIcon from './button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
 
 /**
  * The ButtonTableHeading class provides functionality to work with table heading.

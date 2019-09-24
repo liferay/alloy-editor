@@ -1,7 +1,8 @@
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import ButtonIcon from '../buttons/button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
@@ -143,7 +144,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 					const richCombo = this;
 
 					const items = this._items.map(
-						function(item) {
+						(item) => {
 							const className =
 								'ae-toolbar-element ' +
 								(item.value === this.state.value
@@ -162,7 +163,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 									/>
 								</li>
 							);
-						}.bind(this)
+						}
 					);
 
 					return items;

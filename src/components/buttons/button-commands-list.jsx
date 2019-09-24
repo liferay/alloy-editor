@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonCommandListItem from './button-command-list-item.jsx';
+
 import WidgetFocusManager from '../base/widget-focus-manager';
+import ButtonCommandListItem from './button-command-list-item.jsx';
 
 /**
  * The ButtonCommandsList class provides functionality for showing a list of commands that can be
@@ -97,7 +98,7 @@ class ButtonCommandsList extends React.Component {
 		let items;
 
 		if (commands && commands.length) {
-			items = commands.map(function(item) {
+			items = commands.map((item) => {
 				return (
 					<li key={item.command} role="option">
 						<ButtonCommandListItem

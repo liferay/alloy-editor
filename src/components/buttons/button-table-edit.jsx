@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonIcon from './button-icon.jsx';
+
 import EditorContext from '../../adapter/editor-context';
+import ButtonIcon from './button-icon.jsx';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
@@ -155,8 +156,8 @@ class ButtonTableEdit extends React.Component {
 					<input
 						className="ae-input"
 						id={rowsId}
-						onChange={this._handleChange.bind(this, 'rows')}
 						min="1"
+						onChange={this._handleChange.bind(this, 'rows')}
 						onKeyDown={this._handleKeyDown}
 						placeholder="Rows"
 						ref={this.rowsRef}
@@ -170,8 +171,8 @@ class ButtonTableEdit extends React.Component {
 					<input
 						className="ae-input"
 						id={colsId}
-						onChange={this._handleChange.bind(this, 'cols')}
 						min="1"
+						onChange={this._handleChange.bind(this, 'cols')}
 						onKeyDown={this._handleKeyDown}
 						placeholder="Colums"
 						ref={this.colsRef}

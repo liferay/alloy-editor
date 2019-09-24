@@ -1,6 +1,7 @@
-import ButtonDropdown from './button-dropdown.jsx';
 import React from 'react';
+
 import WidgetFocusManager from '../base/widget-focus-manager';
+import ButtonDropdown from './button-dropdown.jsx';
 
 /**
  * The ButtonLinkAutocompleteList class provides functionality for showing a list of
@@ -154,8 +155,8 @@ class ButtonLinkAutocompleteList extends React.Component {
 				<li key={item.url} role="option">
 					<button
 						className={className}
-						onClick={handleLinkAutocompleteClick}
-						data-value={item.url}>
+						data-value={item.url}
+						onClick={handleLinkAutocompleteClick}>
 						{item.title}
 					</button>
 				</li>

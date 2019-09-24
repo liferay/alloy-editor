@@ -1,8 +1,9 @@
-import ButtonEmbedVideoEdit from './button-embed-video-edit.jsx';
-import ButtonIcon from './button-icon.jsx';
-import ButtonProps from '../base/button-props';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import ButtonProps from '../base/button-props';
+import ButtonEmbedVideoEdit from './button-embed-video-edit.jsx';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonEmbedVideo class provides functionality for changing text color in a document.

@@ -1,10 +1,11 @@
-import ButtonDropdown from './button-dropdown.jsx';
-import ButtonStylesListItem from './button-styles-list-item.jsx';
-import ButtonStylesListItemRemove from './button-styles-list-item-remove.jsx';
-import ButtonsStylesListHeader from './button-styles-list-header.jsx';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
+
 import WidgetFocusManager from '../base/widget-focus-manager';
+import ButtonDropdown from './button-dropdown.jsx';
+import ButtonsStylesListHeader from './button-styles-list-header.jsx';
+import ButtonStylesListItemRemove from './button-styles-list-item-remove.jsx';
+import ButtonStylesListItem from './button-styles-list-item.jsx';
 
 /**
  * The ButtonStylesList class provides functionality for showing a list of styles that can be
@@ -70,7 +71,7 @@ class ButtonStylesList extends React.Component {
 		const inlineStyles = [];
 		const objectStyles = [];
 
-		this.props.styles.forEach(function(item) {
+		this.props.styles.forEach((item) => {
 			const style = new CKEDITOR.style(item.style);
 
 			if (style.type === CKEDITOR.STYLE_BLOCK) {

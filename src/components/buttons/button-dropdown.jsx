@@ -1,5 +1,6 @@
-import WidgetFocusManager from '../base/widget-focus-manager';
 import React from 'react';
+
+import WidgetFocusManager from '../base/widget-focus-manager';
 
 /**
  * The ButtonDropdown class provides markup and keyboard navigation behaviour to a dropdown

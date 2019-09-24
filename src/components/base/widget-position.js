@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+
 import EditorContext from '../../adapter/editor-context';
 
 /**

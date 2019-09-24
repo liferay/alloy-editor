@@ -60,7 +60,7 @@ export default WrappedComponent =>
 		 */
 		filterExclusive(items) {
 			return items.filter(
-				function(item) {
+				(item) => {
 					if (this.state.itemExclusive) {
 						if (this.state.itemExclusive === item.key) {
 							return item;
@@ -68,7 +68,7 @@ export default WrappedComponent =>
 					} else {
 						return item;
 					}
-				}.bind(this)
+				}
 			);
 		}
 

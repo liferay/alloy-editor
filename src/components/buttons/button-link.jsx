@@ -1,10 +1,11 @@
-import ButtonCfgProps from '../base/button-props';
-import ButtonIcon from './button-icon.jsx';
-import ButtonKeystroke from '../base/button-keystroke';
-import ButtonLinkEdit from './button-link-edit.jsx';
-import ButtonStateClasses from '../base/button-state-classes';
-import EditorContext from '../../adapter/editor-context';
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import ButtonKeystroke from '../base/button-keystroke';
+import ButtonCfgProps from '../base/button-props';
+import ButtonStateClasses from '../base/button-state-classes';
+import ButtonIcon from './button-icon.jsx';
+import ButtonLinkEdit from './button-link-edit.jsx';
 
 /**
  * The ButtonLink class provides functionality for creating and editing a link in a document. ButtonLink

@@ -1,7 +1,8 @@
-import ButtonIcon from './button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import ButtonIcon from './button-icon.jsx';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
