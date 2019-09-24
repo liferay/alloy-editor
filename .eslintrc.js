@@ -5,6 +5,7 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
+	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaVersion: 2018,
 		ecmaFeatures: {
