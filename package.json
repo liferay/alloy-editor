@@ -39,6 +39,7 @@
 		"prettier": "^1.18.2",
 		"sinon": "7.2.4",
 		"terser-webpack-plugin": "^1.2.1",
+		"val-loader": "1.1.1",
 		"walk": "^2.3.9",
 		"webpack": "^4.29.0",
 		"webpack-cli": "^3.2.1",
@@ -88,7 +89,6 @@
 		"clay-css": "^2.11.1",
 		"prop-types": "^15.6.2",
 		"react": "^16.8.3",
-		"react-dom": "^16.8.3",
-		"val-loader": "1.1.1"
+		"react-dom": "^16.8.3"
 	}
 }
