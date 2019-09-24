@@ -40,52 +40,49 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		 * @param {Object} editor The current editor instance
 		 */
 		init(editor) {
-			editor.once(
-				'contentDom',
-				function() {
-					const editable = editor.editable();
+			editor.once('contentDom', () => {
+				const editable = editor.editable();
 
-					editable.attachListener(
-						editable,
-						'dragenter',
-						this._onDragEnter,
-						this,
-						{
-							editor,
-						}
-					);
+				editable.attachListener(
+					editable,
+					'dragenter',
+					this._onDragEnter,
+					this,
+					{
+						editor,
+					}
+				);
 
-					editable.attachListener(
-						editable,
-						'dragover',
-						this._onDragOver,
-						this,
-						{
-							editor,
-						}
-					);
+				editable.attachListener(
+					editable,
+					'dragover',
+					this._onDragOver,
+					this,
+					{
+						editor,
+					}
+				);
 
-					editable.attachListener(
-						editable,
-						'drop',
-						this._onDragDrop,
-						this,
-						{
-							editor,
-						}
-					);
+				editable.attachListener(
+					editable,
+					'drop',
+					this._onDragDrop,
+					this,
+					{
+						editor,
+					}
+				);
 
-					editable.attachListener(
-						editable,
-						'paste',
-						this._onPaste,
-						this,
-						{
-							editor,
-						}
-					);
-				}.bind(this)
-			);
+				editable.attachListener(
+					editable,
+					'paste',
+					this._onPaste,
+					this,
+					{
+						editor,
+					}
+				);
+			});
 		},
 
 		/**
@@ -247,7 +244,7 @@ if (!CKEDITOR.plugins.get('ae_addimages')) {
 		_processFile(file, editor) {
 			const reader = new FileReader();
 
-			reader.addEventListener('loadend', function() {
+			reader.addEventListener('loadend', () => {
 				const bin = reader.result;
 
 				const el = CKEDITOR.dom.element.createFromHtml(

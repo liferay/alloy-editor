@@ -1,8 +1,9 @@
+import React from 'react';
+
 import ButtonCommand from '../base/button-command';
-import ButtonIcon from './button-icon.jsx';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonStyle from '../base/button-style';
-import React from 'react';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonOrderedList class provides functionality for creating ordered lists in an editor.

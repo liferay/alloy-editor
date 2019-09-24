@@ -1,8 +1,9 @@
 import React from 'react';
-import ButtonIcon from './button-icon.jsx';
-import ButtonLinkEdit from './button-link-edit.jsx';
+
 import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang';
+import ButtonIcon from './button-icon.jsx';
+import ButtonLinkEdit from './button-link-edit.jsx';
 
 /**
  * The LinkEditBrowse class provides functionality for creating and editing a link in a document,

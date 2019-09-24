@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonDropdown from '../buttons/button-dropdown.jsx';
+
 import EditorContext from '../../adapter/editor-context';
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {

@@ -179,7 +179,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		editor.config.imageScaleResize =
 			editor.config.imageScaleResize || 'both';
 
-		editor.on('imageAdd', function(imageData) {
+		editor.on('imageAdd', imageData => {
 			editor.widgets.initOn(imageData.data.el, 'image');
 		});
 
@@ -322,7 +322,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 					this.data.hasCaption
 				) {
 					for (const c in this.data.classes) {
-						if (this.data.classes.hasOwnProperty(c)) {
+						if (
+							Object.prototype.hasOwnProperty.call(
+								this.data.classes,
+								c
+							)
+						) {
 							this.parts.image.removeClass(c);
 						}
 					}
@@ -548,7 +553,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
 			for (const d in dimensions) {
-				if (dimensions.hasOwnProperty(d)) {
+				if (Object.prototype.hasOwnProperty.call(dimensions, d)) {
 					const dimension = image.attributes[d];
 
 					if (dimension && dimension.match(regexPercent)) {
@@ -822,7 +827,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		}
 
 		// Calculate values of size variables and mouse offsets.
-		resizer.on('mousedown', function(evt) {
+		resizer.on('mousedown', evt => {
 			const image = widget.parts.image;
 
 			// "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
@@ -981,13 +986,13 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		});
 
 		// Change the position of the widget resizer when data changes.
-		widget.on('data', function() {
+		widget.on('data', () => {
 			resizer[widget.data.align == 'right' ? 'addClass' : 'removeClass'](
 				'cke_image_resizer_left'
 			);
 		});
 
-		widget.parts.image.on('click', function() {
+		widget.parts.image.on('click', () => {
 			const selection = editor.getSelection();
 
 			if (selection) {

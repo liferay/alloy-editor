@@ -86,7 +86,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				return;
 			}
 
-			editor.once('contentDom', function(_evt) {
+			editor.once('contentDom', _evt => {
 				init(editor);
 			});
 		},
@@ -147,24 +147,24 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 		editor.on('selectionChange', selectionChange);
 
-		editor.on('getData', function(e) {
+		editor.on('getData', e => {
 			let html = e.data.dataValue || '';
 			html = html.replace(/<div id="ckimgrsz"([\s\S]*?)<\/div>/i, '');
 			html = html.replace(/\b(ckimgrsz)\b/g, '');
 			e.data.dataValue = html;
 		});
 
-		editor.on('beforeUndoImage', function() {
+		editor.on('beforeUndoImage', () => {
 			// Remove the handles before undo images are saved
 			resizer.hide();
 		});
 
-		editor.on('afterUndoImage', function() {
+		editor.on('afterUndoImage', () => {
 			// Restore the handles after undo images are saved
 			selectionChange();
 		});
 
-		editor.on('blur', function() {
+		editor.on('blur', () => {
 			// Remove the handles when editor loses focus
 			resizer.hide();
 		});
@@ -174,7 +174,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			resizer.hide();
 		});
 
-		editor.on('destroy', function() {
+		editor.on('destroy', () => {
 			const resizeElement = document.getElementById('ckimgrsz');
 
 			if (resizeElement) {
@@ -190,7 +190,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 		// Update the selection when the browser window is resized
 		let resizeTimeout;
-		editor.window.on('resize', function() {
+		editor.window.on('resize', () => {
 			// Cancel any resize waiting to happen
 			clearTimeout(resizeTimeout);
 			// Delay resize to "debounce"
@@ -220,16 +220,14 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 			const handles = (this.handles = {});
 
-			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(function(
-				handleName
-			) {
+			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(handleName => {
 				handles[handleName] = instance.handles[
 					handleName
 				] = instance.createHandle(handleName);
 			});
 
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					container.appendChild(handles[n]);
 				}
 			}
@@ -320,7 +318,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			const handles = this.handles;
 
 			for (const handle in handles) {
-				if (handles.hasOwnProperty(handle)) {
+				if (Object.prototype.hasOwnProperty.call(handles, handle)) {
 					POSITION_ELEMENT_FN[handle](
 						handles[handle],
 						left,
@@ -334,7 +332,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			const handles = this.handles;
 			this.updateHandles(this.box);
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					handles[n].style.display = 'block';
 				}
 			}
@@ -342,7 +340,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		hideHandles() {
 			const handles = this.handles;
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					handles[n].style.display = 'none';
 				}
 			}

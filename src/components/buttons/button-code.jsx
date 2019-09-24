@@ -1,8 +1,9 @@
+import React from 'react';
+
 import ButtonActionStyle from '../base/button-action-style';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonStyle from '../base/button-style';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * The ButtonCode class provides wraps a selection in `pre` element.

@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonProps from '../base/button-props';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
-import EditorContext from '../../adapter/editor-context';
-import React from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * The ButtonColor class provides functionality for changing text color in a document.

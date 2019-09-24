@@ -58,13 +58,11 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		}
 
 		if (!imageAlignment) {
-			let centeredImage = CENTERED_IMAGE_STYLE.every(function(style) {
+			let centeredImage = CENTERED_IMAGE_STYLE.every(style => {
 				let styleCheck = image.getStyle(style.name) === style.value;
 
 				if (!styleCheck && style.vendorPrefixes) {
-					styleCheck = style.vendorPrefixes.some(function(
-						vendorPrefix
-					) {
+					styleCheck = style.vendorPrefixes.some(vendorPrefix => {
 						return (
 							image.getStyle(vendorPrefix + style.name) ===
 							style.value
@@ -79,13 +77,11 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 				const imageContainer = image.$.parentNode;
 
 				if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
-					CENTERED_IMAGE_STYLE.forEach(function(style) {
+					CENTERED_IMAGE_STYLE.forEach(style => {
 						image.setStyle(style.name, style.value);
 
 						if (style.vendorPrefixes) {
-							style.vendorPrefixes.forEach(function(
-								vendorPrefix
-							) {
+							style.vendorPrefixes.forEach(vendorPrefix => {
 								image.setStyle(
 									vendorPrefix + style.name,
 									style.value
@@ -128,11 +124,11 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 				image.removeAttribute('align');
 			}
 		} else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
-			CENTERED_IMAGE_STYLE.forEach(function(style) {
+			CENTERED_IMAGE_STYLE.forEach(style => {
 				image.removeStyle(style.name);
 
 				if (style.vendorPrefixes) {
-					style.vendorPrefixes.forEach(function(vendorPrefix) {
+					style.vendorPrefixes.forEach(vendorPrefix => {
 						image.removeStyle(vendorPrefix + style.name);
 					});
 				}
@@ -161,11 +157,11 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		) {
 			image.setStyle('float', imageAlignment);
 		} else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
-			CENTERED_IMAGE_STYLE.forEach(function(style) {
+			CENTERED_IMAGE_STYLE.forEach(style => {
 				image.setStyle(style.name, style.value);
 
 				if (style.vendorPrefixes) {
-					style.vendorPrefixes.forEach(function(vendorPrefix) {
+					style.vendorPrefixes.forEach(vendorPrefix => {
 						image.setStyle(vendorPrefix + style.name, style.value);
 					});
 				}
@@ -191,11 +187,11 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		afterInit(editor) {
 			const self = this;
 
-			ALIGN_VALUES.forEach(function(value) {
+			ALIGN_VALUES.forEach(value => {
 				const command = editor.getCommand('justify' + value);
 
 				if (command) {
-					command.on('exec', function(event) {
+					command.on('exec', event => {
 						const selectionData = editor.getSelectionData();
 
 						if (
@@ -259,7 +255,7 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		 * @param {CKEDITOR.dom.elementPath} elementPath The path of the selected image
 		 */
 		refreshCommands(editor, elementPath) {
-			ALIGN_VALUES.forEach(function(value) {
+			ALIGN_VALUES.forEach(value => {
 				const command = editor.getCommand('justify' + value);
 
 				if (command) {

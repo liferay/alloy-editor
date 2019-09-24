@@ -1,4 +1,5 @@
 import React from 'react';
+
 import EditorContext from '../../adapter/editor-context';
 
 /**
@@ -61,7 +62,7 @@ class ButtonCameraImage extends React.Component {
 			if (this._stream.stop) {
 				this._stream.stop();
 			} else if (this._stream.getVideoTracks) {
-				this._stream.getVideoTracks().forEach(function(track) {
+				this._stream.getVideoTracks().forEach(track => {
 					track.stop();
 				});
 			}

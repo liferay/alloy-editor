@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonDropdown from '../buttons/button-dropdown.jsx';
+
 import EditorContext from '../../adapter/editor-context';
+import ButtonDropdown from '../buttons/button-dropdown.jsx';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
@@ -108,7 +109,7 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 				_getMenuItems() {
 					const editor = this.context.editor.get('nativeEditor');
 					const items = menuButtonDefinition.onMenu();
-					const menuItems = Object.keys(items).map(function(key) {
+					const menuItems = Object.keys(items).map(key => {
 						const menuItem = editor.getMenuItem(key);
 
 						if (!menuItem) {

@@ -1,5 +1,6 @@
-import Lang from '../../oop/lang';
 import ReactDOM from 'react-dom';
+
+import Lang from '../../oop/lang';
 
 const DIRECTION_NONE = 0;
 const DIRECTION_NEXT = 1;
@@ -348,19 +349,17 @@ export default WrappedComponent =>
 
 				this._descendants = [];
 
-				Array.prototype.slice.call(descendants).forEach(
-					function(item) {
-						const dataTabIndex = item.getAttribute('data-tabindex');
+				Array.prototype.slice.call(descendants).forEach(item => {
+					const dataTabIndex = item.getAttribute('data-tabindex');
 
-						if (dataTabIndex) {
-							priorityDescendants.push(item);
-						} else {
-							this._descendants.push(item);
-						}
-					}.bind(this)
-				);
+					if (dataTabIndex) {
+						priorityDescendants.push(item);
+					} else {
+						this._descendants.push(item);
+					}
+				});
 
-				priorityDescendants = priorityDescendants.sort(function(a, b) {
+				priorityDescendants = priorityDescendants.sort((a, b) => {
 					return (
 						Lang.toInt(a.getAttribute('data-tabindex')) >
 						Lang.toInt(b.getAttribute('data-tabindex'))
@@ -373,16 +372,14 @@ export default WrappedComponent =>
 
 				this._activeDescendant = 0;
 
-				this._descendants.some(
-					function(item, index) {
-						if (item.getAttribute('tabindex') === '0') {
-							this._activeDescendant = index;
-							this.focus();
+				this._descendants.some((item, index) => {
+					if (item.getAttribute('tabindex') === '0') {
+						this._activeDescendant = index;
+						this.focus();
 
-							return true;
-						}
-					}.bind(this)
-				);
+						return true;
+					}
+				});
 			}
 		}
 	};

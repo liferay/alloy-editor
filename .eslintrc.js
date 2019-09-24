@@ -12,8 +12,7 @@ module.exports = {
 			jsx: true,
 		},
 	},
-	extends: ['plugin:react/recommended', 'liferay', 'prettier'],
-	plugins: ['babel'],
+	extends: ['liferay/react'],
 	rules: {
 		'require-jsdoc': 'warn',
 		'new-cap': [
@@ -59,13 +58,13 @@ module.exports = {
 				],
 			},
 		],
-		'babel/no-invalid-this': 'warn',
 		'no-inner-declarations': 'off',
-		'no-invalid-this': 'off',
+		'no-invalid-this': 'warn',
 		'react/display-name': 'warn',
 		'react/no-find-dom-node': 'warn',
 		'react/no-string-refs': 'warn',
 		'react/prop-types': 'warn',
+		'sort-keys': 'warn',
 		'valid-jsdoc': 'warn',
 	},
 	settings: {

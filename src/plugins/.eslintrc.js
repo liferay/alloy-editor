@@ -1,5 +1,5 @@
 module.exports = {
 	rules: {
-		'babel/no-invalid-this': 'warn',
+		'no-invalid-this': 'warn',
 	},
 };

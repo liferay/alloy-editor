@@ -1,7 +1,8 @@
+import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonActionStyle from '../base/button-action-style';
 import ButtonStyle from '../base/button-style';
-import EditorContext from '../../adapter/editor-context';
-import React from 'react';
 
 /**
  * The ButtonStylesListItem class provides functionality for previewing a style definition

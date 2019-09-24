@@ -31,22 +31,19 @@ if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 		 * @param {Object} editor The current editor instance
 		 */
 		init(editor) {
-			editor.once(
-				'contentDom',
-				function() {
-					const editable = editor.editable();
+			editor.once('contentDom', () => {
+				const editable = editor.editable();
 
-					editable.attachListener(
-						editable,
-						'paste',
-						this._onPaste,
-						this,
-						{
-							editor,
-						}
-					);
-				}.bind(this)
-			);
+				editable.attachListener(
+					editable,
+					'paste',
+					this._onPaste,
+					this,
+					{
+						editor,
+					}
+				);
+			});
 		},
 
 		/**

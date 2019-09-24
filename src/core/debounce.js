@@ -17,13 +17,13 @@ function debounce(callback, timeout, context, args = []) {
 	let debounceHandle;
 
 	const callFn = function(...callArgs) {
-		/* eslint-disable babel/no-invalid-this */
+		/* eslint-disable no-invalid-this */
 		const callContext = context || this;
-		/* eslint-enable babel/no-invalid-this */
+		/* eslint-enable no-invalid-this */
 
 		clearTimeout(debounceHandle);
 
-		debounceHandle = setTimeout(function() {
+		debounceHandle = setTimeout(() => {
 			callback.apply(callContext, [...callArgs, ...args]);
 		}, timeout);
 	};

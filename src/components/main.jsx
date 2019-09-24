@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
+
+import EditorContext from '../adapter/editor-context';
 import WidgetExclusive from './base/widget-exclusive';
 import WidgetFocusManager from './base/widget-focus-manager';
-import EditorContext from '../adapter/editor-context';
 
 /**
  * The main editor UI class manages a hierarchy of widgets (toolbars and buttons).

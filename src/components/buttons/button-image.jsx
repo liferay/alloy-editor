@@ -1,6 +1,7 @@
-import ButtonIcon from './button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonImage class inserts an image to the content.

@@ -60,7 +60,7 @@ if (!CKEDITOR.plugins.get('ae_placeholder')) {
 			const innerHtml = editableNode.$.innerHTML.trim();
 
 			const isEmpty = enterModeEmptyValue[editor.config.enterMode].some(
-				function(element) {
+				element => {
 					return innerHtml === element;
 				}
 			);

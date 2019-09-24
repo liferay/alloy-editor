@@ -1,4 +1,5 @@
 import React from 'react';
+
 import EditorContext from '../../adapter/editor-context';
 
 export default function ButtonIcon({className = '', symbol}) {
@@ -12,7 +13,7 @@ export default function ButtonIcon({className = '', symbol}) {
 				const combinedClassName = `ae-svg-icon${classNamePrefix}`;
 
 				return (
-					<svg className={combinedClassName} width="18" height="18">
+					<svg className={combinedClassName} height="18" width="18">
 						<use href={path} />
 					</svg>
 				);

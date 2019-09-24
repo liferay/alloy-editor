@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonIcon from './button-icon.jsx';
+
 import EditorContext from '../../adapter/editor-context';
+import ButtonIcon from './button-icon.jsx';
 
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
@@ -122,7 +123,7 @@ class ButtonEmbedEdit extends React.Component {
 					onClick={this._removeEmbed}
 					tabIndex={this.props.tabIndex}
 					title={AlloyEditor.Strings.deleteEmbed}>
-					<ButtonIcon symbol="trash" className="ae-icon-svg-trash" />
+					<ButtonIcon className="ae-icon-svg-trash" symbol="trash" />
 				</button>
 				<div className="ae-container-input xxl">
 					<input
@@ -149,7 +150,7 @@ class ButtonEmbedEdit extends React.Component {
 					disabled={!this._isValidState()}
 					onClick={this._embedLink}
 					title={AlloyEditor.Strings.confirm}>
-					<ButtonIcon symbol="check" className="ae-icon-svg-check" />
+					<ButtonIcon className="ae-icon-svg-check" symbol="check" />
 				</button>
 			</div>
 		);
@@ -276,7 +277,7 @@ class ButtonEmbedEdit extends React.Component {
 	_removeEmbed = () => {
 		const editor = this.context.editor.get('nativeEditor');
 
-		const embedWrapper = this.state.element.getAscendant(function(element) {
+		const embedWrapper = this.state.element.getAscendant(element => {
 			return element.hasClass('cke_widget_wrapper');
 		});
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonIcon from './button-icon.jsx';
+
 import EditorContext from '../../adapter/editor-context';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonTableRemove class provides functionality for removing a table

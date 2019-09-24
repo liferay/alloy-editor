@@ -1,6 +1,7 @@
+import React from 'react';
+
 import ButtonIcon from './button-icon.jsx';
 import ButtonTargetList from './button-target-list.jsx';
-import React from 'react';
 
 /**
  * The ButtonLinkTargetEdit class provides functionality for changing the target of a link
@@ -52,9 +53,9 @@ class ButtonLinkTargetEdit extends React.Component {
 				</button>
 				{this.props.expanded && (
 					<ButtonTargetList
-						onDismiss={this.props.toggleDropdown}
 						allowedLinkTargets={allowedLinkTargets}
 						handleLinkTargetChange={handleLinkTargetChange}
+						onDismiss={this.props.toggleDropdown}
 						selectedTarget={this.props.selectedTarget}
 					/>
 				)}

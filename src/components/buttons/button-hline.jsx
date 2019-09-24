@@ -1,7 +1,8 @@
+import React from 'react';
+
 import ButtonCommand from '../base/button-command';
 import ButtonStyle from '../base/button-style';
 import ButtonIcon from './button-icon.jsx';
-import React from 'react';
 
 /**
  * The ButtonHline class provides inserts horizontal line.

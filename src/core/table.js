@@ -230,7 +230,7 @@ Table.prototype = {
 	 */
 	setAttributes(table, attrs) {
 		if (attrs) {
-			Object.keys(attrs).forEach(function(attr) {
+			Object.keys(attrs).forEach(attr => {
 				table.setAttribute(attr, attrs[attr]);
 			});
 		}
@@ -363,7 +363,7 @@ Table.prototype = {
 	},
 };
 
-CKEDITOR.on('instanceReady', function(event) {
+CKEDITOR.on('instanceReady', event => {
 	const headingCommands = [
 		Table.HEADING_NONE,
 		Table.HEADING_ROW,
@@ -373,7 +373,7 @@ CKEDITOR.on('instanceReady', function(event) {
 
 	const tableUtils = new Table(event.editor);
 
-	headingCommands.forEach(function(heading) {
+	headingCommands.forEach(heading => {
 		event.editor.addCommand('tableHeading' + heading, {
 			exec(_editor) {
 				tableUtils.setHeading(null, heading);

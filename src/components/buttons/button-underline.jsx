@@ -1,9 +1,10 @@
+import React from 'react';
+
 import ButtonCommand from '../base/button-command';
-import ButtonIcon from './button-icon.jsx';
 import ButtonKeystroke from '../base/button-keystroke';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonStyle from '../base/button-style';
-import React from 'react';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonUnderline class provides functionality for underlying a text selection.

@@ -1,7 +1,8 @@
-import ButtonCommand from '../base/button-command.js';
-import ButtonIcon from './button-icon.jsx';
-import ButtonStateClasses from '../base/button-state-classes.js';
 import React from 'react';
+
+import ButtonCommand from '../base/button-command.js';
+import ButtonStateClasses from '../base/button-state-classes.js';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonRemoveImage class removes an image using a CKEDITOR.command.

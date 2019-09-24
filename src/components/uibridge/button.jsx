@@ -1,4 +1,5 @@
 import React from 'react';
+
 import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */

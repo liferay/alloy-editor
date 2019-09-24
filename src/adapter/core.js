@@ -1,19 +1,19 @@
 import '../core';
+
 import '../plugins';
 
 import '../components/uibridge';
 
-import EditorContext from './editor-context';
-import extend from '../oop/oop';
-import Lang from '../oop/lang';
-import Base from '../oop/base';
-import Selections from '../selections/selections';
-import UI from '../components/main.jsx';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 import {removeImageCommand} from '../commands';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+import UI from '../components/main.jsx';
+import Base from '../oop/base';
+import Lang from '../oop/lang';
+import extend from '../oop/oop';
+import Selections from '../selections/selections';
+import EditorContext from './editor-context';
 
 const EMBED_VIDEO_WIDTH = 560;
 const EMBED_VIDEO_HEIGHT = 315;
@@ -90,32 +90,26 @@ extend(
 				);
 			}
 
-			editor.once(
-				'contentDom',
-				function() {
-					this._addReadOnlyLinkClickListener(editor);
+			editor.once('contentDom', () => {
+				this._addReadOnlyLinkClickListener(editor);
 
-					const editable = editor.editable();
+				const editable = editor.editable();
 
-					const extraCommands = this.get('extraCommands');
+				const extraCommands = this.get('extraCommands');
 
-					const extraCommandKeys = Object.keys(extraCommands);
-					for (let i = 0; i < extraCommandKeys.length; i++) {
-						const commandName = extraCommandKeys[i];
+				const extraCommandKeys = Object.keys(extraCommands);
+				for (let i = 0; i < extraCommandKeys.length; i++) {
+					const commandName = extraCommandKeys[i];
 
-						if (editor.commands[commandName]) {
-							continue;
-						}
-
-						editor.addCommand(
-							commandName,
-							extraCommands[commandName]
-						);
+					if (editor.commands[commandName]) {
+						continue;
 					}
 
-					editable.addClass('ae-editable');
-				}.bind(this)
-			);
+					editor.addCommand(commandName, extraCommands[commandName]);
+				}
+
+				editable.addClass('ae-editable');
+			});
 
 			this._editor = editor;
 

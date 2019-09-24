@@ -1,7 +1,8 @@
 import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonDropdown from '../buttons/button-dropdown.jsx';
 import ButtonIcon from '../buttons/button-icon.jsx';
-import EditorContext from '../../adapter/editor-context';
 
 /* istanbul ignore if */
 if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
@@ -142,28 +143,24 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 				_getItems() {
 					const richCombo = this;
 
-					const items = this._items.map(
-						function(item) {
-							const className =
-								'ae-toolbar-element ' +
-								(item.value === this.state.value
-									? 'active'
-									: '');
+					const items = this._items.map(item => {
+						const className =
+							'ae-toolbar-element ' +
+							(item.value === this.state.value ? 'active' : '');
 
-							return (
-								<li key={item.title} role="option">
-									<button
-										className={className}
-										dangerouslySetInnerHTML={{
-											__html: item.preview,
-										}}
-										data-value={item.value}
-										onClick={richCombo._onClick}
-									/>
-								</li>
-							);
-						}.bind(this)
-					);
+						return (
+							<li key={item.title} role="option">
+								<button
+									className={className}
+									dangerouslySetInnerHTML={{
+										__html: item.preview,
+									}}
+									data-value={item.value}
+									onClick={richCombo._onClick}
+								/>
+							</li>
+						);
+					});
 
 					return items;
 				}

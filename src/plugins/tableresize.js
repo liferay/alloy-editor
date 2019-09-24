@@ -287,7 +287,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			}
 
 			const table = pillar.table;
-			setTimeout(function() {
+			setTimeout(() => {
 				table.removeCustomData('_cke_table_pillars');
 			}, 0);
 
@@ -311,14 +311,14 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 				// Defer the resizing to avoid any interference among cells.
 				CKEDITOR.tools.setTimeout(
-					function(
+					(
 						leftCell,
 						leftOldWidth,
 						rightCell,
 						rightOldWidth,
 						tableWidth,
 						sizeShift
-					) {
+					) => {
 						// 1px is the minimum valid width (#11626).
 						if (leftCell) {
 							leftCell.setStyle(
@@ -377,7 +377,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 		}
 
 		// Clean DOM when editor is destroyed.
-		editor.on('destroy', function() {
+		editor.on('destroy', () => {
 			detach();
 
 			resizer.remove();
@@ -439,7 +439,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 		requires: 'ae_tabletools',
 
 		init(editor) {
-			editor.on('contentDom', function() {
+			editor.on('contentDom', () => {
 				let resizer;
 
 				const editable = editor.editable();
@@ -449,7 +449,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 				editable.attachListener(
 					editable.isInline() ? editable : editor.document,
 					'mousemove',
-					function(evt) {
+					evt => {
 						evt = evt.data;
 
 						const target = evt.getTarget();

@@ -96,9 +96,7 @@ describe('ButtonTableHeading', function() {
 		];
 
 		testMatrix.forEach(function(testData) {
-			it(`switches from ${
-				testData.initial
-			} to ${testData.expected}`, function() {
+			it(`switches from ${testData.initial} to ${testData.expected}`, function() {
 				var errorMessage =
 					'Changing table heading from ' +
 					testData.initial +

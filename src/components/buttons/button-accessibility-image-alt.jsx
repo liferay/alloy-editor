@@ -1,9 +1,10 @@
-import ButtonIcon from './button-icon.jsx';
+import ReactDOM from 'react-dom';
+import React from 'react';
+
+import EditorContext from '../../adapter/editor-context';
 import ButtonProps from '../base/button-props';
 import ButtonStateClasses from '../base/button-state-classes';
-import EditorContext from '../../adapter/editor-context';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonAccessibilityImageAlt class provides functionality for changing text color in a document.

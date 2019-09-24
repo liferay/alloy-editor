@@ -59,17 +59,15 @@ export default WrappedComponent =>
 		 * @return {Array|Object} The item with executive state.
 		 */
 		filterExclusive(items) {
-			return items.filter(
-				function(item) {
-					if (this.state.itemExclusive) {
-						if (this.state.itemExclusive === item.key) {
-							return item;
-						}
-					} else {
+			return items.filter(item => {
+				if (this.state.itemExclusive) {
+					if (this.state.itemExclusive === item.key) {
 						return item;
 					}
-				}.bind(this)
-			);
+				} else {
+					return item;
+				}
+			});
 		}
 
 		/**

@@ -7,11 +7,11 @@
 const wrapPluginLifecycle = function(plugin) {
 	const methods = ['beforeInit', 'init', 'afterInit'];
 
-	methods.forEach(function(methodName) {
+	methods.forEach(methodName => {
 		if (plugin[methodName]) {
 			plugin[methodName] = CKEDITOR.tools.override(
 				plugin[methodName],
-				function(originalPluginMethod) {
+				originalPluginMethod => {
 					const payload = {
 						phase: methodName,
 						plugin,
@@ -20,7 +20,7 @@ const wrapPluginLifecycle = function(plugin) {
 					return function(editor) {
 						editor.__processingPlugin__ = payload;
 
-						// eslint-disable-next-line babel/no-invalid-this
+						// eslint-disable-next-line no-invalid-this
 						originalPluginMethod.call(this, editor);
 
 						editor.__processingPlugin__ = null;
@@ -42,7 +42,7 @@ const filterUnwantedDependencies = function(requires) {
 		requires = requires.split(',');
 	}
 
-	return requires.filter(function(require) {
+	return requires.filter(require => {
 		return require !== 'toolbar';
 	});
 };
@@ -66,29 +66,30 @@ const filterUnwantedDependencies = function(requires) {
  * @method load
  * @static
  */
-CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, function(
-	pluginsLoad
-) {
-	// Wrap original load function so we can transform the plugin input parameter
-	// before passing it down to the original callback
-	return function(names, callback, scope) {
-		// eslint-disable-next-line babel/no-invalid-this
-		pluginsLoad.call(this, names, function(plugins) {
-			if (callback) {
-				Object.keys(plugins).forEach(function(pluginName) {
-					const plugin = plugins[pluginName];
+CKEDITOR.plugins.load = CKEDITOR.tools.override(
+	CKEDITOR.plugins.load,
+	pluginsLoad => {
+		// Wrap original load function so we can transform the plugin input parameter
+		// before passing it down to the original callback
+		return function(names, callback, scope) {
+			// eslint-disable-next-line no-invalid-this
+			pluginsLoad.call(this, names, plugins => {
+				if (callback) {
+					Object.keys(plugins).forEach(pluginName => {
+						const plugin = plugins[pluginName];
 
-					if (plugin.requires) {
-						plugin.requires = filterUnwantedDependencies(
-							plugin.requires
-						);
-					}
+						if (plugin.requires) {
+							plugin.requires = filterUnwantedDependencies(
+								plugin.requires
+							);
+						}
 
-					wrapPluginLifecycle(plugin);
-				});
+						wrapPluginLifecycle(plugin);
+					});
 
-				callback.call(scope, plugins);
-			}
-		});
-	};
-});
+					callback.call(scope, plugins);
+				}
+			});
+		};
+	}
+);
