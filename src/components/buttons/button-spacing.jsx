@@ -165,12 +165,9 @@ class ButtonSpacing extends React.Component {
 		const elementPath = nativeEditor.elementPath();
 
 		if (elementPath && elementPath.lastElement) {
-			styleConfig.attributes.class
-				.split(' ')
-				.forEach((className) => {
-					active =
-						active && elementPath.lastElement.hasClass(className);
-				});
+			styleConfig.attributes.class.split(' ').forEach(className => {
+				active = active && elementPath.lastElement.hasClass(className);
+			});
 		} else {
 			active = false;
 		}

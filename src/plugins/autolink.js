@@ -41,73 +41,62 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 		 * @param {Object} editor The current editor instance
 		 */
 		init(editor) {
-			editor.once(
-				'contentDom',
-				() => {
-					const editable = editor.editable();
+			editor.once('contentDom', () => {
+				const editable = editor.editable();
 
-					editable.attachListener(
-						editable,
-						'keyup',
-						this._onKeyUp,
-						this,
-						{
-							editor,
+				editable.attachListener(
+					editable,
+					'keyup',
+					this._onKeyUp,
+					this,
+					{
+						editor,
+					}
+				);
+			});
+
+			editor.on('paste', event => {
+				if (event.data.method === 'paste') {
+					if (
+						event.data.dataValue.indexOf('<') > -1 ||
+						event.data.dataValue.indexOf('&lt;') > -1
+					) {
+						if (
+							event.data.dataValue.indexOf('<u><font color="') >
+							-1
+						) {
+							event.data.dataValue = event.data.dataValue.replace(
+								/<u><font color="#(.*?)">|<\/font><\/u>/g,
+								''
+							);
+						}
+						return;
+					}
+
+					const instance = this;
+
+					event.data.dataValue = event.data.dataValue.replace(
+						RegExp(REGEX_URL, 'gim'),
+						url => {
+							if (instance._isValidURL(url)) {
+								if (instance._isValidEmail(url)) {
+									return (
+										'<a href="mailto:' +
+										url +
+										'">' +
+										url +
+										'</a>'
+									);
+								} else {
+									return (
+										'<a href="' + url + '">' + url + '</a>'
+									);
+								}
+							}
 						}
 					);
 				}
-			);
-
-			editor.on(
-				'paste',
-				(event) => {
-					if (event.data.method === 'paste') {
-						if (
-							event.data.dataValue.indexOf('<') > -1 ||
-							event.data.dataValue.indexOf('&lt;') > -1
-						) {
-							if (
-								event.data.dataValue.indexOf(
-									'<u><font color="'
-								) > -1
-							) {
-								event.data.dataValue = event.data.dataValue.replace(
-									/<u><font color="#(.*?)">|<\/font><\/u>/g,
-									''
-								);
-							}
-							return;
-						}
-
-						const instance = this;
-
-						event.data.dataValue = event.data.dataValue.replace(
-							RegExp(REGEX_URL, 'gim'),
-							(url) => {
-								if (instance._isValidURL(url)) {
-									if (instance._isValidEmail(url)) {
-										return (
-											'<a href="mailto:' +
-											url +
-											'">' +
-											url +
-											'</a>'
-										);
-									} else {
-										return (
-											'<a href="' +
-											url +
-											'">' +
-											url +
-											'</a>'
-										);
-									}
-								}
-							}
-						);
-					}
-				}
-			);
+			});
 		},
 
 		/**

@@ -90,32 +90,26 @@ extend(
 				);
 			}
 
-			editor.once(
-				'contentDom',
-				() => {
-					this._addReadOnlyLinkClickListener(editor);
+			editor.once('contentDom', () => {
+				this._addReadOnlyLinkClickListener(editor);
 
-					const editable = editor.editable();
+				const editable = editor.editable();
 
-					const extraCommands = this.get('extraCommands');
+				const extraCommands = this.get('extraCommands');
 
-					const extraCommandKeys = Object.keys(extraCommands);
-					for (let i = 0; i < extraCommandKeys.length; i++) {
-						const commandName = extraCommandKeys[i];
+				const extraCommandKeys = Object.keys(extraCommands);
+				for (let i = 0; i < extraCommandKeys.length; i++) {
+					const commandName = extraCommandKeys[i];
 
-						if (editor.commands[commandName]) {
-							continue;
-						}
-
-						editor.addCommand(
-							commandName,
-							extraCommands[commandName]
-						);
+					if (editor.commands[commandName]) {
+						continue;
 					}
 
-					editable.addClass('ae-editable');
+					editor.addCommand(commandName, extraCommands[commandName]);
 				}
-			);
+
+				editable.addClass('ae-editable');
+			});
 
 			this._editor = editor;
 

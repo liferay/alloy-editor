@@ -449,7 +449,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 				editable.attachListener(
 					editable.isInline() ? editable : editor.document,
 					'mousemove',
-					(evt) => {
+					evt => {
 						evt = evt.data;
 
 						const target = evt.getTarget();

@@ -349,17 +349,15 @@ export default WrappedComponent =>
 
 				this._descendants = [];
 
-				Array.prototype.slice.call(descendants).forEach(
-					(item) => {
-						const dataTabIndex = item.getAttribute('data-tabindex');
+				Array.prototype.slice.call(descendants).forEach(item => {
+					const dataTabIndex = item.getAttribute('data-tabindex');
 
-						if (dataTabIndex) {
-							priorityDescendants.push(item);
-						} else {
-							this._descendants.push(item);
-						}
+					if (dataTabIndex) {
+						priorityDescendants.push(item);
+					} else {
+						this._descendants.push(item);
 					}
-				);
+				});
 
 				priorityDescendants = priorityDescendants.sort((a, b) => {
 					return (
@@ -374,16 +372,14 @@ export default WrappedComponent =>
 
 				this._activeDescendant = 0;
 
-				this._descendants.some(
-					(item, index) => {
-						if (item.getAttribute('tabindex') === '0') {
-							this._activeDescendant = index;
-							this.focus();
+				this._descendants.some((item, index) => {
+					if (item.getAttribute('tabindex') === '0') {
+						this._activeDescendant = index;
+						this.focus();
 
-							return true;
-						}
+						return true;
 					}
-				);
+				});
 			}
 		}
 	};

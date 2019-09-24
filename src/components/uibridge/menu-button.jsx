@@ -109,7 +109,7 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 				_getMenuItems() {
 					const editor = this.context.editor.get('nativeEditor');
 					const items = menuButtonDefinition.onMenu();
-					const menuItems = Object.keys(items).map((key) => {
+					const menuItems = Object.keys(items).map(key => {
 						const menuItem = editor.getMenuItem(key);
 
 						if (!menuItem) {

@@ -62,7 +62,7 @@ class ButtonCameraImage extends React.Component {
 			if (this._stream.stop) {
 				this._stream.stop();
 			} else if (this._stream.getVideoTracks) {
-				this._stream.getVideoTracks().forEach((track) => {
+				this._stream.getVideoTracks().forEach(track => {
 					track.stop();
 				});
 			}

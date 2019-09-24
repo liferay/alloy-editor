@@ -87,7 +87,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 							{
 								url: encodeURIComponent(url),
 							},
-							(response) => {
+							response => {
 								if (response.html) {
 									if (
 										REGEX_DEFAULT_LINK.test(response.html)
@@ -100,7 +100,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 									widget.createATag(url);
 								}
 							},
-							(_msg) => {
+							_msg => {
 								widget.createATag(url);
 							}
 						);
@@ -138,7 +138,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			editor.once('contentDom', () => {
 				editor.on(
 					'paste',
-					(event) => {
+					event => {
 						const link = event.data.dataValue;
 
 						if (REGEX_HTTP.test(link)) {
@@ -160,7 +160,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
-			editor.on('selectionChange', (_event) => {
+			editor.on('selectionChange', _event => {
 				const selection = editor.getSelection();
 
 				if (selection) {
@@ -195,7 +195,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			});
 
 			// Add a filter to skip filtering widget elements
-			editor.filter.addElementCallback((element) => {
+			editor.filter.addElementCallback(element => {
 				if ('data-ae-embed-url' in element.attributes) {
 					return CKEDITOR.FILTER_SKIP_TREE;
 				}

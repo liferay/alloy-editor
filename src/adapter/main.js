@@ -194,7 +194,7 @@ const loadLanguageResources = function(callback) {
 
 		CKEDITOR.scriptLoader.load(
 			AlloyEditor.getUrl('lang/alloy-editor/' + lang + '.js'),
-			(loaded) => {
+			loaded => {
 				if (loaded) {
 					AlloyEditor.fire('languageResourcesLoaded');
 				}

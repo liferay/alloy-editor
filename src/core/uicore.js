@@ -71,7 +71,7 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 				? editor.config.uicore.timeout
 				: 50;
 
-			const handleUI = CKEDITOR.tools.debounce((event) => {
+			const handleUI = CKEDITOR.tools.debounce(event => {
 				ariaState = [];
 
 				if (
@@ -90,11 +90,11 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 				}
 			}, uiTasksTimeout);
 
-			const handleAria = CKEDITOR.tools.debounce((_event) => {
+			const handleAria = CKEDITOR.tools.debounce(_event => {
 				ariaElement.innerHTML = ariaState.join('. ');
 			}, uiTasksTimeout);
 
-			const handleMouseLeave = CKEDITOR.tools.debounce((event) => {
+			const handleMouseLeave = CKEDITOR.tools.debounce(event => {
 				const aeUINodes = document.querySelectorAll('.ae-ui');
 
 				let found;
@@ -111,7 +111,7 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 				}
 			}, uiTasksTimeout);
 
-			editor.on('ariaUpdate', (event) => {
+			editor.on('ariaUpdate', event => {
 				// handleAria is debounced function, so if it is being called multiple times, it will
 				// be canceled until some time passes.
 				// For that reason here we explicitly append the current message to the list of messages
@@ -129,7 +129,7 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 				const focusHandler = editable.attachListener(
 					editable,
 					'focus',
-					(event) => {
+					event => {
 						focusHandler.removeListener();
 
 						editable.attachListener(editable, 'keyup', handleUI);
@@ -145,7 +145,7 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 				);
 			});
 
-			editor.on('destroy', (_event) => {
+			editor.on('destroy', _event => {
 				ariaElement.parentNode.removeChild(ariaElement);
 
 				handleUI.detach();

@@ -71,7 +71,12 @@ if (!CKEDITOR.plugins.get('ae_menubridge')) {
 			 */
 			editor.addMenuItems = function(definitions) {
 				for (const itemName in definitions) {
-					if (Object.prototype.hasOwnProperty.call(definitions, itemName)) {
+					if (
+						Object.prototype.hasOwnProperty.call(
+							definitions,
+							itemName
+						)
+					) {
 						this.addMenuItem(itemName, definitions[itemName]);
 					}
 				}

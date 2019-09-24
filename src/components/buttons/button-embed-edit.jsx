@@ -277,7 +277,7 @@ class ButtonEmbedEdit extends React.Component {
 	_removeEmbed = () => {
 		const editor = this.context.editor.get('nativeEditor');
 
-		const embedWrapper = this.state.element.getAscendant((element) => {
+		const embedWrapper = this.state.element.getAscendant(element => {
 			return element.hasClass('cke_widget_wrapper');
 		});
 

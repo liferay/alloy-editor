@@ -98,7 +98,7 @@ class ToolbarStyles extends React.Component {
 			});
 
 			const hasGroups =
-				buttonsGroup.filter((button) => {
+				buttonsGroup.filter(button => {
 					return Array.isArray(button);
 				}).length > 0;
 
@@ -122,7 +122,7 @@ class ToolbarStyles extends React.Component {
 							if (Array.isArray(value)) {
 								return (
 									<div className="ae-row" key={index}>
-										{value.map((button) => {
+										{value.map(button => {
 											return button;
 										})}
 									</div>

@@ -31,22 +31,19 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 		 * @param {Object} editor The current editor instance
 		 */
 		init(editor) {
-			editor.once(
-				'contentDom',
-				() => {
-					const editable = editor.editable();
+			editor.once('contentDom', () => {
+				const editable = editor.editable();
 
-					editable.attachListener(
-						editable,
-						'keydown',
-						this._onKeyDown,
-						this,
-						{
-							editor,
-						}
-					);
-				}
-			);
+				editable.attachListener(
+					editable,
+					'keydown',
+					this._onKeyDown,
+					this,
+					{
+						editor,
+					}
+				);
+			});
 		},
 
 		/**

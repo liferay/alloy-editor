@@ -100,7 +100,7 @@
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
-			editor.on('selectionChange', (_event) => {
+			editor.on('selectionChange', _event => {
 				const selection = editor.getSelection();
 
 				if (selection) {
@@ -385,7 +385,12 @@
 					this.data.hasCaption
 				) {
 					for (const c in this.data.classes) {
-						if (Object.prototype.hasOwnProperty.call(this.data.classes, c)) {
+						if (
+							Object.prototype.hasOwnProperty.call(
+								this.data.classes,
+								c
+							)
+						) {
 							this.parts.image.removeClass(c);
 						}
 					}
@@ -1315,7 +1320,7 @@
 		}
 
 		// Calculate values of size variables and mouse offsets.
-		resizer.on('mousedown', (evt) => {
+		resizer.on('mousedown', evt => {
 			const image = widget.parts.image;
 
 			// The x-coordinate of the mouse relative to the screen
@@ -1537,7 +1542,7 @@
 			});
 
 			if (value in {right: 1, left: 1, center: 1}) {
-				command.on('exec', (evt) => {
+				command.on('exec', evt => {
 					const widget = getFocusedWidget(editor);
 
 					if (widget) {

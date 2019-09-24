@@ -60,14 +60,14 @@ export default WrappedComponent =>
 
 			const toolbarButtons = this.filterExclusive(
 				buttons
-					.filter((button) => {
+					.filter(button => {
 						return (
 							button &&
 							(AlloyEditor.Buttons[button] ||
 								AlloyEditor.Buttons[button.name])
 						);
 					})
-					.map((button) => {
+					.map(button => {
 						if (Lang.isString(button)) {
 							buttonProps[button] = buttonCfg[button];
 							button = AlloyEditor.Buttons[button];

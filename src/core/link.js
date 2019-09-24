@@ -206,7 +206,7 @@ Link.prototype = {
 
 			const setAttrs = {};
 
-			Object.keys(attrs).forEach((key) => {
+			Object.keys(attrs).forEach(key => {
 				if (attrs[key] === null) {
 					if (key === 'href') {
 						removeAttrs.push('data-cke-saved-href');

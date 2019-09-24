@@ -86,7 +86,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				return;
 			}
 
-			editor.once('contentDom', (_evt) => {
+			editor.once('contentDom', _evt => {
 				init(editor);
 			});
 		},
@@ -147,7 +147,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 		editor.on('selectionChange', selectionChange);
 
-		editor.on('getData', (e) => {
+		editor.on('getData', e => {
 			let html = e.data.dataValue || '';
 			html = html.replace(/<div id="ckimgrsz"([\s\S]*?)<\/div>/i, '');
 			html = html.replace(/\b(ckimgrsz)\b/g, '');
@@ -220,9 +220,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 			const handles = (this.handles = {});
 
-			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach((
-				handleName
-			) => {
+			IMAGE_HANDLES[this.cfg.imageScaleResize].forEach(handleName => {
 				handles[handleName] = instance.handles[
 					handleName
 				] = instance.createHandle(handleName);

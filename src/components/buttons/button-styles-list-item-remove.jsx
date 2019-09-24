@@ -67,7 +67,7 @@ class ButtonStylesListItemRemove extends React.Component {
 
 		editor.execCommand('removeFormat');
 
-		this.props.removeBlocks.forEach((blockItem) => {
+		this.props.removeBlocks.forEach(blockItem => {
 			const blockStyle = new CKEDITOR.style({element: blockItem});
 
 			editor.removeStyle(blockStyle);

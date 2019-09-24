@@ -71,7 +71,7 @@ class ButtonStylesList extends React.Component {
 		const inlineStyles = [];
 		const objectStyles = [];
 
-		this.props.styles.forEach((item) => {
+		this.props.styles.forEach(item => {
 			const style = new CKEDITOR.style(item.style);
 
 			if (style.type === CKEDITOR.STYLE_BLOCK) {

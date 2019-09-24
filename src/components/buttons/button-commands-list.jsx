@@ -98,7 +98,7 @@ class ButtonCommandsList extends React.Component {
 		let items;
 
 		if (commands && commands.length) {
-			items = commands.map((item) => {
+			items = commands.map(item => {
 				return (
 					<li key={item.command} role="option">
 						<ButtonCommandListItem

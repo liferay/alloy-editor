@@ -179,7 +179,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		editor.config.imageScaleResize =
 			editor.config.imageScaleResize || 'both';
 
-		editor.on('imageAdd', (imageData) => {
+		editor.on('imageAdd', imageData => {
 			editor.widgets.initOn(imageData.data.el, 'image');
 		});
 
@@ -322,7 +322,12 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 					this.data.hasCaption
 				) {
 					for (const c in this.data.classes) {
-						if (Object.prototype.hasOwnProperty.call(this.data.classes, c)) {
+						if (
+							Object.prototype.hasOwnProperty.call(
+								this.data.classes,
+								c
+							)
+						) {
 							this.parts.image.removeClass(c);
 						}
 					}
@@ -822,7 +827,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize_ie')) {
 		}
 
 		// Calculate values of size variables and mouse offsets.
-		resizer.on('mousedown', (evt) => {
+		resizer.on('mousedown', evt => {
 			const image = widget.parts.image;
 
 			// "factor" can be either 1 or -1. I.e.: For right-aligned images, we need to
