@@ -199,9 +199,9 @@ const loadLanguageResources = function(callback) {
 					AlloyEditor.fire('languageResourcesLoaded');
 				}
 			},
-			/* eslint-disable babel/no-invalid-this */
+			/* eslint-disable no-invalid-this */
 			this // Always `AlloyEditor`.
-			/* eslint-enable babel/no-invalid-this */
+			/* eslint-enable no-invalid-this */
 		);
 	}
 };

@@ -20,7 +20,7 @@ const wrapPluginLifecycle = function(plugin) {
 					return function(editor) {
 						editor.__processingPlugin__ = payload;
 
-						// eslint-disable-next-line babel/no-invalid-this
+						// eslint-disable-next-line no-invalid-this
 						originalPluginMethod.call(this, editor);
 
 						editor.__processingPlugin__ = null;
@@ -72,7 +72,7 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override(CKEDITOR.plugins.load, (
 	// Wrap original load function so we can transform the plugin input parameter
 	// before passing it down to the original callback
 	return function(names, callback, scope) {
-		// eslint-disable-next-line babel/no-invalid-this
+		// eslint-disable-next-line no-invalid-this
 		pluginsLoad.call(this, names, (plugins) => {
 			if (callback) {
 				Object.keys(plugins).forEach((pluginName) => {
