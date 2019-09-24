@@ -229,7 +229,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			});
 
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					container.appendChild(handles[n]);
 				}
 			}
@@ -320,7 +320,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			const handles = this.handles;
 
 			for (const handle in handles) {
-				if (handles.hasOwnProperty(handle)) {
+				if (Object.prototype.hasOwnProperty.call(handles, handle)) {
 					POSITION_ELEMENT_FN[handle](
 						handles[handle],
 						left,
@@ -334,7 +334,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			const handles = this.handles;
 			this.updateHandles(this.box);
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					handles[n].style.display = 'block';
 				}
 			}
@@ -342,7 +342,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		hideHandles() {
 			const handles = this.handles;
 			for (const n in handles) {
-				if (handles.hasOwnProperty(n)) {
+				if (Object.prototype.hasOwnProperty.call(handles, n)) {
 					handles[n].style.display = 'none';
 				}
 			}

@@ -140,7 +140,7 @@
 			const integrate = alignCommandIntegrator(editor);
 
 			for (const value in align) {
-				if (align.hasOwnProperty(value)) {
+				if (Object.prototype.hasOwnProperty.call(align, value)) {
 					integrate(value);
 				}
 			}
@@ -385,7 +385,7 @@
 					this.data.hasCaption
 				) {
 					for (const c in this.data.classes) {
-						if (this.data.classes.hasOwnProperty(c)) {
+						if (Object.prototype.hasOwnProperty.call(this.data.classes, c)) {
 							this.parts.image.removeClass(c);
 						}
 					}
@@ -1073,7 +1073,7 @@
 			// If there's an image, then cool, we got a widget.
 			// Now just remove dimension attributes expressed with %.
 			for (const d in dimensions) {
-				if (dimensions.hasOwnProperty(d)) {
+				if (Object.prototype.hasOwnProperty.call(dimensions, d)) {
 					const dimension = image.attributes[d];
 					if (dimension && dimension.match(regexPercent))
 						delete image.attributes[d];

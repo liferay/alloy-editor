@@ -124,7 +124,7 @@
 	};
 
 	for (var type in events) {
-		if (!events.hasOwnProperty(type)) continue;
+		if (!Object.prototype.hasOwnProperty.call(events, type)) continue;
 		var shortcuts = events[type];
 		for (i = 0; i < shortcuts.length; i++) {
 			s = shortcuts[i];
