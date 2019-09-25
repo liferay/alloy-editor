@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ButtonProps from '../base/button-props';
-import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 
@@ -10,7 +9,6 @@ import ButtonStylesList from './button-styles-list.jsx';
  * The ButtonSpacing class provides functionality for changing text color in a document.
  *
  * @uses ButtonProps
- * @uses ButtonStateClasses
  *
  * @class ButtonSpacing
  */
@@ -262,4 +260,4 @@ class ButtonSpacing extends React.Component {
 	}
 }
 
-export default ButtonProps(ButtonStateClasses(ButtonSpacing));
+export default ButtonProps(ButtonSpacing);
