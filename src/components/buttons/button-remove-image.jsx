@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ButtonCommand from '../base/button-command';
-import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 
 /**
@@ -21,13 +20,11 @@ class ButtonRemoveImage extends React.Component {
 	 * @inheritDoc
 	 */
 	render() {
-		const cssClass = `ae-button ${this.getStateClasses()}`;
-
 		return (
 			<button
 				aria-label={AlloyEditor.Strings.removeImage}
-				aria-pressed={cssClass.indexOf('pressed') !== -1}
-				className={cssClass}
+				aria-pressed={false}
+				className="ae-button"
 				onClick={this.execCommand}
 				title={AlloyEditor.Strings.removeImage}>
 				<ButtonIcon symbol="times-circle" />
@@ -36,4 +33,4 @@ class ButtonRemoveImage extends React.Component {
 	}
 }
 
-export default ButtonCommand(ButtonStateClasses(ButtonRemoveImage));
+export default ButtonCommand(ButtonRemoveImage);
