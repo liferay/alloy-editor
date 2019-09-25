@@ -1,13 +1,13 @@
 import EditorContext from '../../adapter/editor-context';
 
 /**
- * ButtonCfgProps is a mixin that provides a style prop and some methods to apply the resulting
+ * ButtonProps is a mixin that provides a style prop and some methods to apply the resulting
  * style and checking if it is present in a given path or selection.
  *
- * @class ButtonCfgProps
+ * @class ButtonProps
  */
 export default WrappedComponent =>
-	class ButtonCfgProps extends WrappedComponent {
+	class ButtonProps extends WrappedComponent {
 		static contextType = EditorContext;
 
 		/**
@@ -15,7 +15,7 @@ export default WrappedComponent =>
 		 * via `buttonCfg` property.
 		 *
 		 * @instance
-		 * @memberof ButtonCfgProps
+		 * @memberof ButtonProps
 		 * @method mergeButtonCfgProps
 		 * @param {Object} props The properties to be merged with the provided configuration for this
 		 * button. If not passed, the user configuration will be merged with `this.props`
