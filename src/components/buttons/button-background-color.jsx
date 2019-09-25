@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
-import ButtonProps from '../base/button-props';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 
@@ -274,4 +273,4 @@ class ButtonBackgroundColor extends React.Component {
 	}
 }
 
-export default ButtonProps(ButtonBackgroundColor);
+export default ButtonBackgroundColor;

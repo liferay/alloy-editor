@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import ButtonProps from '../base/button-props';
 import ButtonEmbedVideoEdit from './button-embed-video-edit.jsx';
 import ButtonIcon from './button-icon.jsx';
 
@@ -9,7 +8,6 @@ import ButtonIcon from './button-icon.jsx';
  * The ButtonEmbedVideo class provides functionality for changing text color in a document.
  *
  * @class ButtonEmbedVideo
- * @uses ButtonProps
  */
 class ButtonEmbedVideo extends React.Component {
 	static key = 'embedVideo';
@@ -60,4 +58,4 @@ class ButtonEmbedVideo extends React.Component {
 	}
 }
 
-export default ButtonProps(ButtonEmbedVideo);
+export default ButtonEmbedVideo;

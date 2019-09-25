@@ -2,14 +2,12 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
-import ButtonProps from '../base/button-props';
 import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonAccessibilityImageAlt class provides functionality for changing text color in a document.
  *
  * @class ButtonAccessibilityImageAlt
- * @uses ButtonProps
  *
  */
 class ButtonAccessibilityImageAlt extends React.Component {
@@ -164,4 +162,4 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	};
 }
 
-export default EditorContext.toProps(ButtonProps(ButtonAccessibilityImageAlt));
+export default EditorContext.toProps(ButtonAccessibilityImageAlt);
