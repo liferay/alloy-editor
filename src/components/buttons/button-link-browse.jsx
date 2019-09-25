@@ -3,7 +3,6 @@ import React from 'react';
 
 import ButtonKeystroke from '../base/button-keystroke';
 import ButtonProps from '../base/button-props';
-import ButtonStateClasses from '../base/button-state-classes';
 import ButtonLinkEditBrowse from './button-link-edit-browse.jsx';
 import ButtonLink from './button-link.jsx';
 
@@ -12,7 +11,6 @@ import ButtonLink from './button-link.jsx';
  *
  * @uses ButtonKeystroke
  * @uses ButtonProps
- * @uses ButtonStateClasses
  *
  * @class ButtonLinkBrowse
  */
@@ -70,6 +68,4 @@ class ButtonLinkBrowse extends React.Component {
 	}
 }
 
-export default ButtonProps(
-	ButtonStateClasses(ButtonKeystroke(ButtonLinkBrowse))
-);
+export default ButtonProps(ButtonKeystroke(ButtonLinkBrowse));
