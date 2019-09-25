@@ -26,12 +26,12 @@
         padding: 0;
 
         &:hover, &:focus {
-            &:disabled, &.ae-button-disabled {
+            &:disabled {
                 color: inherit;
             }
         }
 
-        &:disabled, &.ae-button-disabled {
+        &:disabled {
             cursor: auto;
             opacity: 0.3;
         }
