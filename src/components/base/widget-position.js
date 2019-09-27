@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 
 import EditorContext from '../../adapter/editor-context';
-import Lang from '../../oop/lang';
 
 /**
  * Calculates the position where an Widget should be displayed based on the point
@@ -57,17 +56,12 @@ export default WrappedComponent =>
 			let arrowBoxClasses = 'ae-arrow-box';
 
 			if (
-				Lang.isFunction(this.getInteractionPoint) &&
-				this.getInteractionPoint()
+				this.getInteractionPoint().direction ===
+				CKEDITOR.SELECTION_TOP_TO_BOTTOM
 			) {
-				if (
-					this.getInteractionPoint().direction ===
-					CKEDITOR.SELECTION_TOP_TO_BOTTOM
-				) {
-					arrowBoxClasses += ' ae-arrow-box-top';
-				} else {
-					arrowBoxClasses += ' ae-arrow-box-bottom';
-				}
+				arrowBoxClasses += ' ae-arrow-box-top';
+			} else {
+				arrowBoxClasses += ' ae-arrow-box-bottom';
 			}
 
 			return arrowBoxClasses;
