@@ -6,7 +6,6 @@ import ToolbarButtons from '../base/toolbar-buttons';
 import WidgetDropdown from '../base/widget-dropdown';
 import WidgetExclusive from '../base/widget-exclusive';
 import WidgetFocusManager from '../base/widget-focus-manager';
-import WidgetPosition from '../base/widget-position';
 import ButtonIcon from '../buttons/button-icon.jsx';
 
 const POSITION_LEFT = 1;
@@ -20,7 +19,6 @@ const POSITION_RIGHT = 2;
  * @uses WidgetDropdown
  * @uses WidgetExclusive
  * @uses WidgetFocusManager
- * @uses WidgetPosition
  */
 class ToolbarAdd extends React.Component {
 	static contextType = EditorContext;
@@ -303,6 +301,6 @@ ToolbarAdd.defaultProps = {
 
 export default WidgetDropdown(
 	WidgetExclusive(
-		WidgetFocusManager(WidgetPosition(ToolbarButtons(ToolbarAdd)))
+		WidgetFocusManager(ToolbarButtons(ToolbarAdd))
 	)
 );

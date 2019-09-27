@@ -1,7 +1,10 @@
-import WidgetPosition from './mock/widget-position';
-
 var assert = chai.assert;
-var WidgetPositionComponent = new WidgetPosition();
+
+import ToolbarButtons from '../../../src/components/base/toolbar-buttons';
+
+const Component = ToolbarButtons(class {});
+
+var WidgetPositionComponent = new Component();
 
 describe('widget interaction point', function() {
 	beforeEach(function(done) {
