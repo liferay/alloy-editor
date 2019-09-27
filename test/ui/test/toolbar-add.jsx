@@ -33,7 +33,9 @@ describe('ToolbarAdd', function() {
 				this.container
 			);
 
-			var buttons = toolbarAdd.getToolbarButtons(toolbarAddConfig.buttons);
+			var buttons = toolbarAdd.getToolbarButtons(
+				toolbarAddConfig.buttons
+			);
 
 			assert.deepEqual(tableAttrs, buttons[0].props.tableAttributes);
 		});

@@ -281,7 +281,5 @@ ToolbarStyles.defaultProps = {
 ToolbarStyles.key = 'styles';
 
 export default WidgetDropdown(
-	WidgetExclusive(
-		WidgetFocusManager(ToolbarButtons(ToolbarStyles))
-	)
+	WidgetExclusive(WidgetFocusManager(ToolbarButtons(ToolbarStyles)))
 );

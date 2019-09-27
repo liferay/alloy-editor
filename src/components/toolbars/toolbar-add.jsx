@@ -300,7 +300,5 @@ ToolbarAdd.defaultProps = {
 };
 
 export default WidgetDropdown(
-	WidgetExclusive(
-		WidgetFocusManager(ToolbarButtons(ToolbarAdd))
-	)
+	WidgetExclusive(WidgetFocusManager(ToolbarButtons(ToolbarAdd)))
 );
