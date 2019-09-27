@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ButtonCommand from '../base/button-command';
-import ButtonStyle from '../base/button-style';
 import ButtonIcon from './button-icon.jsx';
 
 /**
@@ -9,7 +8,6 @@ import ButtonIcon from './button-icon.jsx';
  *
  * @class ButtonHline
  * @uses ButtonCommand
- * @uses ButtonStyle
  */
 class ButtonHline extends React.Component {
 	/**
@@ -22,9 +20,6 @@ class ButtonHline extends React.Component {
 	 */
 	static defaultProps = {
 		command: 'horizontalrule',
-		style: {
-			element: 'hr',
-		},
 	};
 
 	/**
@@ -60,4 +55,4 @@ class ButtonHline extends React.Component {
 	}
 }
 
-export default ButtonCommand(ButtonStyle(ButtonHline));
+export default ButtonCommand(ButtonHline);

@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
-import ButtonProps from '../base/button-props';
-import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 
@@ -12,8 +10,6 @@ import ButtonStylesList from './button-styles-list.jsx';
  *
  *
  * @class ButtonColor
- * @uses ButtonProps
- * @uses ButtonStateClasses
  */
 class ButtonColor extends React.Component {
 	static contextType = EditorContext;
@@ -300,4 +296,4 @@ class ButtonColor extends React.Component {
 	}
 }
 
-export default ButtonProps(ButtonStateClasses(ButtonColor));
+export default ButtonColor;

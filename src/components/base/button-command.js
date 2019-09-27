@@ -22,10 +22,6 @@ export default WrappedComponent =>
 
 			editor.execCommand(this.props.command, data);
 
-			if (this.props.modifiesSelection) {
-				editor.selectionChange(true);
-			}
-
 			editor.fire('actionPerformed', this);
 		};
 	};

@@ -2,16 +2,12 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
-import ButtonProps from '../base/button-props';
-import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 
 /**
  * The ButtonAccessibilityImageAlt class provides functionality for changing text color in a document.
  *
  * @class ButtonAccessibilityImageAlt
- * @uses ButtonProps
- * @uses ButtonStateClasses
  *
  */
 class ButtonAccessibilityImageAlt extends React.Component {
@@ -42,8 +38,6 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	 * @return {Object} The content which should be rendered.
 	 */
 	render() {
-		const cssClass = 'ae-button ' + this.getStateClasses();
-
 		if (this.props.renderExclusive) {
 			return (
 				<div className="ae-container-edit-link">
@@ -72,7 +66,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 		} else {
 			return (
 				<button
-					className={cssClass}
+					className="ae-button"
 					onClick={this._requestExclusive}
 					tabIndex={this.props.tabIndex}>
 					<small className="ae-icon small">Alt</small>
@@ -168,6 +162,4 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	};
 }
 
-export default EditorContext.toProps(
-	ButtonProps(ButtonStateClasses(ButtonAccessibilityImageAlt))
-);
+export default EditorContext.toProps(ButtonAccessibilityImageAlt);

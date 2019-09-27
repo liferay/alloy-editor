@@ -4,22 +4,18 @@ import React from 'react';
 import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang';
 import ToolbarButtons from '../base/toolbar-buttons';
-import WidgetArrowBox from '../base/widget-arrow-box';
 import WidgetDropdown from '../base/widget-dropdown';
 import WidgetExclusive from '../base/widget-exclusive';
 import WidgetFocusManager from '../base/widget-focus-manager';
-import WidgetPosition from '../base/widget-position';
 
 /**
  * The ToolbarStyles class hosts the buttons for styling a text selection.
  *
  * @class ToolbarStyles
  * @uses ToolbarButtons
- * @uses WidgetArrowBox
  * @uses WidgetDropdown
  * @uses WidgetExclusive
  * @uses WidgetFocusManager
- * @uses WidgetPosition
  */
 class ToolbarStyles extends React.Component {
 	static contextType = EditorContext;
@@ -284,10 +280,6 @@ ToolbarStyles.defaultProps = {
  */
 ToolbarStyles.key = 'styles';
 
-export default WidgetArrowBox(
-	WidgetDropdown(
-		WidgetExclusive(
-			WidgetFocusManager(WidgetPosition(ToolbarButtons(ToolbarStyles)))
-		)
-	)
+export default WidgetDropdown(
+	WidgetExclusive(WidgetFocusManager(ToolbarButtons(ToolbarStyles)))
 );

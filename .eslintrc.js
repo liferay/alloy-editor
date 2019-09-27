@@ -20,7 +20,7 @@ module.exports = {
 			{
 				capIsNewExceptions: [
 					'ButtonActionStyle',
-					'ButtonCfgProps',
+					'ButtonProps',
 					'ButtonCommand',
 					'ButtonCommandActive',
 					'ButtonKeystroke',

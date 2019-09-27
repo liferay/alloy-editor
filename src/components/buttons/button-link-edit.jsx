@@ -2,7 +2,6 @@ import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
 import Lang from '../../oop/lang';
-import ButtonCfgProps from '../base/button-props';
 import WidgetDropdown from '../base/widget-dropdown';
 import WidgetFocusManager from '../base/widget-focus-manager';
 import ButtonIcon from './button-icon.jsx';
@@ -14,7 +13,6 @@ import ButtonLinkTargetEdit from './button-link-target-edit.jsx';
  * Provides UI for creating, editing and removing a link.
  *
  * @class ButtonLinkEdit
- * @uses ButtonCfgProps
  * @uses WidgetDropdown
  * @uses WidgetFocusManager
  */
@@ -470,5 +468,5 @@ class ButtonLinkEdit extends React.Component {
 }
 
 export default EditorContext.toProps(
-	ButtonCfgProps(WidgetDropdown(WidgetFocusManager(ButtonLinkEdit)))
+	WidgetDropdown(WidgetFocusManager(ButtonLinkEdit))
 );

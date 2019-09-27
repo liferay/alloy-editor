@@ -3,11 +3,9 @@ import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
 import ToolbarButtons from '../base/toolbar-buttons';
-import WidgetArrowBox from '../base/widget-arrow-box';
 import WidgetDropdown from '../base/widget-dropdown';
 import WidgetExclusive from '../base/widget-exclusive';
 import WidgetFocusManager from '../base/widget-focus-manager';
-import WidgetPosition from '../base/widget-position';
 import ButtonIcon from '../buttons/button-icon.jsx';
 
 const POSITION_LEFT = 1;
@@ -18,11 +16,9 @@ const POSITION_RIGHT = 2;
  *
  * @class ToolbarAdd
  * @uses ToolbarButtons
- * @uses WidgetArrowBox
  * @uses WidgetDropdown
  * @uses WidgetExclusive
  * @uses WidgetFocusManager
- * @uses WidgetPosition
  */
 class ToolbarAdd extends React.Component {
 	static contextType = EditorContext;
@@ -303,10 +299,6 @@ ToolbarAdd.defaultProps = {
 	position: POSITION_LEFT,
 };
 
-export default WidgetArrowBox(
-	WidgetDropdown(
-		WidgetExclusive(
-			WidgetFocusManager(WidgetPosition(ToolbarButtons(ToolbarAdd)))
-		)
-	)
+export default WidgetDropdown(
+	WidgetExclusive(WidgetFocusManager(ToolbarButtons(ToolbarAdd)))
 );

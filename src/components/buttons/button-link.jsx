@@ -2,7 +2,7 @@ import React from 'react';
 
 import EditorContext from '../../adapter/editor-context';
 import ButtonKeystroke from '../base/button-keystroke';
-import ButtonCfgProps from '../base/button-props';
+import ButtonProps from '../base/button-props';
 import ButtonStateClasses from '../base/button-state-classes';
 import ButtonIcon from './button-icon.jsx';
 import ButtonLinkEdit from './button-link-edit.jsx';
@@ -15,7 +15,7 @@ import ButtonLinkEdit from './button-link-edit.jsx';
  * - Exclusive: The ButtonLinkEdit UI with all the link edition controls.
  *
  * @class ButtonLink
- * @uses ButtonCfgProps
+ * @uses ButtonProps
  * @uses ButtonKeystroke
  * @uses ButtonStateClasses
  */
@@ -34,6 +34,7 @@ class ButtonLink extends React.Component {
 		keystroke: {
 			fn: '_requestExclusive',
 			keys: CKEDITOR.CTRL + 76 /* L*/,
+			name: 'link',
 		},
 	};
 
@@ -106,4 +107,4 @@ class ButtonLink extends React.Component {
 	};
 }
 
-export default ButtonCfgProps(ButtonKeystroke(ButtonStateClasses(ButtonLink)));
+export default ButtonProps(ButtonKeystroke(ButtonStateClasses(ButtonLink)));
