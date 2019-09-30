@@ -1,4 +1,6 @@
+import * as Base from '../components/base';
 import Buttons from '../components/buttons';
+import * as Compat from '../components/compat';
 import Toolbars from '../components/toolbars';
 import Attribute from '../oop/attribute';
 import Lang from '../oop/lang';
@@ -317,7 +319,9 @@ const OOP = {
 
 export {
 	Attribute,
+	Base,
 	Buttons,
+	Compat,
 	Core,
 	Lang,
 	OOP,
