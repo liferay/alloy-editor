@@ -14,7 +14,6 @@ module.exports = {
 	},
 	extends: ['liferay/react'],
 	rules: {
-		'require-jsdoc': 'warn',
 		'new-cap': [
 			'error',
 			{
@@ -65,7 +64,6 @@ module.exports = {
 		'react/no-string-refs': 'warn',
 		'react/prop-types': 'warn',
 		'sort-keys': 'warn',
-		'valid-jsdoc': 'warn',
 	},
 	settings: {
 		react: {
