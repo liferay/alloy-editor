@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 (function() {
 	'use strict';
 

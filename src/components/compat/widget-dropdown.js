@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom';
+
 (function() {
 	'use strict';
 
@@ -15,7 +17,7 @@
 		 * @memberof WidgetDropdown
 		 * @method componentWillReceiveProps
 		 */
-		componentWillReceiveProps: function(nextProps) {
+		componentWillReceiveProps(_nextProps) {
 			this.setState({
 				dropdownTrigger: null,
 				itemDropdown: null,
