@@ -1,3 +1,12 @@
+## [v2.11.0](https://github.com/liferay/alloy-editor/tree/v2.11.0) (2019-09-30)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.10.0...v2.11.0)
+
+-   feat: make it possible to build custom buttons that use "mixins" ([\#1331](https://github.com/liferay/alloy-editor/pull/1331))
+-   refactor: prepare to export "mixins" ([\#1330](https://github.com/liferay/alloy-editor/pull/1330))
+-   fix: move val-loader out of dependencies into devDependencies ([\#1329](https://github.com/liferay/alloy-editor/pull/1329))
+-   chore: update linting and formatting ([\#1328](https://github.com/liferay/alloy-editor/pull/1328))
+
 ## [v2.10.0](https://github.com/liferay/alloy-editor/tree/v2.10.0) (2019-09-23)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.0.9...v2.10.0)
