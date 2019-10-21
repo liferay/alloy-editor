@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import EditorContext from '../../adapter/editor-context';
 import ButtonIcon from './button-icon.jsx';
 import ButtonStylesList from './button-styles-list.jsx';
 
@@ -10,6 +11,8 @@ import ButtonStylesList from './button-styles-list.jsx';
  * @class ButtonSpacing
  */
 class ButtonSpacing extends React.Component {
+	static contextType = EditorContext;
+
 	static key = 'spacing';
 
 	static propTypes = {
