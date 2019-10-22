@@ -1,3 +1,11 @@
+## [v2.11.1](https://github.com/liferay/alloy-editor/tree/v2.11.1) (2019-10-22)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.0...v2.11.1)
+
+-   fix(button-spacing): adds missing EditorContext ref ([\#1336](https://github.com/liferay/alloy-editor/pull/1336))
+-   feat: prepare to streamline releases with liferay-js-publish (#1334) ([\#1335](https://github.com/liferay/alloy-editor/pull/1335))
+-   docs: remove CHANGELOG-1.x.md ([\#1333](https://github.com/liferay/alloy-editor/pull/1333))
+
 ## [v2.11.0](https://github.com/liferay/alloy-editor/tree/v2.11.0) (2019-09-30)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.10.0...v2.11.0)
