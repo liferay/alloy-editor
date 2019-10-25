@@ -1,4 +1,10 @@
 /**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
+/**
  * CKEditor plugin: Dragable image resizing
  * https://github.com/sstur/ck-dragresize
  * - Shows semi-transparent overlay while resizing

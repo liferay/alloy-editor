@@ -1,3 +1,9 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 export {default as ButtonActionStyle} from './button-action-style';
 export {default as ButtonCommandActive} from './button-command-active';
 export {default as ButtonCommand} from './button-command';

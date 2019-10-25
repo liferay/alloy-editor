@@ -1,3 +1,9 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 if (!CKEDITOR.plugins.get('ae_uicore')) {
 	/**
 	 * UICore class which will handle user interactions with the editor. These interactions

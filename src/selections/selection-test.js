@@ -1,3 +1,9 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const _isRangeAtElementEnd = function(range, element) {
 	// Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
 	// ranges. It might depend on wether a source node inside the element is selected or not. For now,

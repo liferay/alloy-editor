@@ -1,4 +1,10 @@
 /**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
+/**
  * Provides functionality for managing exclusive state of an widget.
  * The exclusive state means that a button may request to be the only rendered
  * widget in its parent container. WidgetExclusive will manage this state by

@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
 	env: {
 		browser: true,
@@ -59,6 +61,12 @@ module.exports = {
 		],
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'warn',
+		'notice/notice': [
+			'error',
+			{
+				templateFile: path.join(__dirname, 'copyright.js')
+			}
+		],
 		'react/display-name': 'warn',
 		'react/no-find-dom-node': 'warn',
 		'react/no-string-refs': 'warn',

@@ -1,3 +1,9 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 if (!CKEDITOR.plugins.get('ae_autolink')) {
 	// Disables the auto URL detection feature in IE, their lacks functionality:
 	// They convert the links only on space. We do on space, comma, semicolon and Enter.
