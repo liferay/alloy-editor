@@ -49,7 +49,7 @@ class ButtonDropdown extends React.Component {
 	render() {
 		return (
 			<div
-				className="ae-dropdown ae-arrow-box ae-arrow-box-top-left"
+				className="ae-arrow-box ae-arrow-box-top-left ae-dropdown"
 				onFocus={this.focus}
 				onKeyDown={this.handleKey}
 				tabIndex="0">

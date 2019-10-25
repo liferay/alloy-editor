@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import WidgetFocusManager from '../base/widget-focus-manager';
 import ButtonDropdown from './button-dropdown.jsx';

@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import EditorContext from '../../adapter/editor-context';
 import ToolbarButtons from '../base/toolbar-buttons';

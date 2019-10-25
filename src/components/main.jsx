@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import EditorContext from '../adapter/editor-context';
 import WidgetExclusive from './base/widget-exclusive';

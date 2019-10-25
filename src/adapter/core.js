@@ -4,8 +4,8 @@ import '../plugins';
 
 import '../components/uibridge';
 
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import {removeImageCommand} from '../commands';
 import UI from '../components/main.jsx';
