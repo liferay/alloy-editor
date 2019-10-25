@@ -1,21 +1,27 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const merge = require('webpack-merge');
 
 const common = require('./webpack.common');
 
 const config = {
-	mode: 'development',
 	devtool: 'inline-source-map',
+	mode: 'development',
 };
 
 const All = merge(common.config, config, {
-	output: {
-		filename: 'alloy-editor-all.js',
-	},
 	devServer: {
 		contentBase: './dist',
 		host: '0.0.0.0',
 		port: 9000,
 		publicPath: '/alloy-editor',
+	},
+	output: {
+		filename: 'alloy-editor-all.js',
 	},
 });
 

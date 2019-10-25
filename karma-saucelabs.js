@@ -1,7 +1,14 @@
+/**
+ * © 2017 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 'use strict';
 
-const Common = require('./karma.common');
 const karmaSauceLauncher = require('karma-sauce-launcher');
+
+const Common = require('./karma.common');
 let sauceLabsAccessKey = process.env.SAUCE_ACCESS_KEY_ENC;
 
 if (sauceLabsAccessKey) {
@@ -15,6 +22,12 @@ var customLaunchers = {
 		base: 'SauceLabs',
 		browserName: 'chrome',
 	},
+	sl_edge_22: {
+		base: 'SauceLabs',
+		browserName: 'microsoftedge',
+		platform: 'Windows 10',
+		version: 'latest',
+	},
 	sl_firefox: {
 		base: 'SauceLabs',
 		browserName: 'firefox',
@@ -25,23 +38,17 @@ var customLaunchers = {
 		platform: 'Windows 10',
 		version: '11',
 	},
-	sl_edge_22: {
-		base: 'SauceLabs',
-		browserName: 'microsoftedge',
-		platform: 'Windows 10',
-		version: 'latest',
-	},
 };
 
 const defaultConfig = Object.assign(Common, {
-	browsers: Object.keys(customLaunchers),
-
 	browserDisconnectTimeout: 10000,
 	browserDisconnectTolerance: 2,
 	browserNoActivityTimeout: 240000,
 
+	browsers: Object.keys(customLaunchers),
+
 	captureTimeout: 240000,
-	customLaunchers: customLaunchers,
+	customLaunchers,
 
 	plugins: [
 		'karma-babel-preprocessor',
@@ -63,15 +70,15 @@ const defaultConfig = Object.assign(Common, {
 	// soucelabs specific configuration
 	sauceLabs: {
 		accessKey: sauceLabsAccessKey,
-		testName: 'AlloyEditor tests',
-		recordVideo: false,
-		recordScreenshots: false,
-		startConnect: true,
 		connectOptions: {
+			logfile: 'sauce_connect.log',
 			'no-ssl-bump-domains': 'all',
 			port: 5757,
-			logfile: 'sauce_connect.log',
 		},
+		recordScreenshots: false,
+		recordVideo: false,
+		startConnect: true,
+		testName: 'AlloyEditor tests',
 	},
 });
 
