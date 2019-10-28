@@ -59,5 +59,8 @@ typings/
 .env
 
 .cache/
-public
+/public/*
 yarn-error.log
+
+# Used by gh-pages to associate site with alloyeditor.com domain.
+!/public/CNAME
