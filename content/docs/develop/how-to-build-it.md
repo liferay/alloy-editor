@@ -48,7 +48,7 @@ yarn build # or "npm run build" if you don't have Yarn
 ```
 
 <p class="small text-center mt-5">
-  There are other scripts that you an use, like **yarn start** (**npm run start**) to run a live-reloading demo, or **yarn test** (**npm test**).
+  There are other scripts that you an use, like <strong>yarn start</strong> (<strong>npm run start</strong>) to run a live-reloading demo, or <strong>yarn test</strong> (<strong>npm test</strong>).
 </p>
 
 ### For AlloyEditor versions prior to 2.0
