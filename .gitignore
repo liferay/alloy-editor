@@ -9,4 +9,6 @@ node_modules
 public
 sauce_connect.log
 test-results.xml
+/1.x/
+/gh-pages/
 /website/
