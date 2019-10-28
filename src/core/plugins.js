@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 // Wraps each of the plugin lifecycle methods in a closure that will
 // set up the editor.__processingPlugin__ variable so it can be globally
 // accessed exposing the plugin being processed and the lifecycle phase

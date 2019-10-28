@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 import React from 'react';
 
 import WidgetFocusManager from '../base/widget-focus-manager';
@@ -70,7 +76,7 @@ class ButtonCommandsList extends React.Component {
 	render() {
 		return (
 			<div
-				className="ae-dropdown ae-arrow-box ae-arrow-box-top-left"
+				className="ae-arrow-box ae-arrow-box-top-left ae-dropdown"
 				onFocus={this.focus}
 				onKeyDown={this.handleKey}
 				ref={this._ref}

@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 	CKEDITOR.SELECTION_TOP_TO_BOTTOM = 0;
 	CKEDITOR.SELECTION_BOTTOM_TO_TOP = 1;

@@ -1,10 +1,17 @@
-const common = require('./webpack.common');
-const merge = require('webpack-merge');
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const TerserJsPlugin = require('terser-webpack-plugin');
+const merge = require('webpack-merge');
+
+const common = require('./webpack.common');
 
 const config = {
-	mode: 'production',
 	devtool: 'source-map',
+	mode: 'production',
 
 	/**
 	 * https://webpack.js.org/configuration/optimization/

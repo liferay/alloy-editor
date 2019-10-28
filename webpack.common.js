@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const path = require('path');
 
 /**
@@ -31,9 +37,9 @@ const base = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
 				include: toAbsolute('./src'),
 				loader: 'babel-loader',
+				test: /\.(js|jsx)$/,
 			},
 			{
 				test: toTestRegExp('scripts/build/version.js'),
@@ -56,26 +62,26 @@ module.exports = {
 	core: {
 		...base,
 		entry: './src/adapter/main.js',
+		externals: {
+			react: {
+				amd: 'react',
+				commonjs: 'react',
+				commonjs2: 'react',
+				root: 'React',
+				umd: 'react',
+			},
+			'react-dom': {
+				amd: 'react-dom',
+				commonjs: 'react-dom',
+				commonjs2: 'react-dom',
+				root: 'ReactDOM',
+				umd: 'react-dom',
+			},
+		},
 		output: {
 			library: 'AlloyEditor',
 			libraryTarget: 'window',
 			path: toAbsolute('./dist/alloy-editor'),
-		},
-		externals: {
-			react: {
-				root: 'React',
-				commonjs2: 'react',
-				commonjs: 'react',
-				amd: 'react',
-				umd: 'react',
-			},
-			'react-dom': {
-				root: 'ReactDOM',
-				commonjs2: 'react-dom',
-				commonjs: 'react-dom',
-				amd: 'react-dom',
-				umd: 'react-dom',
-			},
 		},
 	},
 	noCkeditor: {
@@ -89,25 +95,25 @@ module.exports = {
 	noReact: {
 		...base,
 		entry: './scripts/build/with-ckeditor.js',
-		output: {
-			libraryTarget: 'umd',
-			path: toAbsolute('./dist/alloy-editor'),
-		},
 		externals: {
 			react: {
-				root: 'React',
-				commonjs2: 'react',
-				commonjs: 'react',
 				amd: 'react',
+				commonjs: 'react',
+				commonjs2: 'react',
+				root: 'React',
 				umd: 'react',
 			},
 			'react-dom': {
-				root: 'ReactDOM',
-				commonjs2: 'react-dom',
-				commonjs: 'react-dom',
 				amd: 'react-dom',
+				commonjs: 'react-dom',
+				commonjs2: 'react-dom',
+				root: 'ReactDOM',
 				umd: 'react-dom',
 			},
+		},
+		output: {
+			libraryTarget: 'umd',
+			path: toAbsolute('./dist/alloy-editor'),
 		},
 	},
 };

@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 import React from 'react';
 
 import ButtonIcon from './button-icon.jsx';
@@ -34,7 +40,7 @@ class ButtonLinkTargetEdit extends React.Component {
 
 		return (
 			<div
-				className="ae-container-edit-link-target ae-container-dropdown ae-container-dropdown-medium ae-has-dropdown"
+				className="ae-container-dropdown ae-container-dropdown-medium ae-container-edit-link-target ae-has-dropdown"
 				tabIndex="0">
 				<button
 					aria-expanded={this.props.expanded}

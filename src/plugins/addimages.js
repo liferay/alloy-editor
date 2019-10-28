@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const isIE = CKEDITOR.env.ie;
 
 if (!CKEDITOR.plugins.get('ae_addimages')) {

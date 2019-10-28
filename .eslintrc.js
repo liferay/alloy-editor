@@ -1,18 +1,31 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
+const path = require('path');
+
 module.exports = {
 	env: {
 		browser: true,
-		node: true,
 		es6: true,
 		jest: true,
+		node: true,
+	},
+	extends: ['liferay/react'],
+	globals: {
+		AlloyEditor: true,
+		CKEDITOR: true,
+		Liferay: true,
 	},
 	parser: 'babel-eslint',
 	parserOptions: {
-		ecmaVersion: 2018,
 		ecmaFeatures: {
 			jsx: true,
 		},
+		ecmaVersion: 2018,
 	},
-	extends: ['liferay/react'],
 	rules: {
 		'new-cap': [
 			'error',
@@ -59,6 +72,12 @@ module.exports = {
 		],
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'warn',
+		'notice/notice': [
+			'error',
+			{
+				templateFile: path.join(__dirname, 'copyright.js'),
+			},
+		],
 		'react/display-name': 'warn',
 		'react/no-find-dom-node': 'warn',
 		'react/no-string-refs': 'warn',
@@ -69,10 +88,5 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
-	},
-	globals: {
-		AlloyEditor: true,
-		CKEDITOR: true,
-		Liferay: true,
 	},
 };

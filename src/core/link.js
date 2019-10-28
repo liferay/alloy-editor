@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const REGEX_BOOKMARK_SCHEME = /^#.*/i;
 const REGEX_EMAIL_SCHEME = /^[a-z0-9\u0430-\u044F._-]+@/i;
 const REGEX_URI_SCHEME = /^(?:[a-z][a-z0-9+\-.]*):|^\//i;

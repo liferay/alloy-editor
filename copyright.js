@@ -4,6 +4,3 @@
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 
-import removeImageCommand from './remove-image';
-
-export {removeImageCommand};

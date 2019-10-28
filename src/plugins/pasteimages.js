@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 if (!CKEDITOR.plugins.get('ae_pasteimages')) {
 	/**
 	 * CKEditor plugin which allows pasting images directly into the editable area. The image will be encoded

@@ -1,10 +1,19 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 const _isRangeAtElementEnd = function(range, element) {
-	// Finding if a range is at the end of an element is somewhat tricky due to how CKEditor handles
-	// ranges. It might depend on wether a source node inside the element is selected or not. For now,
-	// we need to cover the following cases:
+	// Finding if a range is at the end of an element is somewhat tricky
+	// due to how CKEditor handles ranges. It might depend on whether a
+	// source node inside the element is selected or not. For now, we
+	// need to cover the following cases:
 	//
-	// - The text length of the element is the same as the endOffset of the range
-	// - Both start and end containers match the element and the start and end offsets are 1
+	// - The text length of the element is the same as the endOffset of
+	//   the range.
+	// - Both start and end containers match the element and the start
+	//   and end offsets are 1.
 
 	return (
 		element.getText().length === range.endOffset ||

@@ -1,4 +1,10 @@
 /**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
+/**
  * Debounce util function. If a function execution is expensive, it might be debounced. This means
  * that it will be executed after some amount of time after its last call. For example, if we attach a
  * a function on scroll event, it might be called hundreds times per second. In this case it may be

@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 import ButtonAccessibilityImageAlt from './button-accessibility-image-alt.jsx';
 import ButtonBackgroundColor from './button-background-color.jsx';
 import ButtonBold from './button-bold.jsx';

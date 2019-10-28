@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 import SelectionTest from '../selections/selection-test';
 
 if (!CKEDITOR.plugins.get('ae_imagealignment')) {

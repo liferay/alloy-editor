@@ -1,3 +1,9 @@
+/**
+ * © 2014 Liferay, Inc. <https://liferay.com>
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
 import SelectionGetArrowBoxClasses from './selection-arrowbox';
 import SelectionSetPosition from './selection-position';
 import SelectionTest from './selection-test';

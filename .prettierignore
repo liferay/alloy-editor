@@ -1,1 +1,4 @@
+# We don't want Prettier to strip the trailing blank line.
+/copyright.js
+
 src/__generated__/*
