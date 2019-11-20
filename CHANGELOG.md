@@ -1,3 +1,14 @@
+## [v2.11.2](https://github.com/liferay/alloy-editor/tree/v2.11.2) (2019-11-20)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.0...v2.11.2)
+
+-   fix: set image alt attribute properly on ie ([\#1343](https://github.com/liferay/alloy-editor/pull/1343))
+-   chore: update linting ([\#1338](https://github.com/liferay/alloy-editor/pull/1338))
+-   feat: add some useful worktree-related .gitignore entries ([\#1341](https://github.com/liferay/alloy-editor/pull/1341))
+-   fix(button-spacing): adds missing EditorContext ref ([\#1336](https://github.com/liferay/alloy-editor/pull/1336))
+-   feat: prepare to streamline releases with liferay-js-publish (#1334) ([\#1335](https://github.com/liferay/alloy-editor/pull/1335))
+-   docs: remove CHANGELOG-1.x.md ([\#1333](https://github.com/liferay/alloy-editor/pull/1333))
+
 ## [v2.11.1](https://github.com/liferay/alloy-editor/tree/v2.11.1) (2019-10-22)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.0...v2.11.1)
