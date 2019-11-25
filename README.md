@@ -35,8 +35,8 @@ git pull upstream master
 4. Build a new release of `alloyeditor` with `yarn build`
 5. Link the new release with `yarn link`
 
-   Additionally can inspect the `~/.config/yarn/link` (on Linux/macOS) or `%APPDATA%\Local\Yarn\Data\link` (on Windows)
-   directory to make sure the symbolic link was created.
+    Additionally can inspect the `~/.config/yarn/link` (on Linux/macOS) or `%APPDATA%\Local\Yarn\Data\link` (on Windows)
+    directory to make sure the symbolic link was created.
 
 Now, you can update the `alloyeditor` package in liferay-portal:
 
