@@ -1,6 +1,5 @@
 This document describres how to setup and use `alloyeditor` for development in [liferay-portal](https://github.com/liferay/liferay-portal)
 
-
 ## Setting up `alloyeditor` in [liferay-portal](https://github.com/liferay/liferay-portal)
 
 1. Make sure your `master` branch is up to date with [`upstream`](https://github.com/liferay/alloy-editor)
