@@ -442,13 +442,15 @@ class ButtonLinkEdit extends React.Component {
 		const linkUtils = new CKEDITOR.Link(editor, {
 			appendProtocol: this.props.appendProtocol,
 		});
-		const linkAttrs = {
+		let linkAttrs = {
 			target: this.state.linkTarget,
 		};
 		const modifySelection = {advance: true};
 
 		if (this.state.linkHref) {
 			if (this.state.element) {
+				if (!this.state.linkTarget) linkAttrs.target = null;
+
 				linkAttrs.href = this.state.linkHref;
 
 				linkUtils.update(
@@ -457,6 +459,8 @@ class ButtonLinkEdit extends React.Component {
 					modifySelection
 				);
 			} else {
+				if (!this.state.linkTarget) linkAttrs = {};
+
 				linkUtils.create(
 					this.state.linkHref,
 					linkAttrs,
