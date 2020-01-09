@@ -1,3 +1,11 @@
+## [v2.11.3](https://github.com/liferay/alloy-editor/tree/v2.11.3) (2020-01-09)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.2...v2.11.3)
+
+-   fix: avoid adding target attribute when default is selected ([\#1358](https://github.com/liferay/alloy-editor/pull/1358))
+-   chore: revert changes to README ([\#1352](https://github.com/liferay/alloy-editor/pull/1352))
+-   docs: update README ([\#1350](https://github.com/liferay/alloy-editor/pull/1350))
+
 ## [v2.11.2](https://github.com/liferay/alloy-editor/tree/v2.11.2) (2019-11-20)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.0...v2.11.2)
