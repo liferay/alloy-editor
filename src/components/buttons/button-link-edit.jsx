@@ -443,14 +443,12 @@ class ButtonLinkEdit extends React.Component {
 			appendProtocol: this.props.appendProtocol,
 		});
 		let linkAttrs = {
-			target: this.state.linkTarget,
+			target: this.state.linkTarget || null,
 		};
 		const modifySelection = {advance: true};
 
 		if (this.state.linkHref) {
 			if (this.state.element) {
-				if (!this.state.linkTarget) linkAttrs.target = null;
-
 				linkAttrs.href = this.state.linkHref;
 
 				linkUtils.update(
