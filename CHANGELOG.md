@@ -1,3 +1,10 @@
+## [v1.5.27](https://github.com/liferay/alloy-editor/tree/v1.5.27) (2020-01-10)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.26...v1.5.27)
+
+-   fix: apply fix for #1354 in 1.x ([\#1361](https://github.com/liferay/alloy-editor/pull/1361))
+-   feat: configure Semantic Pull Requests bot (1.x) ([\#1311](https://github.com/liferay/alloy-editor/pull/1311))
+
 ## [v1.5.26](https://github.com/liferay/alloy-editor/tree/v1.5.26) (2019-08-02)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.25...v1.5.26)
