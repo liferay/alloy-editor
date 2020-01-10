@@ -38,7 +38,7 @@
                 compatHtml: true
             });
 
-            assert.strictEqual('<p><a href="http://link.com" target="">selection</a></p>', data);
+            assert.strictEqual('<p><a href="http://link.com">selection</a></p>', data);
         });
 
         it('should create link without protocol', function() {
@@ -63,7 +63,7 @@
                 compatHtml: true
             });
 
-            assert.strictEqual('<p><a href="link.com" target="">selection</a></p>', data);
+            assert.strictEqual('<p><a href="link.com">selection</a></p>', data);
         });
 
         it('should propagate `allowedTargets` property to `ButtonLinkTargetEdit`', function() {
