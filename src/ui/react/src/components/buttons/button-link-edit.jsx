@@ -454,7 +454,7 @@
             var editor = this.props.editor.get('nativeEditor');
             var linkUtils = new CKEDITOR.Link(editor, {appendProtocol: this.props.appendProtocol});
             var linkAttrs = {
-                target: this.state.linkTarget
+                target: this.state.linkTarget || null
             };
             var modifySelection = { advance: true };
 
@@ -464,6 +464,8 @@
 
                     linkUtils.update(linkAttrs, this.state.element, modifySelection);
                 } else {
+                    if (!this.state.linkTarget) linkAttrs = {};
+
                     linkUtils.create(this.state.linkHref, linkAttrs, modifySelection);
                 }
 
