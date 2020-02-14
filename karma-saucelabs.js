@@ -52,7 +52,6 @@ const defaultConfig = Object.assign(Common, {
 
 	plugins: [
 		'karma-babel-preprocessor',
-		'karma-coverage',
 		'karma-html2js-preprocessor',
 		'karma-chai',
 		'karma-fixture',
