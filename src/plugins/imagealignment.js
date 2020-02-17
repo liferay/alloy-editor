@@ -28,23 +28,53 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	];
 
 	/**
-	 * Necessary styles for the center alignment
+	 * Necessary styles for the left|center|right alignment
 	 * @type {Array.<Object>}
 	 */
-	const CENTERED_IMAGE_STYLE = [
-		{
-			name: 'display',
-			value: 'block',
-		},
-		{
-			name: 'margin-left',
-			value: 'auto',
-		},
-		{
-			name: 'margin-right',
-			value: 'auto',
-		},
-	];
+	const IMAGE_STYLE_ALIGNMENT = {
+		[IMAGE_ALIGNMENT.LEFT]: [
+			{
+				name: 'display',
+				value: 'inline-block',
+			},
+			{
+				name: 'float',
+				value: 'left',
+			},
+			{
+				name: 'margin-right',
+				value: '1.2rem',
+			},
+		],
+		[IMAGE_ALIGNMENT.CENTER]: [
+			{
+				name: 'display',
+				value: 'block',
+			},
+			{
+				name: 'margin-left',
+				value: 'auto',
+			},
+			{
+				name: 'margin-right',
+				value: 'auto',
+			},
+		],
+		[IMAGE_ALIGNMENT.RIGHT]: [
+			{
+				name: 'display',
+				value: 'inline-block',
+			},
+			{
+				name: 'float',
+				value: 'right',
+			},
+			{
+				name: 'margin-left',
+				value: '1.2rem',
+			},
+		],
+	};
 
 	/**
 	 * Retrieves the alignment value of an image.
@@ -64,7 +94,9 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 		}
 
 		if (!imageAlignment) {
-			let centeredImage = CENTERED_IMAGE_STYLE.every(style => {
+			let centeredImage = IMAGE_STYLE_ALIGNMENT[
+				IMAGE_ALIGNMENT.CENTER
+			].every(style => {
 				let styleCheck = image.getStyle(style.name) === style.value;
 
 				if (!styleCheck && style.vendorPrefixes) {
@@ -83,18 +115,20 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 				const imageContainer = image.$.parentNode;
 
 				if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
-					CENTERED_IMAGE_STYLE.forEach(style => {
-						image.setStyle(style.name, style.value);
+					IMAGE_STYLE_ALIGNMENT[IMAGE_ALIGNMENT.CENTER].forEach(
+						style => {
+							image.setStyle(style.name, style.value);
 
-						if (style.vendorPrefixes) {
-							style.vendorPrefixes.forEach(vendorPrefix => {
-								image.setStyle(
-									vendorPrefix + style.name,
-									style.value
-								);
-							});
+							if (style.vendorPrefixes) {
+								style.vendorPrefixes.forEach(vendorPrefix => {
+									image.setStyle(
+										vendorPrefix + style.name,
+										style.value
+									);
+								});
+							}
 						}
-					});
+					);
 					centeredImage = true;
 					imageContainer.style.textAlign = '';
 				}
@@ -124,13 +158,21 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 			imageAlignment === IMAGE_ALIGNMENT.LEFT ||
 			imageAlignment === IMAGE_ALIGNMENT.RIGHT
 		) {
-			image.removeStyle('float');
-
 			if (imageAlignment === getImageAlignment(image)) {
 				image.removeAttribute('align');
 			}
 		} else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
-			CENTERED_IMAGE_STYLE.forEach(style => {
+			const imageContainer = image.$.parentNode;
+
+			if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
+				imageContainer.style.textAlign = '';
+			}
+		}
+
+		const styles = IMAGE_STYLE_ALIGNMENT[imageAlignment];
+
+		if (styles) {
+			styles.forEach(style => {
 				image.removeStyle(style.name);
 
 				if (style.vendorPrefixes) {
@@ -139,12 +181,6 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 					});
 				}
 			});
-
-			const imageContainer = image.$.parentNode;
-
-			if (imageContainer.style.textAlign == IMAGE_ALIGNMENT.CENTER) {
-				imageContainer.style.textAlign = '';
-			}
 		}
 	};
 
@@ -157,13 +193,10 @@ if (!CKEDITOR.plugins.get('ae_imagealignment')) {
 	const setImageAlignment = function(image, imageAlignment) {
 		removeImageAlignment(image, getImageAlignment(image));
 
-		if (
-			imageAlignment === IMAGE_ALIGNMENT.LEFT ||
-			imageAlignment === IMAGE_ALIGNMENT.RIGHT
-		) {
-			image.setStyle('float', imageAlignment);
-		} else if (imageAlignment === IMAGE_ALIGNMENT.CENTER) {
-			CENTERED_IMAGE_STYLE.forEach(style => {
+		const styles = IMAGE_STYLE_ALIGNMENT[imageAlignment];
+
+		if (styles) {
+			styles.forEach(style => {
 				image.setStyle(style.name, style.value);
 
 				if (style.vendorPrefixes) {
