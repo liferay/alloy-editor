@@ -29,7 +29,11 @@ class ButtonAccessibilityImageAlt extends React.Component {
 			.getSelection()
 			.getSelectedElement();
 
-		const imageAlt = (element && element.getAttribute('alt')) || '';
+		const imageElement = element.findOne('img');
+
+		const imageAlt = imageElement
+			? imageElement && imageElement.getAttribute('alt')
+			: element && element.getAttribute('alt');
 
 		this.state = {
 			element,
