@@ -1,3 +1,12 @@
+## [v2.11.4](https://github.com/liferay/alloy-editor/tree/v2.11.4) (2020-02-17)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.3...v2.11.4)
+
+-   fix: Lack of padding around images ([\#1373](https://github.com/liferay/alloy-editor/pull/1373))
+-   chore: remove unused coverage functionality ([\#1376](https://github.com/liferay/alloy-editor/pull/1376))
+-   fix: make globs work on Windows ([\#1374](https://github.com/liferay/alloy-editor/pull/1374))
+-   docs: remove reference to IE9+ from README (#1357) ([\#1363](https://github.com/liferay/alloy-editor/pull/1363))
+
 ## [v2.11.3](https://github.com/liferay/alloy-editor/tree/v2.11.3) (2020-01-09)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.2...v2.11.3)
