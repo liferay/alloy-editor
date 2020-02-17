@@ -2,7 +2,6 @@
 .font-cache
 .sass-cache
 .vscode
-coverage
 gatsby
 jsconfig.json
 node_modules

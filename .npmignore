@@ -3,4 +3,3 @@ node_modules
 *sublime*
 test-results.xml
 sauce_connect.log
-coverage

@@ -18,10 +18,6 @@ const preprocessors = {
 
 const DEBUG = argv.debug || argv.d;
 
-if (!DEBUG) {
-	preprocessors['dist/alloy-editor/src/**/*.js'] = ['coverage'];
-}
-
 const CKEDITOR_DIR = DEBUG ? 'lib/ckeditor-debug' : 'dist/alloy-editor';
 
 const filesToLoad = [
