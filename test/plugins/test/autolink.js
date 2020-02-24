@@ -109,13 +109,15 @@ describe('AutoLink', function() {
 
 	it('should not create a link if last word is not a valid URL', function() {
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
+			expected:
+				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
 			html: 'invalid link ww.liferay.com { }',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
+			expected:
+				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
 			html: 'invalid link ww.liferay.com { }',
 			keyCode: KEY_COMMA,
 		});
@@ -127,7 +129,8 @@ describe('AutoLink', function() {
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p><p>text</p>',
+			expected:
+				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p><p>text</p>',
 			html: '<p>invalid link ww.liferay.com</p>{ }<p>text</p>',
 			keyCode: KEY_ENTER,
 		});
@@ -201,13 +204,15 @@ describe('AutoLink', function() {
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
+			expected:
+				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
 			html: '<p>invalid link ww.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link liferay.com</p>',
+			expected:
+				'<p>invalid link <a href="http://liferay.com">liferay.com</a></p>',
 			html: '<p>invalid link liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
