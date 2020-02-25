@@ -203,7 +203,7 @@ describe('AutoLink', function() {
 		});
 	});
 
-	it("doesn't creates a link when the last word is not a URL", function() {
+	it('does not create a link when the last word is not a URL', function() {
 		testLink.call(this, {
 			expected: '<p>invalid link some_word</p>',
 			html: 'invalid link some_word { }',
