@@ -24,8 +24,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 
 	const REGEX_LAST_WORD = /[^\s]+/gim;
 
-	// Seen at
-	// https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url/49849482#5717133/
+	// Seen at https://stackoverflow.com/a/5717133/2103996
 	const REGEX_URL =
 		'^(https?:\\/\\/)?' + // protocol
 		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
