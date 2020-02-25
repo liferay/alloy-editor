@@ -107,18 +107,17 @@ describe('AutoLink', function() {
 		assert.equal(data, '<p><span>@test</span> </p>');
 	});
 
-	it('should not create a link if last word is not a valid URL', function() {
+	it('should to try to create a link from the last word', function() {
 		testLink.call(this, {
-			expected:
-				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
-			html: 'invalid link ww.liferay.com { }',
+			expected: '<p>invalid link http:ww.liferay.com</p>',
+			html: 'invalid link http:ww.liferay.com { }',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
-			html: 'invalid link ww.liferay.com { }',
+				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+			html: '<p>link liferay.com { }</p>',
 			keyCode: KEY_COMMA,
 		});
 
@@ -130,8 +129,14 @@ describe('AutoLink', function() {
 
 		testLink.call(this, {
 			expected:
-				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p><p>text</p>',
-			html: '<p>invalid link ww.liferay.com</p>{ }<p>text</p>',
+				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p><p>text</p>',
+			html: '<p>link ww.liferay.com</p>{ }<p>text</p>',
+			keyCode: KEY_ENTER,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link eeeewwww</p><p>text</p>',
+			html: '<p>invalid link eeeewwww</p>{ }<p>text</p>',
 			keyCode: KEY_ENTER,
 		});
 	});
@@ -167,7 +172,7 @@ describe('AutoLink', function() {
 		});
 	});
 
-	it('should convert only valid urls as links', function() {
+	it('should try to convert URLs to links', function() {
 		testLink.call(this, {
 			expected:
 				'<p>link <a href="http://www.liferay.org">www.liferay.org</a></p>',
@@ -205,15 +210,33 @@ describe('AutoLink', function() {
 
 		testLink.call(this, {
 			expected:
-				'<p>invalid link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
-			html: '<p>invalid link ww.liferay.com { }</p>',
+				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
+			html: '<p>link ww.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>invalid link <a href="http://liferay.com">liferay.com</a></p>',
-			html: '<p>invalid link liferay.com { }</p>',
+				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+			html: '<p>link liferay.com { }</p>',
+			keyCode: KEY_SPACE,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link eeeewwww</p>',
+			html: '<p>invalid link eeeewwww { }</p>',
+			keyCode: KEY_SPACE,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link wwwwwwwww</p>',
+			html: '<p>invalid link wwwwwwwww { }</p>',
+			keyCode: KEY_SPACE,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link www www www www</p>',
+			html: '<p>invalid link www www www www { }</p>',
 			keyCode: KEY_SPACE,
 		});
 	});
