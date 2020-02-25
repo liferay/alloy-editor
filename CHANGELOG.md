@@ -1,3 +1,12 @@
+## [v2.11.5](https://github.com/liferay/alloy-editor/tree/v2.11.5) (2020-02-25)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.4...v2.11.5)
+
+-   fix: make REGEX_URL validate links and stop validating non links ([\#1383](https://github.com/liferay/alloy-editor/pull/1383))
+-   chore: update for compliance with current Outbound Licensing Policy ([\#1382](https://github.com/liferay/alloy-editor/pull/1382))
+-   refactor: avoid useless boolean expression ([\#1379](https://github.com/liferay/alloy-editor/pull/1379))
+-   fix: show image alt text in alt text input field in IE ([\#1377](https://github.com/liferay/alloy-editor/pull/1377))
+
 ## [v2.11.4](https://github.com/liferay/alloy-editor/tree/v2.11.4) (2020-02-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.3...v2.11.4)
