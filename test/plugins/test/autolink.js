@@ -107,64 +107,21 @@ describe('AutoLink', function() {
 		assert.equal(data, '<p><span>@test</span> </p>');
 	});
 
-	it('should not create a link if last word is not a valid URL', function() {
+	it('creates a link when the last word is a URL', function() {
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
-			html: 'invalid link ww.liferay.com { }',
-			keyCode: KEY_SPACE,
-		});
-
-		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
-			html: 'invalid link ww.liferay.com { }',
+			expected:
+				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+			html: '<p>link liferay.com { }</p>',
 			keyCode: KEY_COMMA,
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link some_word</p>',
-			html: 'invalid link some_word { }',
-			keyCode: KEY_SEMICOLON,
-		});
-
-		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p><p>text</p>',
-			html: '<p>invalid link ww.liferay.com</p>{ }<p>text</p>',
+			expected:
+				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p><p>text</p>',
+			html: '<p>link ww.liferay.com</p>{ }<p>text</p>',
 			keyCode: KEY_ENTER,
 		});
-	});
 
-	it('should remove the created link when pressing BACKSPACE', function() {
-		bender.tools.selection.setWithHtml(
-			this.nativeEditor,
-			'link www.liferay.com { }'
-		);
-
-		var editable = this.nativeEditor.editable();
-
-		happen.keyup(editable.$, {
-			keyCode: KEY_SPACE,
-		});
-
-		happen.keydown(editable.$, {
-			keyCode: KEY_BACK,
-		});
-
-		var data = getData.call(this);
-
-		assert.strictEqual(data, '<p>link www.liferay.com</p>');
-	});
-
-	it('should not remove a link that has not just been created', function() {
-		testLink.call(this, {
-			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
-			html:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> { }</p>',
-			keyCode: KEY_BACK,
-		});
-	});
-
-	it('should convert only valid urls as links', function() {
 		testLink.call(this, {
 			expected:
 				'<p>link <a href="http://www.liferay.org">www.liferay.org</a></p>',
@@ -201,14 +158,79 @@ describe('AutoLink', function() {
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link ww.liferay.com</p>',
-			html: '<p>invalid link ww.liferay.com { }</p>',
+			expected:
+				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
+			html: '<p>link ww.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
-			expected: '<p>invalid link liferay.com</p>',
-			html: '<p>invalid link liferay.com { }</p>',
+			expected:
+				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+			html: '<p>link liferay.com { }</p>',
+			keyCode: KEY_SPACE,
+		});
+	});
+
+	it('should remove the created link when pressing BACKSPACE', function() {
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'link www.liferay.com { }'
+		);
+
+		var editable = this.nativeEditor.editable();
+
+		happen.keyup(editable.$, {
+			keyCode: KEY_SPACE,
+		});
+
+		happen.keydown(editable.$, {
+			keyCode: KEY_BACK,
+		});
+
+		var data = getData.call(this);
+
+		assert.strictEqual(data, '<p>link www.liferay.com</p>');
+	});
+
+	it('should not remove a link that has not just been created', function() {
+		testLink.call(this, {
+			expected:
+				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+			html:
+				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> { }</p>',
+			keyCode: KEY_BACK,
+		});
+	});
+
+	it('does not create a link when the last word is not a URL', function() {
+		testLink.call(this, {
+			expected: '<p>invalid link some_word</p>',
+			html: 'invalid link some_word { }',
+			keyCode: KEY_SEMICOLON,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link http:ww.liferay.com</p>',
+			html: 'invalid link http:ww.liferay.com { }',
+			keyCode: KEY_SPACE,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link eeeewwww</p><p>text</p>',
+			html: '<p>invalid link eeeewwww</p>{ }<p>text</p>',
+			keyCode: KEY_ENTER,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link wwwwwwwww</p>',
+			html: '<p>invalid link wwwwwwwww { }</p>',
+			keyCode: KEY_SPACE,
+		});
+
+		testLink.call(this, {
+			expected: '<p>invalid link www www www www</p>',
+			html: '<p>invalid link www www www www { }</p>',
 			keyCode: KEY_SPACE,
 		});
 	});

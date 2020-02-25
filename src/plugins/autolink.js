@@ -24,8 +24,14 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 
 	const REGEX_LAST_WORD = /[^\s]+/gim;
 
+	// Seen at https://stackoverflow.com/a/5717133/2103996
 	const REGEX_URL =
-		'((([A - Za - z]{ 3, 9}: (?: \\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(https?\\:\\/\\/|www.|[-;:&=.\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))((.*):(\\d*)\\/?(.*))?)';
+		'^(https?:\\/\\/)?' + // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+		'(\\#[-a-z\\d_]*)?$';
 
 	const REGEX_EMAIL = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/i;
 
