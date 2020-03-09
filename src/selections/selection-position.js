@@ -76,7 +76,15 @@ const imageSelectionSetPosition = function(payload) {
 		: null;
 
 	if (selectionData && selectionData.element) {
-		centerToolbar(this, selectionData.element.getClientRect());
+		const nativeEditor = payload.editor.get('nativeEditor');
+		const uiNode = nativeEditor.config.uiNode;
+
+		const scrollTop = uiNode ? uiNode.scrollTop : 0;
+
+		const rect = selectionData.element.getClientRect();
+		rect.top += scrollTop;
+
+		centerToolbar(this, rect);
 
 		return true;
 	}
