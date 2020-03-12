@@ -23,10 +23,17 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const element = props.context.editor
-			.get('nativeEditor')
-			.getSelection()
-			.getSelectedElement();
+		const editor = props.context.editor;
+
+		const nativeEditor = editor.get('nativeEditor');
+
+		const selection = nativeEditor.getSelection();
+
+		const element = selection.getSelectedElement();
+
+		if (!element) {
+			return;
+		}
 
 		const imageElement = element.findOne('img');
 
