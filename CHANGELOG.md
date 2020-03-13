@@ -1,3 +1,16 @@
+## [v2.11.6](https://github.com/liferay/alloy-editor/tree/v2.11.6) (2020-03-13)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.5...v2.11.6)
+
+### :wrench: Bug fixes
+
+-   fix: check that the selected element is valid ([\#1387](https://github.com/liferay/alloy-editor/pull/1387))
+-   fix: toolbar location for images ([\#1386](https://github.com/liferay/alloy-editor/pull/1386))
+
+### :book: Documentation
+
+-   docs: update CHANGELOG.md with new version of liferay-changelog-generator ([\#1384](https://github.com/liferay/alloy-editor/pull/1384))
+
 ## [v2.11.5](https://github.com/liferay/alloy-editor/tree/v2.11.5) (2020-02-25)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.4...v2.11.5)
