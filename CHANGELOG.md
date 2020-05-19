@@ -1,3 +1,12 @@
+## [v2.11.7](https://github.com/liferay/alloy-editor/tree/v2.11.7) (2020-05-19)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.6...v2.11.7)
+
+### :wrench: Bug fixes
+
+-   fix: select new cell after the new row/column is inserted ([\#1391](https://github.com/liferay/alloy-editor/pull/1391))
+-   fix: gracefully handle invalid JSON in data-style attribute (#1393) ([\#1394](https://github.com/liferay/alloy-editor/pull/1394))
+
 ## [v2.11.6](https://github.com/liferay/alloy-editor/tree/v2.11.6) (2020-03-13)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.5...v2.11.6)
