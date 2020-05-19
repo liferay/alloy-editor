@@ -129,7 +129,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		return null;
 	}
 
-	function insertRow(selection, insertBefore) {
+	function insertRow(editor, insertBefore) {
+		const selection = editor.getSelection();
+
 		const cells = getSelectedCells(selection);
 
 		const firstCell = cells[0];
@@ -188,6 +190,11 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		} else {
 			newRow.insertAfter(row);
 		}
+
+		const cell = new CKEDITOR.dom.element(newRow.$).getChild(
+			cells[0] ? cells[0].$.cellIndex : 0
+		);
+		selectElement(editor, cell);
 	}
 
 	function deleteRows(selectionOrRow) {
@@ -299,7 +306,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		return retval;
 	}
 
-	function insertColumn(selection, insertBefore) {
+	function insertColumn(editor, insertBefore) {
+		const selection = editor.getSelection();
+
 		const cells = getSelectedCells(selection);
 
 		const firstCell = cells[0];
@@ -328,6 +337,7 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 			nextCol.push(nextCell);
 		}
 
+		const insertedCells = [];
 		for (let i = 0; i < height; i++) {
 			let cell;
 
@@ -348,8 +358,22 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				cell = cell.$;
 			}
 
+			insertedCells[i] = cell;
+
 			i += cell.rowSpan - 1;
 		}
+
+		const cell = new CKEDITOR.dom.element(
+			insertedCells[firstCell.getParent().$.rowIndex]
+		);
+		selectElement(editor, cell);
+	}
+
+	function selectElement(editor, element) {
+		const range = editor.createRange();
+
+		range.moveToPosition(element, CKEDITOR.POSITION_AFTER_START);
+		editor.getSelection().selectRanges([range]);
 	}
 
 	function deleteColumns(selectionOrCell) {
@@ -851,8 +875,7 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				createDef({
 					requiredContent: 'table',
 					exec(editor) {
-						const selection = editor.getSelection();
-						insertRow(selection, true);
+						insertRow(editor, true);
 					},
 				})
 			);
@@ -862,8 +885,7 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				createDef({
 					requiredContent: 'table',
 					exec(editor) {
-						const selection = editor.getSelection();
-						insertRow(selection);
+						insertRow(editor);
 					},
 				})
 			);
@@ -887,8 +909,7 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				createDef({
 					requiredContent: 'table',
 					exec(editor) {
-						const selection = editor.getSelection();
-						insertColumn(selection, true);
+						insertColumn(editor, true);
 					},
 				})
 			);
@@ -898,8 +919,7 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				createDef({
 					requiredContent: 'table',
 					exec(editor) {
-						const selection = editor.getSelection();
-						insertColumn(selection);
+						insertColumn(editor);
 					},
 				})
 			);
