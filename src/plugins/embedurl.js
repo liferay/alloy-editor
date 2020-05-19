@@ -406,11 +406,19 @@ if (!CKEDITOR.plugins.get('embedurl')) {
 
 					// Sync dimensions and alignment with editor wrapper
 
+					let styles = null;
+
 					const stylesJSON = instance.element.getAttribute(
 						'data-styles'
 					);
 
-					let styles = stylesJSON ? JSON.parse(stylesJSON) : null;
+					if (stylesJSON) {
+						try {
+							styles = JSON.parse(stylesJSON);
+						} catch (_error) {
+							styles = null;
+						}
+					}
 
 					if (!styles) {
 						const iframe = instance.wrapper.findOne('iframe');
