@@ -46,9 +46,23 @@ const centerToolbar = function(toolbar, rect) {
 		CKEDITOR.SELECTION_BOTTOM_TO_TOP
 	);
 
+	const caretPosition = nativeEditor.getSelection();
+	const ranges = caretPosition.getRanges();
+	let offsetHeight = 0;
+
+	if (ranges) {
+		const startContainer = ranges[0].startContainer;
+		const startContainerClientRect = startContainer.getClientRect();
+		offsetHeight = startContainerClientRect.y - rect.top;
+	}
+
 	const endPosition = [
 		rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
-		rect.top - toolbarNode.offsetHeight + scrollPosition.y - gutter.top,
+		rect.top +
+			offsetHeight -
+			toolbarNode.offsetHeight +
+			scrollPosition.y -
+			gutter.top,
 	];
 
 	if (endPosition[0] < 0) {
