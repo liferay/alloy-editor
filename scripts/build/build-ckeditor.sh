@@ -60,6 +60,6 @@ echo "    yarn start # check demo"
 echo
 echo "Don't forget to commit the result!"
 echo
-echo "    git add -A -- ckeditor ckeditor-debug"
-echo "    git commit -m 'Update CKEDITOR to $VERSION'"
+echo "    git add -A -- lib"
+echo "    git commit -m 'chore: Update CKEDITOR to $VERSION'"
 echo
