@@ -1,3 +1,11 @@
+## [v2.11.9](https://github.com/liferay/alloy-editor/tree/v2.11.9) (2020-07-02)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.8...v2.11.9)
+
+### :wrench: Bug fixes
+
+-   fix: point CKEditor submodule back at v4.14.1 ([\#1407](https://github.com/liferay/alloy-editor/pull/1407))
+
 ## [v2.11.8](https://github.com/liferay/alloy-editor/tree/v2.11.8) (2020-07-01)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.7...v2.11.8)
