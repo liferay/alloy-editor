@@ -1,3 +1,19 @@
+## [v2.11.9](https://github.com/liferay/alloy-editor/tree/v2.11.9) (2020-07-02)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.7...v2.11.9)
+
+### :new: Features
+
+-   feat: make the toolbar visible in tables ([\#1404](https://github.com/liferay/alloy-editor/pull/1404))
+
+### :wrench: Bug fixes
+
+-   fix: update instructions at end of build script ([\#1405](https://github.com/liferay/alloy-editor/pull/1405))
+
+### :house: Chores
+
+-   chore: update CKEditor build to v4.14.1 ([\#1402](https://github.com/liferay/alloy-editor/pull/1402))
+
 ## [v2.11.8](https://github.com/liferay/alloy-editor/tree/v2.11.8) (2020-07-01)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.7...v2.11.8)
