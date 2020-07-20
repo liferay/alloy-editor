@@ -13,6 +13,34 @@ describe('ButtonTableEdit', function() {
 	beforeEach(Utils.createAlloyEditor);
 	afterEach(Utils.destroyAlloyEditor);
 
+	it('should create a 1x1 table by default when user selects a negative value for rows or columns', function() {
+		var buttonTableEdit = this.render(
+			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
+			this.container
+		);
+
+		Simulate.change(buttonTableEdit.rowsRef.current, {
+			target: {value: -1},
+		});
+		Simulate.change(buttonTableEdit.colsRef.current, {
+			target: {value: 0},
+		});
+
+		var confirmButton = this.container.querySelector('button');
+		assert.ok(confirmButton);
+
+		Simulate.click(confirmButton);
+
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: true,
+			compatHtml: true,
+		});
+
+		var expected = getFixture('1_by_1_table.html');
+
+		assert.strictEqual(data, expected);
+	});
+
 	it('should create a 3x3 table by default when clicking on the confirm button', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
