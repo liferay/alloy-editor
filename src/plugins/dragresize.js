@@ -555,16 +555,22 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	function resizeElement(el, width, height) {
 		const imageScaleResize = this.editor.config.imageScaleResize;
 		if (imageScaleResize === 'both') {
+			el.setAttribute('width', String(width));
 			el.style.width = String(width) + 'px';
+			el.setAttribute('height', String(height));
 			el.style.height = String(height) + 'px';
 		} else if (
 			imageScaleResize === 'width' ||
 			imageScaleResize === 'scale'
 		) {
+			el.removeAttribute('height');
 			el.style.height = 'auto';
+			el.setAttribute('width', String(width));
 			el.style.width = String(width) + 'px';
 		} else if (imageScaleResize === 'height') {
+			el.setAttribute('height', String(height));
 			el.style.height = String(height) + 'px';
+			el.removeAttribute('width');
 			el.style.width = 'auto';
 		}
 	}
