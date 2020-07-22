@@ -42,6 +42,10 @@ var filesToLoad = [
         pattern: path.join(alloyEditorDir, 'lang/*.js'),
         included: true,
         watched: false
+    }, {
+        pattern: path.join(alloyEditorDir, 'vendor/promise.js'),
+        included: true,
+        watched: false
     },
 
     /* bender requires CKEDITOR, should be after ckeditor.js */
