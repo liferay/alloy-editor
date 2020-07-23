@@ -32,7 +32,7 @@ class ButtonTableEdit extends React.Component {
 			border: 1,
 			cellPadding: 0,
 			cellSpacing: 0,
-			style: 'width: 100%',
+			style: 'table-layout: fixed; width: 100%;',
 		},
 	};
 
