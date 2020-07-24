@@ -13,7 +13,7 @@ describe('ButtonTableEdit', function() {
 	beforeEach(Utils.createAlloyEditor);
 	afterEach(Utils.destroyAlloyEditor);
 
-	it('should create a 1x1 table by default when user selects a negative value for rows or columns', function() {
+	it('creates a 1x1 table by default when user selects a negative value for rows or columns', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
@@ -41,7 +41,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(data, expected);
 	});
 
-	it('should create a 3x3 table by default when clicking on the confirm button', function() {
+	it('creates a 3x3 table by default when clicking on the confirm button', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
@@ -62,7 +62,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(data, expected);
 	});
 
-	it('should create a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
+	it('creates a 6 x 4 table based on the rows and cols inputs when clicking on the confirm button', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
@@ -90,7 +90,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(data, expected);
 	});
 
-	it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
+	it('creates a 6 x 4 table based on the rows and cols inputs when pressing enter on the rows input', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
@@ -117,7 +117,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(data, expected);
 	});
 
-	it('should create a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
+	it('creates a 6 x 4 table based on the rows and cols inputs when pressing enter on the cols input', function() {
 		var buttonTableEdit = this.render(
 			<ButtonTableEdit cancelExclusive={sinon.stub()} />,
 			this.container
@@ -144,7 +144,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(data, expected);
 	});
 
-	it('should not create a table and dismiss the ui when pressing escape on the rows input', function() {
+	it('not create a table and dismiss the ui when pressing escape on the rows input', function() {
 		var cancelExclusive = sinon.stub();
 
 		var buttonTableEdit = this.render(
@@ -168,7 +168,7 @@ describe('ButtonTableEdit', function() {
 		assert.strictEqual(1, cancelExclusive.callCount);
 	});
 
-	it('should not create a table and dismiss the ui when pressing escape on the cols input', function() {
+	it('not create a table and dismiss the ui when pressing escape on the cols input', function() {
 		var cancelExclusive = sinon.stub();
 
 		var buttonTableEdit = this.render(
