@@ -121,12 +121,8 @@ class ButtonTableEdit extends React.Component {
 	_handleChange = (inputName, event) => {
 		const state = {};
 
-		if (
-			inputName === INPUT_NAMES.ROWS ||
-			(inputName === INPUT_NAMES.COLS &&
-				event.target.value < MINIMUM_GRID_VALUE)
-		) {
-			state[inputName] = MINIMUM_GRID_VALUE;
+		if (inputName === INPUT_NAMES.COLS || inputName === INPUT_NAMES.ROWS) {
+			state[inputName] = Math.min(event.target.value, MINIMUM_GRID_VALUE);
 		} else {
 			state[inputName] = event.target.value;
 		}
