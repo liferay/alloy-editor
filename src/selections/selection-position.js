@@ -50,10 +50,15 @@ const centerToolbar = function(toolbar, rect) {
 	const ranges = caretPosition.getRanges();
 	let offsetHeight = 0;
 
-	if (ranges) {
-		const startContainer = ranges[0].startContainer;
-		const startContainerClientRect = startContainer.getClientRect();
-		offsetHeight = startContainerClientRect.y - rect.top;
+	if (ranges && ranges.length === 1) {
+		let startContainer = ranges[0].startContainer;
+		if (startContainer.$.nodeType !== Node.ELEMENT_NODE) {
+			startContainer = startContainer.getParent();
+		}
+		if (startContainer) {
+			const startContainerClientRect = startContainer.getClientRect();
+			offsetHeight = startContainerClientRect.y - rect.top;
+		}
 	}
 
 	const endPosition = [
