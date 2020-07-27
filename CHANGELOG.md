@@ -1,3 +1,13 @@
+## [v2.11.10](https://github.com/liferay/alloy-editor/tree/v2.11.10) (2020-07-27)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.9...v2.11.10)
+
+### :wrench: Bug fixes
+
+-   fix: set width and height attributes for firefox and chrome (#1412) ([\#1413](https://github.com/liferay/alloy-editor/pull/1413))
+-   fix: unbreak table drag-resizing by using fixed table layout ([\#1414](https://github.com/liferay/alloy-editor/pull/1414))
+-   fix: avoid JS error computing selection position ([\#1415](https://github.com/liferay/alloy-editor/pull/1415))
+
 ## [v2.11.9](https://github.com/liferay/alloy-editor/tree/v2.11.9) (2020-07-02)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.8...v2.11.9)
