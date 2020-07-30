@@ -11,6 +11,13 @@ import ButtonIcon from './button-icon.jsx';
 const KEY_ENTER = 13;
 const KEY_ESC = 27;
 
+const INPUT_NAMES = {
+	COLS: 'cols',
+	ROWS: 'rows',
+};
+
+const MINIMUM_GRID_VALUE = 1;
+
 /**
  * The ButtonTableEdit class provides functionality for creating and editing a table in a document.
  * Provides UI for creating a table.
@@ -113,7 +120,12 @@ class ButtonTableEdit extends React.Component {
 	 */
 	_handleChange = (inputName, event) => {
 		const state = {};
-		state[inputName] = event.target.value;
+
+		if (inputName === INPUT_NAMES.COLS || inputName === INPUT_NAMES.ROWS) {
+			state[inputName] = Math.min(event.target.value, MINIMUM_GRID_VALUE);
+		} else {
+			state[inputName] = event.target.value;
+		}
 
 		this.setState(state);
 	};
@@ -151,8 +163,8 @@ class ButtonTableEdit extends React.Component {
 	 */
 	render() {
 		const time = Date.now();
-		const rowsId = time + 'rows';
-		const colsId = time + 'cols';
+		const rowsId = time + INPUT_NAMES.ROWS;
+		const colsId = time + INPUT_NAMES.COLS;
 
 		return (
 			<div className="ae-container-edit-table">
@@ -161,8 +173,11 @@ class ButtonTableEdit extends React.Component {
 					<input
 						className="ae-input"
 						id={rowsId}
-						min="1"
-						onChange={this._handleChange.bind(this, 'rows')}
+						min={MINIMUM_GRID_VALUE}
+						onChange={this._handleChange.bind(
+							this,
+							INPUT_NAMES.ROWS
+						)}
 						onKeyDown={this._handleKeyDown}
 						placeholder="Rows"
 						ref={this.rowsRef}
@@ -176,8 +191,11 @@ class ButtonTableEdit extends React.Component {
 					<input
 						className="ae-input"
 						id={colsId}
-						min="1"
-						onChange={this._handleChange.bind(this, 'cols')}
+						min={MINIMUM_GRID_VALUE}
+						onChange={this._handleChange.bind(
+							this,
+							INPUT_NAMES.COLS
+						)}
 						onKeyDown={this._handleKeyDown}
 						placeholder="Colums"
 						ref={this.colsRef}
