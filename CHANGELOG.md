@@ -1,3 +1,11 @@
+## [v2.11.11](https://github.com/liferay/alloy-editor/tree/v2.11.11) (2020-07-30)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.10...v2.11.11)
+
+### :wrench: Bug fixes
+
+-   fix: Don't allow users to input a value less than a minimum `row` or `col` value when creating a table ([\#1409](https://github.com/liferay/alloy-editor/pull/1409))
+
 ## [v2.11.10](https://github.com/liferay/alloy-editor/tree/v2.11.10) (2020-07-27)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.9...v2.11.10)
