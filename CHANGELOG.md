@@ -1,3 +1,11 @@
+## [v1.5.28](https://github.com/liferay/alloy-editor/tree/v1.5.28) (2020-07-31)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/1.5.27...v1.5.28)
+
+### :house: Chores
+
+-   chore: Updated CKEditor build to v4.14.1 in AlloyEditor 1.5 ([\#1411](https://github.com/liferay/alloy-editor/pull/1411))
+
 ## [v1.5.27](https://github.com/liferay/alloy-editor/tree/v1.5.27) (2020-01-10)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v1.5.26...v1.5.27)
