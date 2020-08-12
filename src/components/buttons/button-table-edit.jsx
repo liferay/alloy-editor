@@ -100,8 +100,8 @@ class ButtonTableEdit extends React.Component {
 
 		tableUtils.create({
 			attrs: this.props.tableAttributes,
-			cols: cols < MINIMUM_GRID_VALUE ? MINIMUM_GRID_VALUE : cols,
-			rows: rows < MINIMUM_GRID_VALUE ? MINIMUM_GRID_VALUE : rows,
+			cols: Math.max(MINIMUM_GRID_VALUE, cols),
+			rows: Math.max(MINIMUM_GRID_VALUE, rows),
 		});
 
 		this.props.cancelExclusive();
