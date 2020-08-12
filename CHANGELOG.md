@@ -1,3 +1,11 @@
+## [v2.11.12](https://github.com/liferay/alloy-editor/tree/v2.11.12) (2020-08-12)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.11...v2.11.12)
+
+### :wrench: Bug fixes
+
+-   fix: Avoids blocking user input when settling a minimal input value ([\#1419](https://github.com/liferay/alloy-editor/pull/1419))
+
 ## [v2.11.11](https://github.com/liferay/alloy-editor/tree/v2.11.11) (2020-07-30)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.10...v2.11.11)
