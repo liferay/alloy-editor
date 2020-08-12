@@ -120,11 +120,9 @@ class ButtonTableEdit extends React.Component {
 	 * @protected
 	 */
 	_handleChange = (inputName, event) => {
-		const state = {};
-
-		state[inputName] = event.target.value;
-
-		this.setState(state);
+		this.setState({
+			[inputName]: event.target.value,
+		});
 	};
 
 	/**
