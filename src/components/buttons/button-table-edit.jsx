@@ -96,11 +96,12 @@ class ButtonTableEdit extends React.Component {
 	_createTable = () => {
 		const editor = this.context.editor.get('nativeEditor');
 		const tableUtils = new CKEDITOR.Table(editor);
+		const {cols, rows} = this.state;
 
 		tableUtils.create({
 			attrs: this.props.tableAttributes,
-			cols: this.state.cols,
-			rows: this.state.rows,
+			cols: Math.max(MINIMUM_GRID_VALUE, cols),
+			rows: Math.max(MINIMUM_GRID_VALUE, rows),
 		});
 
 		this.props.cancelExclusive();
@@ -119,15 +120,9 @@ class ButtonTableEdit extends React.Component {
 	 * @protected
 	 */
 	_handleChange = (inputName, event) => {
-		const state = {};
-
-		if (inputName === INPUT_NAMES.COLS || inputName === INPUT_NAMES.ROWS) {
-			state[inputName] = Math.min(event.target.value, MINIMUM_GRID_VALUE);
-		} else {
-			state[inputName] = event.target.value;
-		}
-
-		this.setState(state);
+		this.setState({
+			[inputName]: event.target.value,
+		});
 	};
 
 	/**
