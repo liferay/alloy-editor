@@ -19,7 +19,7 @@ describe('imageScaleResize on IE', function() {
 	describe('with the default value "both"', function() {
 		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
-				extraPlugins: 'ae_dragresize_ie',
+				extraPlugins: 'ae_dragresize_ie11',
 			});
 		});
 
@@ -66,7 +66,7 @@ describe('imageScaleResize on IE', function() {
 	describe('with height value', function() {
 		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
-				extraPlugins: 'ae_dragresize_ie',
+				extraPlugins: 'ae_dragresize_ie11',
 				imageScaleResize: 'height',
 			});
 		});
@@ -94,7 +94,7 @@ describe('imageScaleResize on IE', function() {
 	describe('with scale value', function() {
 		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
-				extraPlugins: 'ae_dragresize_ie',
+				extraPlugins: 'ae_dragresize_ie11',
 				imageScaleResize: 'scale',
 			});
 		});
@@ -122,7 +122,7 @@ describe('imageScaleResize on IE', function() {
 	describe('with width value', function() {
 		beforeEach(function(done) {
 			Utils.createCKEditor.call(this, done, {
-				extraPlugins: 'ae_dragresize_ie',
+				extraPlugins: 'ae_dragresize_ie11',
 				imageScaleResize: 'width',
 			});
 		});
