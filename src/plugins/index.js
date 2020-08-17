@@ -11,8 +11,6 @@ import './autolist';
 
 import './dragresize';
 
-import './dragresize_ie';
-
 import './dragresize_ie11';
 
 import './embed';

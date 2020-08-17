@@ -80,10 +80,7 @@ extend(
 			Lang.mix(editor.config, config);
 
 			if (CKEDITOR.env.ie && !CKEDITOR.env.edge) {
-				const plugin =
-					CKEDITOR.env.version === 11
-						? 'ae_dragresize_ie11'
-						: 'ae_dragresize_ie';
+				const plugin = 'ae_dragresize_ie11';
 
 				editor.config.extraPlugins = editor.config.extraPlugins.replace(
 					'ae_dragresize',
