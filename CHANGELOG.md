@@ -1,3 +1,11 @@
+## [v2.11.13](https://github.com/liferay/alloy-editor/tree/v2.11.13) (2020-08-17)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.12...v2.11.13)
+
+### :woman_juggling: Refactoring
+
+-   refactor: remove ae_dragresize_ie plugin ([\#1422](https://github.com/liferay/alloy-editor/pull/1422))
+
 ## [v2.11.12](https://github.com/liferay/alloy-editor/tree/v2.11.12) (2020-08-12)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.11...v2.11.12)
