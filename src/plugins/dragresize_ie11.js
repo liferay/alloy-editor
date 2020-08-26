@@ -420,13 +420,16 @@
 					src: image.getAttribute('src'),
 					alt: image.getAttribute('alt') || '',
 					width: image.getAttribute('width') || '',
-					height: image.getAttribute('height') || '',
 
 					// Lock ratio is on by default (#10833).
 					lock: this.ready
 						? helpers.checkHasNaturalRatio(image)
 						: true,
 				};
+
+				data.height = data.lock
+					? null
+					: image.getAttribute('height') || '';
 
 				// If we used 'a' in widget#parts definition, it could happen that
 				// selected element is a child of widget.parts#caption. Since there's no clever
@@ -1249,7 +1252,10 @@
 	function setDimensions(widget) {
 		const data = widget.data;
 
-		const dimensions = {width: data.width, height: data.height};
+		const dimensions = {
+			width: data.width,
+			height: data.lock ? null : data.height,
+		};
 
 		const image = widget.parts.image;
 
@@ -1475,7 +1481,9 @@
 				// This is to prevent images to visually disappear.
 				if (newWidth >= 15 && newHeight >= 15) {
 					image.$.style.width = newWidth + 'px';
-					image.$.style.height = newHeight + 'px';
+					image.$.style.height = widget.data.lock
+						? 'auto'
+						: newHeight + 'px';
 
 					updateData = true;
 				} else {
@@ -1496,7 +1504,7 @@
 
 				if (updateData) {
 					widget.setData({
-						height: newHeight,
+						height: widget.data.lock ? null : newHeight,
 						width: newWidth,
 					});
 
