@@ -1,3 +1,11 @@
+## [v2.11.14-pre.0](https://github.com/liferay/alloy-editor/tree/v2.11.14-pre.0) (2020-09-07)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.13...v2.11.14-pre.0)
+
+### :wrench: Bug fixes
+
+-   fix: correct toolbar misalignment when editor is rendered in modal ([\#1425](https://github.com/liferay/alloy-editor/pull/1425))
+
 ## [v2.11.13](https://github.com/liferay/alloy-editor/tree/v2.11.13) (2020-08-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.12...v2.11.13)
