@@ -454,7 +454,9 @@ export default WrappedComponent =>
 					10
 				);
 				const totalWidth =
-					uiNodeMarginLeft + uiNode.clientWidth + uiNodeMarginRight;
+					uiNodeMarginLeft +
+					document.body.clientWidth +
+					uiNodeMarginRight;
 
 				const scrollTop =
 					uiNode.tagName !== 'BODY' ? uiNode.scrollTop : 0;
