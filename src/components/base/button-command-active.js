@@ -24,7 +24,7 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if the command is active, false otherwise.
 		 */
 		isActive() {
-			const editor = this.context.editor.get('nativeEditor');
+			const editor = this.props.editor.get('nativeEditor');
 
 			const command = editor.getCommand(this.props.command);
 
