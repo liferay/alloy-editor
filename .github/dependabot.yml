@@ -1,0 +1,13 @@
+---
+# Configuration for the GitHub's Dependabot.
+#
+# See: https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - directory: "/"
+    open-pull-requests-limit: 1
+    package-ecosystem: "npm"
+    rebase-strategy: "disabled"
+    schedule:
+      interval: "weekly"
