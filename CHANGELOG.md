@@ -1,3 +1,16 @@
+## [v2.11.14](https://github.com/liferay/alloy-editor/tree/v2.11.14) (2020-09-08)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.13...v2.11.14)
+
+### :wrench: Bug fixes
+
+-   fix: correct toolbar misalignment when editor is rendered in modal and the uiNode is provided ([\#1425](https://github.com/liferay/alloy-editor/pull/1425))
+
+### :house: Chores
+
+-   chore: config Yarn to use "pre" as preid ([\#1429](https://github.com/liferay/alloy-editor/pull/1429))
+-   chore: configure dependabot to reduce noise ([\#1431](https://github.com/liferay/alloy-editor/pull/1431))
+
 ## [v2.11.13](https://github.com/liferay/alloy-editor/tree/v2.11.13) (2020-08-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.12...v2.11.13)
