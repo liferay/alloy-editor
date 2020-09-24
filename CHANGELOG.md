@@ -1,3 +1,15 @@
+## [v2.11.15](https://github.com/liferay/alloy-editor/tree/v2.11.15) (2020-09-24)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.14...v2.11.15)
+
+### :wrench: Bug fixes
+
+-   fix: if we're locking the image attributes, use 'auto' for the height like we do in other browsers ([\#1423](https://github.com/liferay/alloy-editor/pull/1423))
+
+### :book: Documentation
+
+-   docs: add CODE_OF_CONDUCT.md ([\#1381](https://github.com/liferay/alloy-editor/pull/1381))
+
 ## [v2.11.14](https://github.com/liferay/alloy-editor/tree/v2.11.14) (2020-09-08)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.13...v2.11.14)
