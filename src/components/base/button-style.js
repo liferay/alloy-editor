@@ -89,7 +89,7 @@ export default WrappedComponent =>
 		 * @return {Boolean} True if style is active, false otherwise.
 		 */
 		isActive() {
-			const editor = this.context.editor.get('nativeEditor');
+			const editor = this.props.editor.get('nativeEditor');
 			const elementPath = editor.elementPath();
 			return this.getStyle().checkActive(elementPath, editor);
 		}

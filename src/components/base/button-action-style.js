@@ -33,7 +33,7 @@ export default WrappedComponent =>
 				Lang.isFunction(this.isActive) &&
 				Lang.isFunction(this.getStyle)
 			) {
-				const editor = this.context.editor.get('nativeEditor');
+				const editor = this.props.editor.get('nativeEditor');
 
 				editor.getSelection().lock();
 

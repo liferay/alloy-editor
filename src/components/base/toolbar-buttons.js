@@ -383,7 +383,7 @@ export default WrappedComponent =>
 		 */
 		show() {
 			const domNode = ReactDOM.findDOMNode(this);
-			const uiNode = this.context.editor.get('uiNode');
+			const uiNode = this.props.editor.get('uiNode');
 
 			const scrollTop = uiNode ? uiNode.scrollTop : 0;
 
@@ -443,7 +443,7 @@ export default WrappedComponent =>
 
 			if (interactionPoint && domNode) {
 				const uiNode =
-					this.context.editor.get('uiNode') || document.body;
+					this.props.editor.get('uiNode') || document.body;
 				const uiNodeStyle = getComputedStyle(uiNode);
 				const uiNodeMarginLeft = parseInt(
 					uiNodeStyle.getPropertyValue('margin-left'),
@@ -520,7 +520,7 @@ export default WrappedComponent =>
 		getToolbarButtons(buttons, additionalProps) {
 			const buttonProps = {};
 
-			const nativeEditor = this.context.editor.get('nativeEditor');
+			const nativeEditor = this.props.editor.get('nativeEditor');
 			const buttonCfg = nativeEditor.config.buttonCfg || {};
 
 			if (Lang.isFunction(buttons)) {
@@ -555,7 +555,7 @@ export default WrappedComponent =>
 			).map(function(button, index) {
 				let props = this.mergeExclusiveProps(
 					{
-						editor: this.context.editor,
+						editor: this.props.editor,
 						key:
 							button.key !== 'separator'
 								? button.key
