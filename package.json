@@ -13,7 +13,7 @@
 		"bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
 		"chai": "4.2.0",
 		"del": "^3.0.0",
-		"eslint": "^6.5.1",
+		"eslint": "^7.11.0",
 		"eslint-config-liferay": "^13.0.0",
 		"event-stream": "3.3.1",
 		"gulp": "4.0.0",
