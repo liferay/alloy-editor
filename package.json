@@ -43,7 +43,7 @@
 		"webpack": "^4.29.0",
 		"webpack-cli": "^3.2.1",
 		"webpack-dev-server": "^3.1.14",
-		"webpack-merge": "^4.2.1",
+		"webpack-merge": "^5.3.0",
 		"yargs": "6.6.0"
 	},
 	"main": "dist/alloy-editor/alloy-editor-no-react.js",
