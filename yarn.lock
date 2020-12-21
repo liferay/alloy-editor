@@ -1875,9 +1875,9 @@ class-utils@^0.3.5:
     static-extend "^0.1.1"
 
 clay-css@^2.11.1:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.12.0.tgz#984163b32848a17691a76b99cdeaa3aef5653c5c"
-  integrity sha512-Jwh7oiZ3VSvJPC0OMXwfJe1IBUkaD/w5IOtLkkv+4E8z8JXG7m4C+iACxJxunJsPxnC66SgWt9Lq2RbZUvv87w==
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/clay-css/-/clay-css-2.22.0.tgz#9881d7f55198f5d983b6012ec13e4ee2b0dee91e"
+  integrity sha512-s8wYycTsE8xoRiQrb8DC1Hiw8BK8+u4xAphZOQOBAzm7VQA+n9YxyxunG3pM3kopqvRa2cMgk+3FTsTCFg8f6g==
 
 cli-cursor@^2.1.0:
   version "2.1.0"
