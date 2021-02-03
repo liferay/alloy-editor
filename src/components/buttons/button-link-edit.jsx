@@ -402,7 +402,7 @@ class ButtonLinkEdit extends React.Component {
 		const selection = editor.getSelection();
 		const bookmarks = selection.createBookmarks();
 
-		linkUtils.remove(this.state.element, {advance: true});
+		linkUtils.remove(this.state.element, {advance: false});
 
 		selection.selectBookmarks(bookmarks);
 
@@ -444,7 +444,7 @@ class ButtonLinkEdit extends React.Component {
 		let linkAttrs = {
 			target: this.state.linkTarget || null,
 		};
-		const modifySelection = {advance: true};
+		const modifySelection = {advance: false};
 
 		if (this.state.linkHref) {
 			if (this.state.element) {
