@@ -1,6 +1,6 @@
 {
 	"name": "alloyeditor",
-	"version": "2.11.15",
+	"version": "2.11.16",
 	"description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
 	"devDependencies": {
 		"babel-core": "^6.26.0",
@@ -41,7 +41,7 @@
 		"val-loader": "1.1.1",
 		"walk": "^2.3.9",
 		"webpack": "^4.29.0",
-		"webpack-cli": "^3.2.1",
+		"webpack-cli": "^4.5.0",
 		"webpack-dev-server": "^3.1.14",
 		"webpack-merge": "^4.2.1",
 		"yargs": "6.6.0"
