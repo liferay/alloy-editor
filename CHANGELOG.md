@@ -1,3 +1,11 @@
+## [v2.11.16](https://github.com/liferay/alloy-editor/tree/v2.11.16) (2021-02-04)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.15...v2.11.16)
+
+### :wrench: Bug fixes
+
+-   fix: Do not advance selection when editing a link ([\#1460](https://github.com/liferay/alloy-editor/pull/1460))
+
 ## [v2.11.15](https://github.com/liferay/alloy-editor/tree/v2.11.15) (2020-09-24)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.14...v2.11.15)
