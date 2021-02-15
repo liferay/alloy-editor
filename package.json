@@ -36,7 +36,7 @@
 		"mocha": "6.0.0",
 		"parallel-webpack": "2.3.0",
 		"prettier": "^1.18.2",
-		"sinon": "7.2.4",
+		"sinon": "9.2.4",
 		"terser-webpack-plugin": "^1.2.1",
 		"val-loader": "1.1.1",
 		"walk": "^2.3.9",
