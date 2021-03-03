@@ -61,13 +61,16 @@ const centerToolbar = function(toolbar, rect) {
 		}
 	}
 
+	const scrollTop = uiNode ? uiNode.scrollTop : 0;
+
 	const endPosition = [
 		rect.left + rect.width / 2 - halfNodeWidth - scrollPosition.x,
 		rect.top +
 			offsetHeight -
 			toolbarNode.offsetHeight +
 			scrollPosition.y -
-			gutter.top,
+			gutter.top +
+			scrollTop,
 	];
 
 	if (endPosition[0] < 0) {
