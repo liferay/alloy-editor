@@ -12,7 +12,7 @@ module.exports = {
 		jest: true,
 		node: true,
 	},
-	extends: ['liferay/react'],
+	extends: ['@liferay/eslint-config/react'],
 	globals: {
 		AlloyEditor: true,
 		CKEDITOR: true,
