@@ -1,3 +1,11 @@
+## [v2.11.17](https://github.com/liferay/alloy-editor/tree/v2.11.17) (2021-03-08)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.16...v2.11.17)
+
+### :wrench: Bug fixes
+
+-   fix: Toolbar is not correctly positioned when editing tables and images within a modal window ([\#1467](https://github.com/liferay/alloy-editor/pull/1467))
+
 ## [v2.11.16](https://github.com/liferay/alloy-editor/tree/v2.11.16) (2021-02-04)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.15...v2.11.16)

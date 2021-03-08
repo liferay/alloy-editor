@@ -1,6 +1,6 @@
 {
 	"name": "alloyeditor",
-	"version": "2.11.16",
+	"version": "2.12.0",
 	"description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
 	"devDependencies": {
 		"babel-core": "^6.26.0",
