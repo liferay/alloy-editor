@@ -1,6 +1,6 @@
-## [v2.11.17](https://github.com/liferay/alloy-editor/tree/v2.11.17) (2021-03-08)
+## [v2.12.0](https://github.com/liferay/alloy-editor/tree/v2.12.0) (2021-03-08)
 
-[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.16...v2.11.17)
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.16...v2.12.0)
 
 ### :wrench: Bug fixes
 
