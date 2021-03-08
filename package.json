@@ -37,7 +37,7 @@
 		"parallel-webpack": "2.3.0",
 		"prettier": "^1.18.2",
 		"sinon": "7.2.4",
-		"terser-webpack-plugin": "^1.2.1",
+		"terser-webpack-plugin": "^4.2.3",
 		"val-loader": "1.1.1",
 		"walk": "^2.3.9",
 		"webpack": "^4.29.0",
