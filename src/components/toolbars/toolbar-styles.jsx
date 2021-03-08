@@ -227,6 +227,7 @@ class ToolbarStyles extends React.Component {
 	 */
 	_updatePosition() {
 		// If component is not mounted, there is nothing to do
+
 		if (!ReactDOM.findDOMNode(this)) {
 			return;
 		}
@@ -236,6 +237,7 @@ class ToolbarStyles extends React.Component {
 
 		// If current selection has a function called `setPosition`, call it
 		// and check the returned value. If false, fallback to the default positioning logic.
+
 		if (currentSelection) {
 			const setPositionFn = this._getSelectionFunction(
 				currentSelection.setPosition

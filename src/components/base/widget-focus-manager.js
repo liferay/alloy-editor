@@ -70,10 +70,12 @@ export default WrappedComponent =>
 					const activeDescendantEl = this._descendants[
 						this._activeDescendant
 					];
+
 					// When user clicks with the mouse, the activeElement is already set and there
 					// is no need to focus it. Focusing of the active descendant (usually some button) is required
 					// in case of keyboard navigation, because the focused element might be not the first button,
 					// but the div element, which contains the button.
+
 					if (
 						document.activeElement !== activeDescendantEl &&
 						!this.props.focusFirstChild
@@ -317,6 +319,7 @@ export default WrappedComponent =>
 			if (this.props.circular) {
 				// Calculate proper modulo result since remainder operator doesn't behave in the
 				// same way for negative numbers
+
 				this._activeDescendant =
 					((this._activeDescendant % numDescendants) +
 						numDescendants) %

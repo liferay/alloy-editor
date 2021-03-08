@@ -45,6 +45,7 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 				// API not yet implemented inside the menubutton
 				// bridge. By mocking the unsupported method, we prevent
 				// plugins from crashing if they make use of it.
+
 				toFeature() {}
 
 				render() {

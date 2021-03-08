@@ -40,6 +40,7 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 				// API not yet implemented inside the button
 				// bridge. By mocking the unsupported method, we prevent
 				// plugins from crashing if they make use of it.
+
 				toFeature() {}
 
 				render() {

@@ -147,6 +147,7 @@ if (!CKEDITOR.plugins.get('ae_autolist')) {
 
 			// Subscribe to keydown in order to check if the next key press is `Backspace`.
 			// If so, the creation of the list will be discarded.
+
 			editable.attachListener(
 				editable,
 				'keydown',

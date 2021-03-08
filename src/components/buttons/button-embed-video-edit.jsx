@@ -44,6 +44,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 		if (this.props.renderExclusive || this.props.manualSelection) {
 			// We need to wait for the next rendering cycle before focusing to avoid undesired
 			// scrolls on the page
+
 			if (window.requestAnimationFrame) {
 				window.requestAnimationFrame(this._focusVideoUrlInput);
 			} else {
@@ -81,6 +82,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 	 */
 	getInitialState() {
 		// Can't access context from constructor, so get editor from props.
+
 		const editor = this.props.context.editor.get('nativeEditor');
 		let element;
 
@@ -188,6 +190,7 @@ class ButtonEmbedVideoEdit extends React.Component {
 
 		// We need to cancelExclusive with the bound parameters in case the button is used
 		// inside another in exclusive mode (such is the case of the link button)
+
 		this.props.cancelExclusive();
 	};
 

@@ -32,6 +32,7 @@ const extend = function(receiver, supplier, protoProps, staticProps) {
 	receiver.superclass = supplierProto;
 
 	// assign constructor property
+
 	if (
 		supplier !== Object &&
 		supplierProto.constructor === Object.prototype.constructor
@@ -40,11 +41,13 @@ const extend = function(receiver, supplier, protoProps, staticProps) {
 	}
 
 	// add prototype overrides
+
 	if (protoProps) {
 		Lang.mix(receiverProto, protoProps);
 	}
 
 	// add object overrides
+
 	if (staticProps) {
 		Lang.mix(receiver, staticProps);
 	}

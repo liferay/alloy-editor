@@ -138,6 +138,7 @@ Attribute.prototype = {
 		const currentAttr = this.constructor.ATTRS[attr];
 
 		// Check if there is default value or passed one via configuration object
+
 		const hasDefaultValue = Object.prototype.hasOwnProperty.call(
 			currentAttr,
 			'value'
@@ -148,18 +149,23 @@ Attribute.prototype = {
 		);
 
 		// If there is valueFn, set the value to be the result of invocation of this function
+
 		if (currentAttr.valueFn) {
 			value = this._callStringOrFunction(currentAttr.valueFn, value);
 
 			this.__ATTRS__[attr] = value;
 		}
+
 		// else if the attribute has readOnly flag, set the default value from the attribute,
 		// regardless if there is value or not
+
 		else if (currentAttr.readOnly) {
 			value = currentAttr.value;
 		}
+
 		// else if the attribute has writeOnce value, set it from the passed configuration or from the
 		// default value, in this order. Otherwise, return miserable.
+
 		else if (currentAttr.writeOnce) {
 			if (hasPassedValueViaConfig) {
 				value = this.__config__[attr];
@@ -169,8 +175,10 @@ Attribute.prototype = {
 				return;
 			}
 		}
+
 		// These two cases below are easy - set the value to be from the passed config or
 		// from the default value, in this order.
+
 		else if (hasPassedValueViaConfig) {
 			value = this.__config__[attr];
 		} else if (hasDefaultValue) {
@@ -180,6 +188,7 @@ Attribute.prototype = {
 		// If there is validator, and user passed config object - check the returned value.
 		// If it is false, then set as initial value the default one.
 		// However, if there is no default value, just return.
+
 		if (
 			currentAttr.validator &&
 			hasPassedValueViaConfig &&
@@ -194,11 +203,13 @@ Attribute.prototype = {
 
 		// If there is setter and user passed config object - pass the value thought the setter.
 		// The value might be one from defaultFn, default value or provided from the config.
+
 		if (currentAttr.setter && hasPassedValueViaConfig) {
 			value = this._callStringOrFunction(currentAttr.setter, value);
 		}
 
 		// Finally, set the value as initial value to the storage with values.
+
 		this.__ATTRS__[attr] = value;
 	},
 

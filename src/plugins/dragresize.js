@@ -72,6 +72,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 	if (enablePlugin) {
 		// CSS is added in a compressed form
+
 		CKEDITOR.addCss(
 			'img::selection{color:rgba(0,0,0,0)}img.ckimgrsz{outline:1px dashed #000}#ckimgrsz{position:absolute;width:0;height:0;cursor:default;z-index:10001}#ckimgrsz span{display:none;position:absolute;top:0;left:0;width:0;height:0;background-size:100% 100%;opacity:.65;outline:1px dashed #000}#ckimgrsz i{position:absolute;display:block;width:5px;height:5px;background:#fff;border:1px solid #000}#ckimgrsz i.active,#ckimgrsz i:hover{background:#000}#ckimgrsz i.br,#ckimgrsz i.tl{cursor:nwse-resize}#ckimgrsz i.bm,#ckimgrsz i.tm{cursor:ns-resize}#ckimgrsz i.bl,#ckimgrsz i.tr{cursor:nesw-resize}#ckimgrsz i.lm,#ckimgrsz i.rm{cursor:ew-resize}body.dragging-br,body.dragging-br *,body.dragging-tl,body.dragging-tl *{cursor:nwse-resize!important}body.dragging-bm,body.dragging-bm *,body.dragging-tm,body.dragging-tm *{cursor:ns-resize!important}body.dragging-bl,body.dragging-bl *,body.dragging-tr,body.dragging-tr *{cursor:nesw-resize!important}body.dragging-lm,body.dragging-lm *,body.dragging-rm,body.dragging-rm *{cursor:ew-resize!important}'
 		);
@@ -104,6 +105,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 		if (isFirefox) {
 			// Disable the native image resizing
+
 			document.execCommand('enableObjectResizing', false, false);
 		}
 
@@ -131,13 +133,16 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		function selectionChange() {
 			const selection = editor.getSelection();
 
-			if (!selection) return;
+			if (!selection) {return;}
+
 			// If an element is selected and that element is an IMG
+
 			if (
 				selection.getType() !== CKEDITOR.SELECTION_NONE &&
 				selection.getStartElement().is('img')
 			) {
 				// And we're not right or middle clicking on the image
+
 				if (
 					!window.event ||
 					!window.event.button ||
@@ -161,16 +166,19 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 		editor.on('beforeUndoImage', () => {
 			// Remove the handles before undo images are saved
+
 			resizer.hide();
 		});
 
 		editor.on('afterUndoImage', () => {
 			// Restore the handles after undo images are saved
+
 			selectionChange();
 		});
 
 		editor.on('blur', () => {
 			// Remove the handles when editor loses focus
+
 			resizer.hide();
 		});
 
@@ -194,11 +202,15 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		});
 
 		// Update the selection when the browser window is resized
+
 		let resizeTimeout;
 		editor.window.on('resize', () => {
 			// Cancel any resize waiting to happen
+
 			clearTimeout(resizeTimeout);
+
 			// Delay resize to "debounce"
+
 			resizeTimeout = setTimeout(selectionChange, 50);
 		});
 	}
@@ -240,6 +252,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		createHandle(name) {
 			const el = this.document.createElement('i');
 			el.classList.add(name);
+
 			return el;
 		},
 		isHandle(el) {
@@ -249,6 +262,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 					return true;
 				}
 			}
+
 			return false;
 		},
 		show(el) {
@@ -275,6 +289,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		},
 		hide() {
 			// Remove class from all img.ckimgrsz
+
 			const elements = this.document.getElementsByClassName('ckimgrsz');
 			for (let i = 0; i < elements.length; ++i) {
 				elements[i].classList.remove('ckimgrsz');
@@ -287,6 +302,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		initDrag(e) {
 			if (e.button !== 0) {
 				// right-click or middle-click
+
 				return;
 			}
 			const resizer = this;
@@ -307,12 +323,16 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				resizer.hidePreview();
 				resizer.hide();
 				resizer.editor.getSelection().unlock();
+
 				// Save an undo snapshot before the image is permanently changed
+
 				resizer.editor.fire('saveSnapshot');
 			};
 			drag.onComplete = function() {
 				resizer.resizeComplete();
+
 				// Save another snapshot after the image is changed
+
 				resizer.editor.fire('saveSnapshot');
 			};
 			drag.start(e);
@@ -378,7 +398,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				height: this.box.height,
 			});
 
-			if (!data) return;
+			if (!data) {return;}
 
 			const attr = data.target.className;
 
@@ -394,7 +414,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			if (~attr.indexOf('t')) {
 				box.height = Math.max(32, this.box.height - data.delta.y);
 			}
+
 			// if dragging corner, enforce aspect ratio (unless shift key is being held)
+
 			if (attr.indexOf('m') < 0 && !data.keys.shift) {
 				const ratio = this.box.width / this.box.height;
 				if (box.width / box.height > ratio) {
@@ -422,6 +444,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			}
 
 			// recalculate left or top position
+
 			if (~attr.indexOf('l')) {
 				box.left = this.box.width - box.width;
 			}
@@ -495,11 +518,13 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 			}
 			if (e.which === 0) {
 				// mouse button released outside window; mouseup wasn't fired (Chrome)
+
 				this.mouseup(e);
 			}
 		},
 		keydown(e) {
 			// escape key cancels dragging
+
 			if (e.keyCode === 27) {
 				this.release();
 			}
@@ -528,6 +553,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 	};
 
 	// helper functions
+
 	function toArray(obj) {
 		const len = obj.length;
 
@@ -535,6 +561,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		for (let i = 0; i < len; i++) {
 			arr[i] = obj[i];
 		}
+
 		return arr;
 	}
 
@@ -542,6 +569,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		if (fn.bind) {
 			return fn.bind(ctx);
 		}
+
 		return function(...args) {
 			fn.apply(ctx, args);
 		};
@@ -577,6 +605,7 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 
 	function getBoundingBox(window, el) {
 		const rect = el.getBoundingClientRect();
+
 		return {
 			left: rect.left + window.pageXOffset,
 			top: rect.top + window.pageYOffset,

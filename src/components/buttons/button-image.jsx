@@ -98,6 +98,7 @@ class ButtonImage extends React.Component {
 
 		// On IE11 the function might be called with an empty array of
 		// files. In such a case, no actions will be taken.
+
 		if (!inputEl.files.length) {
 			return;
 		}

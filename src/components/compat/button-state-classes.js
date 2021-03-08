@@ -29,11 +29,13 @@ const ButtonStateClasses = {
 		let stateClasses = '';
 
 		// Check for active state
+
 		if (Lang.isFunction(this.isActive) && this.isActive()) {
 			stateClasses += 'ae-button-pressed';
 		}
 
 		// Check for disabled state
+
 		if (Lang.isFunction(this.isDisabled) && this.isDisabled()) {
 			stateClasses += ' ae-button-disabled';
 		}

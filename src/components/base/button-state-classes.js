@@ -29,6 +29,7 @@ export default WrappedComponent =>
 			let stateClasses = '';
 
 			// Check for active state
+
 			if (Lang.isFunction(this.isActive) && this.isActive()) {
 				stateClasses += 'ae-button-pressed';
 			}

@@ -16,6 +16,7 @@ import Lang from '../../oop/lang';
  */
 const ButtonStyle = {
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * The style the button should handle. Allowed values are:

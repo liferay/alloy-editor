@@ -54,6 +54,7 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 
 				// API not yet implemented inside the richcombo bridge. By mocking the unsupported methods, we
 				// prevent plugins from crashing if they make use of them.
+
 				commit() {}
 				createPanel() {}
 				disable() {}

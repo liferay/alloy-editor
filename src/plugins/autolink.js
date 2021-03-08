@@ -6,6 +6,7 @@
 if (!CKEDITOR.plugins.get('ae_autolink')) {
 	// Disables the auto URL detection feature in IE, their lacks functionality:
 	// They convert the links only on space. We do on space, comma, semicolon and Enter.
+
 	if (/MSIE ([^;]*)|Trident.*; rv:([0-9.]+)/.test(navigator.userAgent)) {
 		document.execCommand('AutoUrlDetect', false, false);
 	}
@@ -25,6 +26,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 	const REGEX_LAST_WORD = /[^\s]+/gim;
 
 	// Seen at https://stackoverflow.com/a/5717133/2103996
+
 	const REGEX_URL =
 		'^(https?:\\/\\/)?' + // protocol
 		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
@@ -81,6 +83,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 								''
 							);
 						}
+
 						return;
 					}
 
@@ -132,6 +135,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			let previousText = '';
 
 			// The user pressed Enter, so we have to look on the previous node
+
 			if (this._currentKeyCode === KEY_ENTER) {
 				let previousNode = range.startContainer.getPrevious();
 
@@ -140,6 +144,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 				if (previousNode) {
 					// If previous node is a SPACE, (it does not have 'getLast' method),
 					// ignore it and find the previous text node
+
 					while (!previousNode.getLast) {
 						previousNode = previousNode.getPrevious();
 					}
@@ -149,12 +154,14 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 					// Depending on the browser, the last child node may be a <BR>
 					// (which does not have 'getText' method),
 					// so ignore it and find the previous text node
+
 					while (lastChild && !lastChild.getText()) {
 						lastChild = lastChild.getPrevious();
 					}
 				}
 
 				// Check if the lastChild is already a link
+
 				if (!(lastChild && lastChild.$.href)) {
 					this._startContainer = lastChild;
 					previousText = lastChild ? lastChild.getText() : '';
@@ -164,6 +171,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 				this._startContainer = range.startContainer;
 
 				// Last character is the delimiter, ignore it
+
 				previousText = this._startContainer
 					.getText()
 					.substring(0, offset - 1);
@@ -281,6 +289,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			const offset = this._offset;
 
 			// Select the content, so CKEDITOR.Link can properly replace it
+
 			range.setStart(node, offset - content.length);
 			range.setEnd(node, offset);
 			range.select();
@@ -296,10 +305,12 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 
 			// Now range is on the link and it is selected. We have to
 			// return focus to the caret position.
+
 			range = editor.getSelection().getRanges()[0];
 
 			// If user pressed `Enter`, get the next editable node at position 0,
 			// otherwise set the cursor at the next character of the link (the white space)
+
 			if (this._currentKeyCode === KEY_ENTER) {
 				const nextEditableNode = range.getNextEditableNode();
 
@@ -336,6 +347,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			const caretOffset = range.startOffset;
 
 			// Select the link, so CKEDITOR.Link can properly remove it
+
 			const linkNode =
 				this._startContainer.getNext() || this._startContainer;
 
@@ -347,6 +359,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			this._ckLink.remove();
 
 			// Return focus to the caret position
+
 			range.setEnd(range.startContainer, caretOffset);
 			range.setStart(range.startContainer, caretOffset);
 
@@ -367,6 +380,7 @@ if (!CKEDITOR.plugins.get('ae_autolink')) {
 			// Change the priority of keydown listener - 1 means the highest priority.
 			// In Chrome on pressing `Enter` the listener is not being invoked.
 			// See http://dev.ckeditor.com/ticket/11861 for more information.
+
 			editable.attachListener(
 				editable,
 				'keydown',

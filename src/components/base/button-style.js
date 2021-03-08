@@ -91,6 +91,7 @@ export default WrappedComponent =>
 		isActive() {
 			const editor = this.context.editor.get('nativeEditor');
 			const elementPath = editor.elementPath();
+
 			return this.getStyle().checkActive(elementPath, editor);
 		}
 	};

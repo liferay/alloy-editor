@@ -44,6 +44,7 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 
 				// API not yet implemented inside the panel menu button bridge. By mocking the unsupported methods, we
 				// prevent plugins from crashing if they make use of them.
+
 				createPanel() {}
 
 				render() {

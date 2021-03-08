@@ -61,6 +61,7 @@ class ToolbarAdd extends React.Component {
 
 		// In case of exclusive rendering, focus the first descendant (button)
 		// so the user will be able to start interacting with the buttons immediately.
+
 		if (this.props.renderExclusive) {
 			this.focus();
 		}
@@ -83,6 +84,7 @@ class ToolbarAdd extends React.Component {
 		//
 		// It should be safe to assume that if you have been able to render the toolbar
 		// and request the exclusive mode, then rendering might be kept until the exclusive mode is left.
+
 		if (
 			!this.state.itemExclusive &&
 			this.props.editorEvent &&
@@ -174,6 +176,7 @@ class ToolbarAdd extends React.Component {
 		let region;
 
 		// If component is not mounted, there is nothing to do
+
 		if (!ReactDOM.findDOMNode(this)) {
 			return;
 		}

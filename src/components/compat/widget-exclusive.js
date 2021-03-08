@@ -44,6 +44,7 @@ const WidgetExclusive = {
 		// re-rendered.  Re-rendering is triggered by editorInteraction,
 		// so we have to reset the exclusive state and render the UI
 		// according to the new selection.
+
 		this.setState({
 			itemExclusive: null,
 		});

@@ -100,6 +100,7 @@ class UI extends React.Component {
 		// It is not easy to debounce _setUIHidden on mousedown, because if we
 		// debounce it, when the handler is being invoked, the target might be no more part
 		// of the editor's UI - onActionPerformed causes re-render.
+
 		this._mousedownListener = event => {
 			this._setUIHidden(event.target);
 		};
