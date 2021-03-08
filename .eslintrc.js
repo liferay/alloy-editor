@@ -69,6 +69,7 @@ module.exports = {
 				],
 			},
 		],
+		'no-for-of-loops/no-for-of-loops': 'error',
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'warn',
 		'notice/notice': [
