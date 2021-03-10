@@ -459,7 +459,9 @@ class ButtonLinkEdit extends React.Component {
 					modifySelection
 				);
 			} else {
-				if (!this.state.linkTarget) {linkAttrs = {};}
+				if (!this.state.linkTarget) {
+					linkAttrs = {};
+				}
 
 				linkUtils.create(
 					this.state.linkHref,

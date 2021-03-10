@@ -158,14 +158,12 @@ Attribute.prototype = {
 
 		// else if the attribute has readOnly flag, set the default value from the attribute,
 		// regardless if there is value or not
-
 		else if (currentAttr.readOnly) {
 			value = currentAttr.value;
 		}
 
 		// else if the attribute has writeOnce value, set it from the passed configuration or from the
 		// default value, in this order. Otherwise, return miserable.
-
 		else if (currentAttr.writeOnce) {
 			if (hasPassedValueViaConfig) {
 				value = this.__config__[attr];
@@ -178,7 +176,6 @@ Attribute.prototype = {
 
 		// These two cases below are easy - set the value to be from the passed config or
 		// from the default value, in this order.
-
 		else if (hasPassedValueViaConfig) {
 			value = this.__config__[attr];
 		} else if (hasDefaultValue) {

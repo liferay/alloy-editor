@@ -130,7 +130,6 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			}
 
 			// Otherwise calculate positions based on the table (for last cell).
-
 			else {
 				x = table.getDocumentPosition().x;
 

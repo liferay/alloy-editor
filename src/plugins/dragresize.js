@@ -133,7 +133,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 		function selectionChange() {
 			const selection = editor.getSelection();
 
-			if (!selection) {return;}
+			if (!selection) {
+				return;
+			}
 
 			// If an element is selected and that element is an IMG
 
@@ -398,7 +400,9 @@ if (!CKEDITOR.plugins.get('ae_dragresize')) {
 				height: this.box.height,
 			});
 
-			if (!data) {return;}
+			if (!data) {
+				return;
+			}
 
 			const attr = data.target.className;
 

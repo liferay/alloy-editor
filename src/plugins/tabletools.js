@@ -19,7 +19,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		function moveOutOfCellGuard(node) {
 			// Apply to the first cell only.
 
-			if (retval.length > 0) {return;}
+			if (retval.length > 0) {
+				return;
+			}
 
 			// If we are exiting from the first </td>, then the td should definitely be
 			// included.
@@ -49,7 +51,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				const nearestCell =
 					startNode.getAscendant('td', true) ||
 					startNode.getAscendant('th', true);
-				if (nearestCell) {retval.push(nearestCell);}
+				if (nearestCell) {
+					retval.push(nearestCell);
+				}
 			} else {
 				const walker = new CKEDITOR.dom.walker(range);
 				let node;
@@ -102,8 +106,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 		let tr;
 
-		while ((cell = cellsToDelete[i++]))
-			{CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);}
+		while ((cell = cellsToDelete[i++])) {
+			CKEDITOR.dom.element.setMarker(database, cell, 'delete_cell', true);
+		}
 
 		// 1.first we check left or right side focusable cell row by row;
 
@@ -126,12 +131,16 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		// 2. then we check the toppest row (outside the selection area square) focusable cell
 
 		tr = cellsToDelete[0].getParent();
-		if ((tr = tr.getPrevious())) {return tr.getLast();}
+		if ((tr = tr.getPrevious())) {
+			return tr.getLast();
+		}
 
 		// 3. last we check the lowerest  row focusable cell
 
 		tr = cellsToDelete[last].getParent();
-		if ((tr = tr.getNext())) {return tr.getChild(0);}
+		if ((tr = tr.getNext())) {
+			return tr.getChild(0);
+		}
 
 		return null;
 	}
@@ -239,10 +248,11 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 					const cellRowIndex = cell.getParent().$.rowIndex;
 
-					if (cell.$.rowSpan == 1) {cell.remove();}
+					if (cell.$.rowSpan == 1) {
+						cell.remove();
+					}
 
 					// Row spanned cell.
-
 					else {
 						// Span row of the cell, reduce spanning.
 
@@ -283,15 +293,19 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 					table.$.parentNode
 			);
 
-			for (let i = rowsToDelete.length; i >= 0; i--)
-				{deleteRows(rowsToDelete[i]);}
+			for (let i = rowsToDelete.length; i >= 0; i--) {
+				deleteRows(rowsToDelete[i]);
+			}
 
 			return cursorPosition;
 		} else if (selectionOrRow instanceof CKEDITOR.dom.element) {
 			const table = selectionOrRow.getAscendant('table');
 
-			if (table.$.rows.length == 1) {table.remove();}
-			else {selectionOrRow.remove();}
+			if (table.$.rows.length == 1) {
+				table.remove();
+			} else {
+				selectionOrRow.remove();
+			}
 		}
 
 		return null;
@@ -306,7 +320,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		for (let i = 0; i < rowCells.length; i++) {
 			const mapCell = rowCells[i];
 			colIndex += isStart ? 1 : mapCell.colSpan;
-			if (mapCell == cell.$) {break;}
+			if (mapCell == cell.$) {
+				break;
+			}
 		}
 
 		return colIndex - 1;
@@ -316,8 +332,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		let retval = isStart ? Infinity : 0;
 		for (let i = 0; i < cells.length; i++) {
 			const colIndex = getCellColIndex(cells[i], isStart);
-			if (isStart ? colIndex < retval : colIndex > retval)
-				{retval = colIndex;}
+			if (isStart ? colIndex < retval : colIndex > retval) {
+				retval = colIndex;
+			}
 		}
 
 		return retval;
@@ -358,7 +375,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		for (let i = 0; i < height; i++) {
 			let cell;
 
-			if (!cloneCol[i]) {continue;}
+			if (!cloneCol[i]) {
+				continue;
+			}
 
 			// Check whether there's a spanning column here, do not break it.
 
@@ -418,8 +437,12 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		for (let i = 0, rows = map.length; i < rows; i++) {
 			// eslint-disable-next-line sort-vars
 			for (let j = 0, cols = map[i].length; j < cols; j++) {
-				if (map[i][j] == firstCell.$) {startColIndex = j;}
-				if (map[i][j] == lastCell.$) {endColIndex = j;}
+				if (map[i][j] == firstCell.$) {
+					startColIndex = j;
+				}
+				if (map[i][j] == lastCell.$) {
+					endColIndex = j;
+				}
 			}
 		}
 
@@ -434,15 +457,20 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				const cell = new CKEDITOR.dom.element(mapRow[i]);
 
 				if (cell.$) {
-					if (cell.$.colSpan == 1) {cell.remove();}
+					if (cell.$.colSpan == 1) {
+						cell.remove();
+					}
 
 					// Reduce the col spans.
-
-					else {cell.$.colSpan -= 1;}
+					else {
+						cell.$.colSpan -= 1;
+					}
 
 					j += cell.$.rowSpan - 1;
 
-					if (!row.$.cells.length) {rowsToDelete.push(row);}
+					if (!row.$.cells.length) {
+						rowsToDelete.push(row);
+					}
 				}
 			}
 		}
@@ -463,7 +491,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 		// Delete table rows only if all columns are gone (do not remove empty row).
 
-		if (rowsToDelete.length == rows) {table.remove();}
+		if (rowsToDelete.length == rows) {
+			table.remove();
+		}
 
 		return cursorPosition;
 	}
@@ -474,15 +504,20 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 			startElement.getAscendant('td', 1) ||
 			startElement.getAscendant('th', 1);
 
-		if (!cell) {return;}
+		if (!cell) {
+			return;
+		}
 
 		// Create the new cell element to be added.
 
 		const newCell = cell.clone();
 		newCell.appendBogus();
 
-		if (insertBefore) {newCell.insertBefore(cell);}
-		else {newCell.insertAfter(cell);}
+		if (insertBefore) {
+			newCell.insertBefore(cell);
+		} else {
+			newCell.insertAfter(cell);
+		}
 	}
 
 	function deleteCells(selectionOrCell) {
@@ -492,15 +527,22 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 				cellsToDelete[0] && cellsToDelete[0].getAscendant('table');
 			const cellToFocus = getFocusElementAfterDelCells(cellsToDelete);
 
-			for (let i = cellsToDelete.length - 1; i >= 0; i--)
-				{deleteCells(cellsToDelete[i]);}
+			for (let i = cellsToDelete.length - 1; i >= 0; i--) {
+				deleteCells(cellsToDelete[i]);
+			}
 
-			if (cellToFocus) {placeCursorInCell(cellToFocus, true);}
-			else if (table) {table.remove();}
+			if (cellToFocus) {
+				placeCursorInCell(cellToFocus, true);
+			} else if (table) {
+				table.remove();
+			}
 		} else if (selectionOrCell instanceof CKEDITOR.dom.element) {
 			const tr = selectionOrCell.getParent();
-			if (tr.getChildCount() == 1) {tr.remove();}
-			else {selectionOrCell.remove();}
+			if (tr.getChildCount() == 1) {
+				tr.remove();
+			} else {
+				selectionOrCell.remove();
+			}
 		}
 	}
 
@@ -541,11 +583,16 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 	function cellInRow(tableMap, rowIndex, cell) {
 		const oRow = tableMap[rowIndex];
-		if (typeof cell == 'undefined') {return oRow;}
+		if (typeof cell == 'undefined') {
+			return oRow;
+		}
 
 		for (let c = 0; oRow && c < oRow.length; c++) {
-			if (cell.is && oRow[c] == cell.$) {return c;}
-			else if (c == cell) {return new CKEDITOR.dom.element(oRow[c]);}
+			if (cell.is && oRow[c] == cell.$) {
+				return c;
+			} else if (c == cell) {
+				return new CKEDITOR.dom.element(oRow[c]);
+			}
 		}
 
 		return cell.is ? -1 : null;
@@ -559,7 +606,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 			// Avoid adding duplicate cells.
 
-			if (row[colIndex].rowSpan > 1) {r += row[colIndex].rowSpan - 1;}
+			if (row[colIndex].rowSpan > 1) {
+				r += row[colIndex].rowSpan - 1;
+			}
 		}
 
 		return oCol;
@@ -579,8 +628,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 			((commonAncestor = selection.getCommonAncestor()) &&
 				commonAncestor.type == CKEDITOR.NODE_ELEMENT &&
 				commonAncestor.is('table'))
-		)
-			{return false;}
+		) {
+			return false;
+		}
 
 		let cell;
 
@@ -627,7 +677,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 			// 1. No cell could be merged.
 			// 2. Same cell actually.
 
-			if (!targetCell || firstCell.$ == targetCell) {return false;}
+			if (!targetCell || firstCell.$ == targetCell) {
+				return false;
+			}
 
 			// Sort in map order regardless of the DOM sequence.
 
@@ -701,8 +753,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 						const last = frag.getLast(
 							CKEDITOR.dom.walker.whitespaces(true)
 						);
-						if (last && !(last.is && last.is('br')))
-							{frag.append('br');}
+						if (last && !(last.is && last.is('br'))) {
+							frag.append('br');
+						}
 					}
 
 					cell.moveChildren(frag);
@@ -721,11 +774,17 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 			firstCell.appendBogus();
 
-			if (totalColSpan >= mapWidth) {firstCell.removeAttribute('rowSpan');}
-			else {firstCell.$.rowSpan = totalRowSpan;}
+			if (totalColSpan >= mapWidth) {
+				firstCell.removeAttribute('rowSpan');
+			} else {
+				firstCell.$.rowSpan = totalRowSpan;
+			}
 
-			if (totalRowSpan >= mapHeight) {firstCell.removeAttribute('colSpan');}
-			else {firstCell.$.colSpan = totalColSpan;}
+			if (totalRowSpan >= mapHeight) {
+				firstCell.removeAttribute('colSpan');
+			} else {
+				firstCell.$.colSpan = totalColSpan;
+			}
 
 			// Swip empty <tr> left at the end of table due to the merging.
 
@@ -747,7 +806,6 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 		// Be able to merge cells only if actual dimension of selected
 		// cells equals to the caculated rectangle.
-
 		else {
 			return totalRowSpan * totalColSpan == dimension;
 		}
@@ -755,8 +813,11 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 	function verticalSplitCell(selection, isDetect) {
 		const cells = getSelectedCells(selection);
-		if (cells.length > 1) {return false;}
-		else if (isDetect) {return true;}
+		if (cells.length > 1) {
+			return false;
+		} else if (isDetect) {
+			return true;
+		}
 
 		const cell = cells[0];
 
@@ -813,7 +874,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 			// The destination row is empty, append at will.
 
-			if (!candidateCell) {newCellTr.append(newCell);}
+			if (!candidateCell) {
+				newCellTr.append(newCell);
+			}
 		} else {
 			newCellRowSpan = newRowSpan = 1;
 
@@ -822,24 +885,32 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 			newCellTr.append((newCell = cell.clone()));
 
 			const cellsInSameRow = cellInRow(map, rowIndex);
-			for (let i = 0; i < cellsInSameRow.length; i++)
-				{cellsInSameRow[i].rowSpan++;}
+			for (let i = 0; i < cellsInSameRow.length; i++) {
+				cellsInSameRow[i].rowSpan++;
+			}
 		}
 
 		newCell.appendBogus();
 
 		cell.$.rowSpan = newRowSpan;
 		newCell.$.rowSpan = newCellRowSpan;
-		if (newRowSpan == 1) {cell.removeAttribute('rowSpan');}
-		if (newCellRowSpan == 1) {newCell.removeAttribute('rowSpan');}
+		if (newRowSpan == 1) {
+			cell.removeAttribute('rowSpan');
+		}
+		if (newCellRowSpan == 1) {
+			newCell.removeAttribute('rowSpan');
+		}
 
 		return newCell;
 	}
 
 	function horizontalSplitCell(selection, isDetect) {
 		const cells = getSelectedCells(selection);
-		if (cells.length > 1) {return false;}
-		else if (isDetect) {return true;}
+		if (cells.length > 1) {
+			return false;
+		} else if (isDetect) {
+			return true;
+		}
 
 		const cell = cells[0];
 
@@ -865,8 +936,9 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 		} else {
 			newCellColSpan = newColSpan = 1;
 			const cellsInSameCol = cellInCol(map, colIndex);
-			for (let i = 0; i < cellsInSameCol.length; i++)
-				{cellsInSameCol[i].colSpan++;}
+			for (let i = 0; i < cellsInSameCol.length; i++) {
+				cellsInSameCol[i].colSpan++;
+			}
 		}
 		const newCell = cell.clone();
 		newCell.insertAfter(cell);
@@ -874,8 +946,12 @@ if (!CKEDITOR.plugins.get('ae_tabletools')) {
 
 		cell.$.colSpan = newColSpan;
 		newCell.$.colSpan = newCellColSpan;
-		if (newColSpan == 1) {cell.removeAttribute('colSpan');}
-		if (newCellColSpan == 1) {newCell.removeAttribute('colSpan');}
+		if (newColSpan == 1) {
+			cell.removeAttribute('colSpan');
+		}
+		if (newCellColSpan == 1) {
+			newCell.removeAttribute('colSpan');
+		}
 
 		return newCell;
 	}
@@ -1104,13 +1180,17 @@ CKEDITOR.tools.buildTableMap = function(table) {
 			const oCell = aRows[i].cells[j];
 
 			c++;
-			while (aMap[r][c]) {c++;}
+			while (aMap[r][c]) {
+				c++;
+			}
 
 			const iColSpan = isNaN(oCell.colSpan) ? 1 : oCell.colSpan;
 			const iRowSpan = isNaN(oCell.rowSpan) ? 1 : oCell.rowSpan;
 
 			for (let rs = 0; rs < iRowSpan; rs++) {
-				if (!aMap[r + rs]) {aMap[r + rs] = [];}
+				if (!aMap[r + rs]) {
+					aMap[r + rs] = [];
+				}
 
 				for (let cs = 0; cs < iColSpan; cs++) {
 					aMap[r + rs][c + cs] = aRows[i].cells[j];

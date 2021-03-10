@@ -26,6 +26,7 @@ module.exports = {
 		ecmaVersion: 2018,
 	},
 	rules: {
+		'lines-around-comment': 'off',
 		'new-cap': [
 			'error',
 			{

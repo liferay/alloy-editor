@@ -81,7 +81,6 @@ const getBasePath = function() {
 		}
 
 		// Relative path.
-
 		else {
 			path = location.href.match(/^[^?]*\/(?:)/)[0] + path;
 		}
