@@ -3,7 +3,7 @@
 	"version": "2.12.0",
 	"description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
 	"devDependencies": {
-		"@liferay/eslint-config": "21.3.0",
+		"@liferay/eslint-config": "22.0.0",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "10.0.3",
 		"babel-loader": "^7.1.4",

@@ -126,10 +126,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@liferay/eslint-config@21.3.0":
-  version "21.3.0"
-  resolved "https://registry.yarnpkg.com/@liferay/eslint-config/-/eslint-config-21.3.0.tgz#f7de96adb23c85d8243e2b3f8172977d2d2e40b3"
-  integrity sha512-036dX4ClIdW/IbPpsEfWHXM2XSjcpqLDuE7HiXWyng4aKbG12mAnL6w214uWvr001m3m49HEaK0mk/v3MFVqkA==
+"@liferay/eslint-config@22.0.0":
+  version "22.0.0"
+  resolved "https://registry.yarnpkg.com/@liferay/eslint-config/-/eslint-config-22.0.0.tgz#f52f343316d6eb1aa8b99d5a9c393d25872827e2"
+  integrity sha512-aLOyJdORT2y0MoUcdakf8XFTu7gbHtxz1ygKmw5mZkmd/9Ihdgurly28tI3fBRbxjpZ2YMZCHGV/dLfK6vYFiQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "4.3.0"
     "@typescript-eslint/parser" "4.3.0"
