@@ -35,6 +35,7 @@ const ToolbarButtons = {
 		return buttons.reduce((list, button) => {
 			if (Array.isArray(button)) {
 				list.push(instance.getToolbarButtons(button, additionalProps));
+
 				return list;
 			} else {
 				return instance.getToolbarButtons(buttons, additionalProps);

@@ -19,6 +19,7 @@ const WidgetPosition = {
 	mixins: [WidgetInteractionPoint],
 
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * Should the widget to be restricted to the viewport, or not.
@@ -223,6 +224,7 @@ const WidgetPosition = {
 			});
 
 			// 150ms to match transition-duration for .ae-toolbar-transition:
+
 			setTimeout(() => {
 				domElement.setStyles({
 					pointerEvents: '',

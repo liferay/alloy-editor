@@ -15,6 +15,7 @@ import Lang from '../../oop/lang';
  */
 const ButtonKeystroke = {
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * The keystroke definition. An object with the following properties:

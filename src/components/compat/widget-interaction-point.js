@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
  */
 const WidgetInteractionPoint = {
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * The provided editor event.
@@ -130,6 +131,7 @@ const WidgetInteractionPoint = {
 
 			if (leftDist < rightDist) {
 				// user raised the mouse on left on the selection
+
 				x = left;
 			} else {
 				x = right;

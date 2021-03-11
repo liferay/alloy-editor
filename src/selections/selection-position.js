@@ -6,6 +6,7 @@
 import ReactDOM from 'react-dom';
 
 // Default gutter value for toolbar positioning
+
 const DEFAULT_GUTTER = {
 	left: 0,
 	top: 0,

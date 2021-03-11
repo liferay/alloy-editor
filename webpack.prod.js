@@ -24,6 +24,7 @@ const config = {
 				terserOptions: {
 					compress: {
 						// Small gains, turned off to speed things up.
+
 						arrows: false,
 						collapse_vars: false,
 						comparisons: false,

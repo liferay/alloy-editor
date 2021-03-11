@@ -219,6 +219,7 @@ export default WrappedComponent =>
 
 				if (leftDist < rightDist) {
 					// user raised the mouse on left on the selection
+
 					x = left;
 				} else {
 					x = right;
@@ -366,6 +367,7 @@ export default WrappedComponent =>
 				});
 
 				// 150ms to match transition-duration for .ae-toolbar-transition:
+
 				setTimeout(() => {
 					domElement.setStyles({
 						pointerEvents: '',
@@ -499,6 +501,7 @@ export default WrappedComponent =>
 			return buttons.reduce((list, button) => {
 				if (Array.isArray(button)) {
 					list.push(this.getToolbarButtons(button, additionalProps));
+
 					return list;
 				} else {
 					return this.getToolbarButtons(buttons, additionalProps);

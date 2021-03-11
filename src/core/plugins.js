@@ -9,6 +9,7 @@
 // in which it is happening
 //
 // @param {Object} plugin The plugin to wrap lifecycle methods
+
 const wrapPluginLifecycle = function(plugin) {
 	const methods = ['beforeInit', 'init', 'afterInit'];
 
@@ -42,6 +43,7 @@ const wrapPluginLifecycle = function(plugin) {
 //
 // @param {string|Array<string>} requires The requires object
 // @return {string} The filtered requires object
+
 const filterUnwantedDependencies = function(requires) {
 	if (typeof requires === 'string') {
 		requires = requires.split(',');
@@ -76,6 +78,7 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override(
 	pluginsLoad => {
 		// Wrap original load function so we can transform the plugin input parameter
 		// before passing it down to the original callback
+
 		return function(names, callback, scope) {
 			// eslint-disable-next-line no-invalid-this
 			pluginsLoad.call(this, names, plugins => {

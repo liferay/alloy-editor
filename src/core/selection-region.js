@@ -223,6 +223,7 @@ if (!CKEDITOR.plugins.get('ae_selectionregion')) {
 			}
 
 			const ranges = selection.getRanges();
+
 			return ranges && ranges.length === 1 && ranges[0].collapsed;
 		},
 

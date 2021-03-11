@@ -51,6 +51,7 @@ Table.prototype = {
 		config = config || {};
 
 		// Generate the rows and cols.
+
 		const tbody = table.append(this._createElement('tbody'));
 		const rows = config.rows || 1;
 		const cols = config.cols || 1;
@@ -68,6 +69,7 @@ Table.prototype = {
 		this.setHeading(table, config.heading);
 
 		// Insert the table element if we're creating one.
+
 		editor.insertElement(table);
 
 		const firstCell = new CKEDITOR.dom.element(table.$.rows[0].cells[0]);
@@ -162,8 +164,10 @@ Table.prototype = {
 		let colHeadingSettings = true;
 
 		// Check if all of the first cells in every row are TH
+
 		for (let row = 0; row < table.$.rows.length; row++) {
 			// If just one cell isn't a TH then it isn't a header column
+
 			const cell = table.$.rows[row].cells[0];
 
 			if (cell && cell.nodeName.toLowerCase() !== 'th') {
@@ -206,6 +210,7 @@ Table.prototype = {
 
 			if (table) {
 				// If the table's parent has only one child remove it as well (unless it's a table cell, or the editable element) (#5416, #6289, #12110)
+
 				const parent = table.getParent();
 				const editable = editor.editable();
 
@@ -270,15 +275,18 @@ Table.prototype = {
 
 		// If we need row heading and don't have a <thead> element yet, move the
 		// first row of the table to the head and convert the nodes to <th> ones.
+
 		if (!table.$.tHead && needRowHeading) {
 			const tableFirstRow = tableBody.getElementsByTag('tr').getItem(0);
 			const tableFirstRowChildCount = tableFirstRow.getChildCount();
 
 			// Change TD to TH:
+
 			for (i = 0; i < tableFirstRowChildCount; i++) {
 				const cell = tableFirstRow.getChild(i);
 
 				// Skip bookmark nodes. (#6155)
+
 				if (
 					cell.type === CKEDITOR.NODE_ELEMENT &&
 					!cell.data('cke-bookmark')
@@ -294,8 +302,10 @@ Table.prototype = {
 
 		// If we don't need row heading and we have a <thead> element, move the
 		// row out of there and into the <tbody> element.
+
 		if (table.$.tHead !== null && !needRowHeading) {
 			// Move the row out of the THead and put it in the TBody:
+
 			tableHead = this._createElement(table.$.tHead);
 
 			const previousFirstRow = tableBody.getFirst();
@@ -326,6 +336,7 @@ Table.prototype = {
 
 		// If we need column heading and the table doesn't have it, convert every first cell in
 		// every row into a `<th scope="row">` element.
+
 		if (!hasColHeading && needColHeading) {
 			for (i = 0; i < table.$.rows.length; i++) {
 				if (table.$.rows[i].cells[0].nodeName.toLowerCase() !== 'th') {
@@ -340,6 +351,7 @@ Table.prototype = {
 
 		// If we don't need column heading but the table has it, convert every first cell in every
 		// row back into a `<td>` element.
+
 		if (hadColHeading && !needColHeading) {
 			for (i = 0; i < table.$.rows.length; i++) {
 				const row = new CKEDITOR.dom.element(table.$.rows[i]);

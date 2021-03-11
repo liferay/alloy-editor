@@ -16,6 +16,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 	CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL =
 		'<div data-ae-embed-url="{url}"></div>';
 	CKEDITOR.DEFAULT_AE_EMBED_DEFAULT_LINK_TPL = '<a href="{url}">{url}</a>';
+
 	/**
 	 * CKEditor plugin which adds the infrastructure to embed urls as media objects using an oembed
 	 * service. By default, and for demoing purposes only, the oembed service is hosted in iframe.ly
@@ -46,6 +47,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 
 			// Default function to upcast DOM elements to embed widgets.
 			// It matches CKEDITOR.DEFAULT_AE_EMBED_WIDGET_TPL
+
 			const defaultEmbedWidgetUpcastFn = function(element, data) {
 				if (
 					element.name === 'div' &&
@@ -58,6 +60,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			};
 
 			// Create a embedUrl command that can be invoked to easily embed media URLs
+
 			editor.addCommand('embedUrl', {
 				exec(editor, data) {
 					editor.insertHtml(
@@ -69,6 +72,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			});
 
 			// Create a widget to properly handle embed operations
+
 			editor.widgets.add('ae_embed', {
 				mask: true,
 				requiredContent: 'div[data-ae-embed-url]',
@@ -140,6 +144,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			});
 
 			// Add a listener to handle paste events and turn links into embed objects
+
 			editor.once('contentDom', () => {
 				editor.on(
 					'paste',
@@ -156,15 +161,18 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 					},
 					null,
 					null,
+
 					// Make sure we run before autolink's paste handler,
 					// otherwise the link will be turned into an anchor and our
 					// REGEX_HTTP test will fail.
+
 					HIGH_PRIORITY
 				);
 			});
 
 			// Add a listener to handle selection change events and properly detect editor
 			// interactions on the widgets without messing with widget native selection
+
 			editor.on('selectionChange', _event => {
 				const selection = editor.getSelection();
 
@@ -200,6 +208,7 @@ if (!CKEDITOR.plugins.get('ae_embed')) {
 			});
 
 			// Add a filter to skip filtering widget elements
+
 			editor.filter.addElementCallback(element => {
 				if ('data-ae-embed-url' in element.attributes) {
 					return CKEDITOR.FILTER_SKIP_TREE;

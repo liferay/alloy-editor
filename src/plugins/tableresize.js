@@ -28,6 +28,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 		if (computed.indexOf('px') < 0) {
 			// look up keywords
+
 			if (
 				computed in borderMap &&
 				element.getComputedStyle('border-style') != 'none'
@@ -42,6 +43,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 	}
 
 	// Gets the table row that contains the most columns.
+
 	function getMasterPillarRow(table) {
 		const $rows = table.$.rows;
 
@@ -74,18 +76,22 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 		const rtl = table.getComputedStyle('direction') === 'rtl';
 
 		// Get the raw row element that cointains the most columns.
+
 		const $tr = getMasterPillarRow(table);
 
 		// Get the tbody element and position, which will be used to set the
 		// top and bottom boundaries.
+
 		const tbody = new CKEDITOR.dom.element(table.$.tBodies[0]);
 
 		const tbodyPosition = tbody.getDocumentPosition();
 
 		// Loop thorugh all cells, building pillars after each one of them.
+
 		for (let i = 0, len = $tr.cells.length; i < len; i++) {
 			// Both the current cell and the successive one will be used in the
 			// pillar size calculation.
+
 			const td = new CKEDITOR.dom.element($tr.cells[i]);
 
 			const nextTd =
@@ -94,12 +100,14 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			pillarIndex += td.$.colSpan || 1;
 
 			// Calculate the pillar boundary positions.
+
 			let pillarLeft;
 			let pillarRight;
 
 			let x = td.getDocumentPosition().x;
 
 			// Calculate positions based on the current cell.
+
 			if (rtl) {
 				pillarRight = x + getBorderWidth(td, 'left');
 			} else {
@@ -107,6 +115,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			}
 
 			// Calculate positions based on the next cell, if available.
+
 			if (nextTd) {
 				x = nextTd.getDocumentPosition().x;
 
@@ -119,6 +128,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 					pillarRight = x + getBorderWidth(nextTd, 'left');
 				}
 			}
+
 			// Otherwise calculate positions based on the table (for last cell).
 			else {
 				x = table.getDocumentPosition().x;
@@ -134,6 +144,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 			// The pillar should reflects exactly the shape of the hovered
 			// column border line.
+
 			pillars.push({
 				table,
 				index: pillarIndex,
@@ -264,10 +275,12 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			}
 
 			// Cache the list of cells to be resized.
+
 			leftSideCells = leftColumnCells;
 			rightSideCells = rightColumnCells;
 
 			// Cache the resize limit boundaries.
+
 			leftShiftBoundary = pillar.x - leftMinSize;
 			rightShiftBoundary = pillar.x + rightMinSize;
 
@@ -279,6 +292,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 			resizer.on('mousemove', onMouseMove);
 
 			// Prevent the native drag behavior otherwise 'mousemove' won't fire.
+
 			document.on('dragstart', cancel);
 		}
 
@@ -307,6 +321,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 				: leftSideCells.length;
 
 			// Perform the actual resize to table cells, only for those by side of the pillar.
+
 			for (let i = 0; i < cellsCount; i++) {
 				const leftCell = leftSideCells[i];
 
@@ -315,6 +330,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 				const table = pillar.table;
 
 				// Defer the resizing to avoid any interference among cells.
+
 				CKEDITOR.tools.setTimeout(
 					(
 						leftCell,
@@ -325,6 +341,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 						sizeShift
 					) => {
 						// 1px is the minimum valid width (#11626).
+
 						if (leftCell) {
 							leftCell.setStyle(
 								'width',
@@ -339,6 +356,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 						}
 
 						// If we're in the last cell, we need to resize the table as well
+
 						if (tableWidth) {
 							table.setStyle(
 								'width',
@@ -382,6 +400,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 		}
 
 		// Clean DOM when editor is destroyed.
+
 		editor.on('destroy', () => {
 			detach();
 
@@ -390,6 +409,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 		// Place the resizer after body to prevent it
 		// from being editable.
+
 		document.getDocumentElement().append(resizer);
 
 		resizer.setStyles({
@@ -405,6 +425,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 		// Display the resizer to receive events but don't show it,
 		// only change the cursor to resizable shape.
+
 		resizer.show();
 
 		this.destroy = function() {
@@ -421,6 +442,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 		if (evt.name === 'mouseout') {
 			// Bypass interal mouse move.
+
 			if (!target.is('table')) {
 				return;
 			}
@@ -451,6 +473,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 				// In Classic editor it is better to use document
 				// instead of editable so event will work below body.
+
 				editable.attachListener(
 					editable.isInline() ? editable : editor.document,
 					'mousemove',
@@ -461,6 +484,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 						// FF may return document and IE8 some UFO (object with no nodeType property...)
 						// instead of an element (#11823).
+
 						if (target.type !== CKEDITOR.NODE_ELEMENT) {
 							return;
 						}
@@ -469,6 +493,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 						// If we're already attached to a pillar, simply move the
 						// resizer.
+
 						if (resizer) {
 							if (resizer.isResizing()) {
 								resizer.move(pageX);
@@ -484,6 +509,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 						}
 
 						// Considering table, tr, td, tbody but nothing else.
+
 						let pillars;
 
 						if (
@@ -497,6 +523,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 
 						// Make sure the table we found is inside the container
 						// (eg. we should not use tables the editor is embedded within)
+
 						if (!editor.editable().contains(table)) {
 							return;
 						}
@@ -507,6 +534,7 @@ if (!CKEDITOR.plugins.get('ae_tableresize')) {
 							))
 						) {
 							// Cache table pillars calculation result.
+
 							table.setCustomData(
 								'_cke_table_pillars',
 								(pillars = buildTableColumnPillars(table))

@@ -12,7 +12,7 @@ module.exports = {
 		jest: true,
 		node: true,
 	},
-	extends: ['liferay/react'],
+	extends: ['@liferay/eslint-config/react'],
 	globals: {
 		AlloyEditor: true,
 		CKEDITOR: true,
@@ -26,6 +26,7 @@ module.exports = {
 		ecmaVersion: 2018,
 	},
 	rules: {
+		'lines-around-comment': 'off',
 		'new-cap': [
 			'error',
 			{
@@ -69,6 +70,7 @@ module.exports = {
 				],
 			},
 		],
+		'no-for-of-loops/no-for-of-loops': 'error',
 		'no-inner-declarations': 'off',
 		'no-invalid-this': 'warn',
 		'notice/notice': [

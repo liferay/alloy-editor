@@ -27,6 +27,7 @@ if (!CKEDITOR.plugins.get('ae_menubridge')) {
 		 */
 		beforeInit(editor) {
 			// Do nothing if the real menu plugin is present
+
 			if (CKEDITOR.plugins.get('menu')) {
 				return;
 			}

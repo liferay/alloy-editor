@@ -19,6 +19,7 @@ import Core from './core';
 import '../plugins';
 
 // An object containing all currently registered plugins in AlloyEditor.
+
 const BRIDGE_BUTTONS = {};
 
 /**
@@ -53,6 +54,7 @@ const editable = function(node, config) {
  */
 const getBasePath = function() {
 	// Find out the editor directory path, based on its <script> tag.
+
 	let path = window.ALLOYEDITOR_BASEPATH || '';
 
 	if (!path) {
@@ -70,11 +72,14 @@ const getBasePath = function() {
 
 	// In IE (only) the script.src string is the raw value entered in the
 	// HTML source. Other browsers return the full resolved URL instead.
+
 	if (path.indexOf(':/') === -1 && path.slice(0, 2) !== '//') {
 		// Absolute path.
+
 		if (path.indexOf('/') === 0) {
 			path = location.href.match(/^.*?:\/\/[^/]*/)[0] + path;
 		}
+
 		// Relative path.
 		else {
 			path = location.href.match(/^[^?]*\/(?:)/)[0] + path;
@@ -229,11 +234,13 @@ const getUrl = function(resource) {
 	const basePath = AlloyEditor.getBasePath();
 
 	// If this is not a full or absolute path.
+
 	if (resource.indexOf(':/') === -1 && resource.indexOf('/') !== 0) {
 		resource = basePath + resource;
 	}
 
 	// Add the timestamp, except for directories.
+
 	if (
 		CKEDITOR.timestamp &&
 		resource.charAt(resource.length - 1) !== '/' &&
@@ -292,6 +299,7 @@ const getButtons = function(buttons) {
 	return function() {
 		return buttons.reduce((acc, val) => {
 			val = BRIDGE_BUTTONS[val] || [val];
+
 			return acc.concat(val);
 		}, []);
 	};

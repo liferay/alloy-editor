@@ -15,6 +15,7 @@ import ButtonLinkEdit from '../buttons/button-link-edit.jsx';
  */
 const ButtonProps = {
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * The editor instance where the component is being used.

@@ -98,6 +98,7 @@ class ButtonStyles extends React.Component {
 
 		// Styles with wildcard element (*) won't be considered active by CKEditor. Defaulting
 		// to a 'span' element works for most of those cases with no defined element.
+
 		styleConfig = CKEDITOR.tools.merge({element: 'span'}, styleConfig);
 
 		const style = new CKEDITOR.style(styleConfig);

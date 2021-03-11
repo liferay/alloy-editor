@@ -80,6 +80,7 @@ class ButtonLinkEdit extends React.Component {
 		if (this.props.renderExclusive || this.props.manualSelection) {
 			// We need to wait for the next rendering cycle before focusing to avoid undesired
 			// scrolls on the page
+
 			this._focusLinkInput();
 		}
 	}
@@ -220,6 +221,7 @@ class ButtonLinkEdit extends React.Component {
 	 */
 	_getInitialState() {
 		// Can't access context from contructor, so get editor from props.
+
 		const {editor} = this.props.context;
 		const {defaultLinkTarget} = this.props;
 
@@ -408,6 +410,7 @@ class ButtonLinkEdit extends React.Component {
 
 		// We need to cancelExclusive with the bound parameters in case the button is used
 		// inside another in exclusive mode (such is the case of the link button)
+
 		this.props.cancelExclusive();
 
 		editor.fire('actionPerformed', this);
@@ -456,7 +459,9 @@ class ButtonLinkEdit extends React.Component {
 					modifySelection
 				);
 			} else {
-				if (!this.state.linkTarget) linkAttrs = {};
+				if (!this.state.linkTarget) {
+					linkAttrs = {};
+				}
 
 				linkUtils.create(
 					this.state.linkHref,
@@ -470,6 +475,7 @@ class ButtonLinkEdit extends React.Component {
 
 		// We need to cancelExclusive with the bound parameters in case the button is used
 		// inside another in exclusive mode (such is the case of the link button)
+
 		this.props.cancelExclusive();
 	};
 }

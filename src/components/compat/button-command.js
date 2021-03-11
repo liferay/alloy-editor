@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
  */
 const ButtonCommand = {
 	// Allows validating props being passed to the component.
+
 	propTypes: {
 		/**
 		 * The command that should be executed.

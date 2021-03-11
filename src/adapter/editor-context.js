@@ -26,6 +26,7 @@ EditorContext.toProps = Component => {
 		</EditorContext.Consumer>
 	));
 	forwardingComponent.key = Component.key;
+
 	return forwardingComponent;
 };
 
