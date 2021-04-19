@@ -13,7 +13,7 @@
 		"babel-preset-react": "^6.24.1",
 		"bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
 		"chai": "4.2.0",
-		"del": "^3.0.0",
+		"del": "^6.0.0",
 		"eslint": "7.21.0",
 		"event-stream": "3.3.1",
 		"gulp": "4.0.0",
