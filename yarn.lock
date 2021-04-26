@@ -1678,9 +1678,10 @@ bonjour@^3.5.0:
     multicast-dns "^6.0.1"
     multicast-dns-service-types "^1.1.0"
 
-"bourbon@https://github.com/thoughtbot/bourbon.git#v4.2.6":
-  version "4.2.6"
-  resolved "https://github.com/thoughtbot/bourbon.git#797d5e4a48a6f44da263cb9ee6257af41778d967"
+bourbon@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/bourbon/-/bourbon-7.0.0.tgz#42c0b691e99cb1f7616aad2a11b17ab88bbc4918"
+  integrity sha512-49kyBY+4gwnEvnez8H0TzFjfNZpUVdCmmS873S9nQ6YUuh2+qesbOh8lA+9gAuWlqtYlF+/3Etxm/13RhceOrg==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
