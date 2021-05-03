@@ -32,7 +32,7 @@
 		"karma-sauce-launcher": "2.0.2",
 		"karma-sinon": "1.0.5",
 		"karma-verbose-reporter": "0.0.6",
-		"karma-webpack": "4.0.0-rc.6",
+		"karma-webpack": "4.0.2",
 		"mocha": "6.0.0",
 		"parallel-webpack": "2.3.0",
 		"prettier": "^1.18.2",
