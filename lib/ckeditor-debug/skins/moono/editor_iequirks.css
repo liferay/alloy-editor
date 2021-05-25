@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 /*
@@ -479,6 +479,31 @@ a.cke_button_disabled:active
 	background-image: linear-gradient(to bottom, #f2f2f2, #ccc);
 	filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f2f2f2', endColorstr='#cccccc');
 }
+@media screen and ( hover: none ) {
+	a.cke_button_off:hover,
+	a.cke_button_disabled:hover
+	{
+		box-shadow: none;
+		background: transparent;
+		filter: none;
+	}
+	a.cke_button_on:hover
+	{
+		box-shadow: 0 1px 5px rgba(0,0,0,.6) inset, 0 1px 0 rgba(0,0,0,.2);
+	}
+		a.cke_button_off:active,
+	a.cke_button_disabled:active
+	{
+		box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
+		background: #ccc;
+		background-image: linear-gradient(to bottom, #f2f2f2, #ccc);
+		filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f2f2f2', endColorstr='#cccccc');
+	}
+	a.cke_button_on:active
+	{
+		box-shadow: 0 1px 6px rgba(0,0,0,.7) inset, 0 1px 0 rgba(0,0,0,.2);
+	}
+}
 .cke_button_icon
 {
 	cursor: inherit;
@@ -816,6 +841,31 @@ a.cke_combo_button
 {
 	box-shadow: 0 1px 6px rgba(0,0,0,.7) inset, 0 1px 0 rgba(0,0,0,.2);
 }
+@media screen and ( hover: none ) {
+	.cke_combo_off a.cke_combo_button:hover
+	{
+		background: #e4e4e4;
+		background-image: linear-gradient(to bottom, #ffffff, #e4e4e4);
+		filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#ffffff', endColorstr='#e4e4e4');
+		outline: none;
+	}
+	.cke_combo_on a.cke_combo_button:hover
+	{
+		box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 0 2px rgba(255,255,255,.15) inset, 0 1px 0 rgba(255,255,255,.15) inset;
+	}
+		.cke_combo_off a.cke_combo_button:active
+	{
+		border: 1px solid #777;
+		box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 5px rgba(0,0,0,.6) inset;
+		background: #b5b5b5;
+		background-image: linear-gradient(to bottom, #aaa, #cacaca);
+		filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#aaaaaa', endColorstr='#cacaca');
+	}
+	.cke_combo_on a.cke_combo_button:active
+	{
+		box-shadow: 0 1px 6px rgba(0,0,0,.7) inset, 0 1px 0 rgba(0,0,0,.2);
+	}
+}
 .cke_rtl .cke_combo_button
 {
 	float: right;
@@ -1087,88 +1137,88 @@ legend.cke_voice_label
 {
 	display: none;
 }
-.cke_button__simplebox_icon {background: url(icons.png?t=K5T7) no-repeat 0 -0px !important;}
-.cke_button__bgcolor_icon {background: url(icons.png?t=K5T7) no-repeat 0 -24px !important;}
-.cke_button__blockquote_icon {background: url(icons.png?t=K5T7) no-repeat 0 -48px !important;}
-.cke_button__bold_icon {background: url(icons.png?t=K5T7) no-repeat 0 -72px !important;}
-.cke_rtl .cke_button__bulletedlist_icon, .cke_mixed_dir_content .cke_rtl .cke_button__bulletedlist_icon {background: url(icons.png?t=K5T7) no-repeat 0 -96px !important;}
-.cke_ltr .cke_button__bulletedlist_icon {background: url(icons.png?t=K5T7) no-repeat 0 -120px !important;}
-.cke_rtl .cke_button__copy_icon, .cke_mixed_dir_content .cke_rtl .cke_button__copy_icon {background: url(icons.png?t=K5T7) no-repeat 0 -144px !important;}
-.cke_ltr .cke_button__copy_icon {background: url(icons.png?t=K5T7) no-repeat 0 -168px !important;}
-.cke_rtl .cke_button__cut_icon, .cke_mixed_dir_content .cke_rtl .cke_button__cut_icon {background: url(icons.png?t=K5T7) no-repeat 0 -192px !important;}
-.cke_ltr .cke_button__cut_icon {background: url(icons.png?t=K5T7) no-repeat 0 -216px !important;}
-.cke_button__horizontalrule_icon {background: url(icons.png?t=K5T7) no-repeat 0 -240px !important;}
-.cke_rtl .cke_button__indent_icon, .cke_mixed_dir_content .cke_rtl .cke_button__indent_icon {background: url(icons.png?t=K5T7) no-repeat 0 -264px !important;}
-.cke_ltr .cke_button__indent_icon {background: url(icons.png?t=K5T7) no-repeat 0 -288px !important;}
-.cke_button__italic_icon {background: url(icons.png?t=K5T7) no-repeat 0 -312px !important;}
-.cke_button__justifyblock_icon {background: url(icons.png?t=K5T7) no-repeat 0 -336px !important;}
-.cke_button__justifycenter_icon {background: url(icons.png?t=K5T7) no-repeat 0 -360px !important;}
-.cke_button__justifyleft_icon {background: url(icons.png?t=K5T7) no-repeat 0 -384px !important;}
-.cke_button__justifyright_icon {background: url(icons.png?t=K5T7) no-repeat 0 -408px !important;}
-.cke_rtl .cke_button__numberedlist_icon, .cke_mixed_dir_content .cke_rtl .cke_button__numberedlist_icon {background: url(icons.png?t=K5T7) no-repeat 0 -432px !important;}
-.cke_ltr .cke_button__numberedlist_icon {background: url(icons.png?t=K5T7) no-repeat 0 -456px !important;}
-.cke_rtl .cke_button__outdent_icon, .cke_mixed_dir_content .cke_rtl .cke_button__outdent_icon {background: url(icons.png?t=K5T7) no-repeat 0 -480px !important;}
-.cke_ltr .cke_button__outdent_icon {background: url(icons.png?t=K5T7) no-repeat 0 -504px !important;}
-.cke_rtl .cke_button__paste_icon, .cke_mixed_dir_content .cke_rtl .cke_button__paste_icon {background: url(icons.png?t=K5T7) no-repeat 0 -528px !important;}
-.cke_ltr .cke_button__paste_icon {background: url(icons.png?t=K5T7) no-repeat 0 -552px !important;}
-.cke_rtl .cke_button__pastefromword_icon, .cke_mixed_dir_content .cke_rtl .cke_button__pastefromword_icon {background: url(icons.png?t=K5T7) no-repeat 0 -576px !important;}
-.cke_ltr .cke_button__pastefromword_icon {background: url(icons.png?t=K5T7) no-repeat 0 -600px !important;}
-.cke_rtl .cke_button__redo_icon, .cke_mixed_dir_content .cke_rtl .cke_button__redo_icon {background: url(icons.png?t=K5T7) no-repeat 0 -624px !important;}
-.cke_ltr .cke_button__redo_icon {background: url(icons.png?t=K5T7) no-repeat 0 -648px !important;}
-.cke_button__removeformat_icon {background: url(icons.png?t=K5T7) no-repeat 0 -672px !important;}
-.cke_button__strike_icon {background: url(icons.png?t=K5T7) no-repeat 0 -696px !important;}
-.cke_button__subscript_icon {background: url(icons.png?t=K5T7) no-repeat 0 -720px !important;}
-.cke_button__superscript_icon {background: url(icons.png?t=K5T7) no-repeat 0 -744px !important;}
-.cke_button__textcolor_icon {background: url(icons.png?t=K5T7) no-repeat 0 -768px !important;}
-.cke_button__underline_icon {background: url(icons.png?t=K5T7) no-repeat 0 -792px !important;}
-.cke_rtl .cke_button__undo_icon, .cke_mixed_dir_content .cke_rtl .cke_button__undo_icon {background: url(icons.png?t=K5T7) no-repeat 0 -816px !important;}
-.cke_ltr .cke_button__undo_icon {background: url(icons.png?t=K5T7) no-repeat 0 -840px !important;}
-.cke_hidpi .cke_button__simplebox_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -0px !important;}
-.cke_hidpi .cke_button__bgcolor_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -24px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__blockquote_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -48px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__bold_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -72px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__bulletedlist_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__bulletedlist_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -96px !important;background-size: 16px !important;}
+.cke_button__simplebox_icon {background: url(icons.png?t=L4P9) no-repeat 0 -0px !important;}
+.cke_button__bgcolor_icon {background: url(icons.png?t=L4P9) no-repeat 0 -24px !important;}
+.cke_button__blockquote_icon {background: url(icons.png?t=L4P9) no-repeat 0 -48px !important;}
+.cke_button__bold_icon {background: url(icons.png?t=L4P9) no-repeat 0 -72px !important;}
+.cke_rtl .cke_button__bulletedlist_icon, .cke_mixed_dir_content .cke_rtl .cke_button__bulletedlist_icon {background: url(icons.png?t=L4P9) no-repeat 0 -96px !important;}
+.cke_ltr .cke_button__bulletedlist_icon {background: url(icons.png?t=L4P9) no-repeat 0 -120px !important;}
+.cke_rtl .cke_button__copy_icon, .cke_mixed_dir_content .cke_rtl .cke_button__copy_icon {background: url(icons.png?t=L4P9) no-repeat 0 -144px !important;}
+.cke_ltr .cke_button__copy_icon {background: url(icons.png?t=L4P9) no-repeat 0 -168px !important;}
+.cke_rtl .cke_button__cut_icon, .cke_mixed_dir_content .cke_rtl .cke_button__cut_icon {background: url(icons.png?t=L4P9) no-repeat 0 -192px !important;}
+.cke_ltr .cke_button__cut_icon {background: url(icons.png?t=L4P9) no-repeat 0 -216px !important;}
+.cke_button__horizontalrule_icon {background: url(icons.png?t=L4P9) no-repeat 0 -240px !important;}
+.cke_rtl .cke_button__indent_icon, .cke_mixed_dir_content .cke_rtl .cke_button__indent_icon {background: url(icons.png?t=L4P9) no-repeat 0 -264px !important;}
+.cke_ltr .cke_button__indent_icon {background: url(icons.png?t=L4P9) no-repeat 0 -288px !important;}
+.cke_button__italic_icon {background: url(icons.png?t=L4P9) no-repeat 0 -312px !important;}
+.cke_button__justifyblock_icon {background: url(icons.png?t=L4P9) no-repeat 0 -336px !important;}
+.cke_button__justifycenter_icon {background: url(icons.png?t=L4P9) no-repeat 0 -360px !important;}
+.cke_button__justifyleft_icon {background: url(icons.png?t=L4P9) no-repeat 0 -384px !important;}
+.cke_button__justifyright_icon {background: url(icons.png?t=L4P9) no-repeat 0 -408px !important;}
+.cke_rtl .cke_button__numberedlist_icon, .cke_mixed_dir_content .cke_rtl .cke_button__numberedlist_icon {background: url(icons.png?t=L4P9) no-repeat 0 -432px !important;}
+.cke_ltr .cke_button__numberedlist_icon {background: url(icons.png?t=L4P9) no-repeat 0 -456px !important;}
+.cke_rtl .cke_button__outdent_icon, .cke_mixed_dir_content .cke_rtl .cke_button__outdent_icon {background: url(icons.png?t=L4P9) no-repeat 0 -480px !important;}
+.cke_ltr .cke_button__outdent_icon {background: url(icons.png?t=L4P9) no-repeat 0 -504px !important;}
+.cke_rtl .cke_button__paste_icon, .cke_mixed_dir_content .cke_rtl .cke_button__paste_icon {background: url(icons.png?t=L4P9) no-repeat 0 -528px !important;}
+.cke_ltr .cke_button__paste_icon {background: url(icons.png?t=L4P9) no-repeat 0 -552px !important;}
+.cke_rtl .cke_button__pastefromword_icon, .cke_mixed_dir_content .cke_rtl .cke_button__pastefromword_icon {background: url(icons.png?t=L4P9) no-repeat 0 -576px !important;}
+.cke_ltr .cke_button__pastefromword_icon {background: url(icons.png?t=L4P9) no-repeat 0 -600px !important;}
+.cke_rtl .cke_button__redo_icon, .cke_mixed_dir_content .cke_rtl .cke_button__redo_icon {background: url(icons.png?t=L4P9) no-repeat 0 -624px !important;}
+.cke_ltr .cke_button__redo_icon {background: url(icons.png?t=L4P9) no-repeat 0 -648px !important;}
+.cke_button__removeformat_icon {background: url(icons.png?t=L4P9) no-repeat 0 -672px !important;}
+.cke_button__strike_icon {background: url(icons.png?t=L4P9) no-repeat 0 -696px !important;}
+.cke_button__subscript_icon {background: url(icons.png?t=L4P9) no-repeat 0 -720px !important;}
+.cke_button__superscript_icon {background: url(icons.png?t=L4P9) no-repeat 0 -744px !important;}
+.cke_button__textcolor_icon {background: url(icons.png?t=L4P9) no-repeat 0 -768px !important;}
+.cke_button__underline_icon {background: url(icons.png?t=L4P9) no-repeat 0 -792px !important;}
+.cke_rtl .cke_button__undo_icon, .cke_mixed_dir_content .cke_rtl .cke_button__undo_icon {background: url(icons.png?t=L4P9) no-repeat 0 -816px !important;}
+.cke_ltr .cke_button__undo_icon {background: url(icons.png?t=L4P9) no-repeat 0 -840px !important;}
+.cke_hidpi .cke_button__simplebox_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -0px !important;}
+.cke_hidpi .cke_button__bgcolor_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -24px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__blockquote_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -48px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__bold_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -72px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__bulletedlist_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__bulletedlist_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -96px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__bulletedlist_icon,
-.cke_ltr.cke_hidpi .cke_button__bulletedlist_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -120px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__copy_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__copy_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -144px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__bulletedlist_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -120px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__copy_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__copy_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -144px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__copy_icon,
-.cke_ltr.cke_hidpi .cke_button__copy_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -168px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__cut_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__cut_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -192px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__copy_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -168px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__cut_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__cut_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -192px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__cut_icon,
-.cke_ltr.cke_hidpi .cke_button__cut_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -216px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__horizontalrule_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -240px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__indent_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__indent_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -264px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__cut_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -216px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__horizontalrule_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -240px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__indent_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__indent_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -264px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__indent_icon,
-.cke_ltr.cke_hidpi .cke_button__indent_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -288px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__italic_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -312px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__justifyblock_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -336px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__justifycenter_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -360px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__justifyleft_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -384px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__justifyright_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -408px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__numberedlist_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__numberedlist_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -432px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__indent_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -288px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__italic_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -312px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__justifyblock_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -336px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__justifycenter_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -360px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__justifyleft_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -384px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__justifyright_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -408px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__numberedlist_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__numberedlist_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -432px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__numberedlist_icon,
-.cke_ltr.cke_hidpi .cke_button__numberedlist_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -456px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__outdent_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__outdent_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -480px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__numberedlist_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -456px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__outdent_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__outdent_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -480px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__outdent_icon,
-.cke_ltr.cke_hidpi .cke_button__outdent_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -504px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__paste_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__paste_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -528px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__outdent_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -504px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__paste_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__paste_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -528px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__paste_icon,
-.cke_ltr.cke_hidpi .cke_button__paste_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -552px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__pastefromword_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__pastefromword_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -576px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__paste_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -552px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__pastefromword_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__pastefromword_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -576px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__pastefromword_icon,
-.cke_ltr.cke_hidpi .cke_button__pastefromword_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -600px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__redo_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__redo_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -624px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__pastefromword_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -600px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__redo_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__redo_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -624px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__redo_icon,
-.cke_ltr.cke_hidpi .cke_button__redo_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -648px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__removeformat_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -672px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__strike_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -696px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__subscript_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -720px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__superscript_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -744px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__textcolor_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -768px !important;background-size: 16px !important;}
-.cke_hidpi .cke_button__underline_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -792px !important;background-size: 16px !important;}
-.cke_rtl.cke_hidpi .cke_button__undo_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__undo_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -816px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__redo_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -648px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__removeformat_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -672px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__strike_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -696px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__subscript_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -720px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__superscript_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -744px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__textcolor_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -768px !important;background-size: 16px !important;}
+.cke_hidpi .cke_button__underline_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -792px !important;background-size: 16px !important;}
+.cke_rtl.cke_hidpi .cke_button__undo_icon, .cke_hidpi .cke_mixed_dir_content .cke_rtl .cke_button__undo_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -816px !important;background-size: 16px !important;}
 .cke_hidpi .cke_ltr .cke_button__undo_icon,
-.cke_ltr.cke_hidpi .cke_button__undo_icon {background: url(icons_hidpi.png?t=K5T7) no-repeat 0 -840px !important;background-size: 16px !important;}
+.cke_ltr.cke_hidpi .cke_button__undo_icon {background: url(icons_hidpi.png?t=L4P9) no-repeat 0 -840px !important;background-size: 16px !important;}
 a.cke_button_disabled,
 a.cke_button_disabled:hover,
 a.cke_button_disabled:focus,
