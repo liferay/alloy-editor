@@ -1,3 +1,12 @@
+## [v2.13.0](https://github.com/liferay/alloy-editor/tree/v2.13.0) (2021-05-28)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.12.0...v2.13.0)
+
+### :house: Chores
+
+-   chore: Update CKEDITOR to 4.16.1 (#1484) ([\#1488](https://github.com/liferay/alloy-editor/pull/1488))
+-   chore: update to latest version of @liferay/eslint-config ([\#1469](https://github.com/liferay/alloy-editor/pull/1469))
+
 ## [v2.12.0](https://github.com/liferay/alloy-editor/tree/v2.12.0) (2021-03-08)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.11.16...v2.12.0)

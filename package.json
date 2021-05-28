@@ -1,6 +1,6 @@
 {
 	"name": "alloyeditor",
-	"version": "2.12.0",
+	"version": "2.13.0",
 	"description": "AlloyEditor, a modern WYSIWYG editor, build on top of CKEditor",
 	"devDependencies": {
 		"@liferay/eslint-config": "22.0.0",
