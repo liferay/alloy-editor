@@ -654,7 +654,9 @@ extend(
 			 */
 			spritemap: {
 				validator: Lang.isString,
-				value: 'alloy-editor/assets/icons/icons.svg',
+				value:
+					(window.ALLOYEDITOR_BASEPATH || 'alloy-editor/') +
+					'assets/icons/icons.svg',
 				writeOnce: true,
 			},
 
