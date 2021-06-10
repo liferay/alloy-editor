@@ -4,8 +4,7 @@
 
 ### :wrench: Bug fixes
 
--   fix: use ALLOYEDITOR_BASEPATH in spritemap if defined fixes #1489
-([\#1490](https://github.com/liferay/alloy-editor/pull/1490))
+-   fix: use ALLOYEDITOR_BASEPATH in spritemap if defined fixes ([\#1490](https://github.com/liferay/alloy-editor/pull/1490))
 
 ## [v2.13.0](https://github.com/liferay/alloy-editor/tree/v2.13.0) (2021-05-28)
 
