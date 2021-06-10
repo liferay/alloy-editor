@@ -1,3 +1,12 @@
+## [v2.14.1](https://github.com/liferay/alloy-editor/tree/v2.14.1) (2021-06-10)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.0...v2.14.1)
+
+### :wrench: Bug fixes
+
+-   fix: use ALLOYEDITOR_BASEPATH in spritemap if defined fixes #1489
+([\#1490](https://github.com/liferay/alloy-editor/pull/1490))
+
 ## [v2.13.0](https://github.com/liferay/alloy-editor/tree/v2.13.0) (2021-05-28)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.12.0...v2.13.0)
