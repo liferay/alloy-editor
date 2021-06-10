@@ -1,3 +1,11 @@
+## [v2.14.2](https://github.com/liferay/alloy-editor/tree/v2.14.2) (2021-06-10)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.1...v2.14.2)
+
+### :book: Documentation
+
+-   docs: fix pull request issue number in changelog as that is throwing CI errors ([\#1493](https://github.com/liferay/alloy-editor/pull/1493))
+
 ## [v2.14.1](https://github.com/liferay/alloy-editor/tree/v2.14.1) (2021-06-10)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.0...v2.14.1)
