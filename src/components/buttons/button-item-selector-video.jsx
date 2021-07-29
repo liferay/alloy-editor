@@ -28,7 +28,7 @@ class ButtonItemSelectorVideo extends React.Component {
 				onClick={this._handleClick}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.video}>
-				<ButtonIcon symbol="video" />
+				<ButtonIcon symbol="document-multimedia" />
 			</button>
 		);
 	}
