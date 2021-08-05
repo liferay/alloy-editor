@@ -1,3 +1,11 @@
+## [v2.14.3](https://github.com/liferay/alloy-editor/tree/v2.14.3) (2021-08-04)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.2...v2.14.3)
+
+### :wrench: Bug fixes
+
+-   fix: Two functions have the same icon in the same toolbar (#1495) ([\#1496](https://github.com/liferay/alloy-editor/pull/1496))
+
 ## [v2.14.2](https://github.com/liferay/alloy-editor/tree/v2.14.2) (2021-06-10)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.1...v2.14.2)
