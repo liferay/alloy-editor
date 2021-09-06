@@ -30,12 +30,13 @@ class ButtonParagraphAlign extends React.Component {
 	render() {
 		let buttonCommandsList;
 		let buttonCommandsListId;
+		const getCommands = this._getCommands();
 
 		if (this.props.expanded) {
 			buttonCommandsListId = ButtonParagraphAlign.key + 'List';
 			buttonCommandsList = (
 				<ButtonCommandsList
-					commands={this._getCommands()}
+					commands={getCommands}
 					inlineIcons={false}
 					listId={buttonCommandsListId}
 					onDismiss={this.props.toggleDropdown}
@@ -45,13 +46,15 @@ class ButtonParagraphAlign extends React.Component {
 
 		const editor = this.context.editor.get('nativeEditor');
 
-		const activeCommand = this._getCommands()
+		let activeCommand = getCommands
 			.filter(alignment => {
 				const command = editor.getCommand(alignment.command);
 
 				return command ? command.state === CKEDITOR.TRISTATE_ON : false;
 			})
 			.pop();
+
+		activeCommand = activeCommand ? activeCommand : getCommands[0];
 
 		const iconClassName = activeCommand.icon;
 
