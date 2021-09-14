@@ -1,3 +1,11 @@
+## [v2.14.4](https://github.com/liferay/alloy-editor/tree/v2.14.4) (2021-09-14)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.3...v2.14.4)
+
+### :wrench: Bug fixes
+
+-   fix: Prevent activeCommand in button-paragraph-align.jsx to be undefined (#1500) ([\#1501](https://github.com/liferay/alloy-editor/pull/1501))
+
 ## [v2.14.3](https://github.com/liferay/alloy-editor/tree/v2.14.3) (2021-08-04)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.2...v2.14.3)
