@@ -1,3 +1,15 @@
+## [v2.14.5](https://github.com/liferay/alloy-editor/tree/v2.14.5) (2021-12-09)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.4...v2.14.5)
+
+### :wrench: Bug fixes
+
+-   fix: Reload image state selection each time you select another one (… ([\#1508](https://github.com/liferay/alloy-editor/pull/1508))
+
+### :house: Chores
+
+-   chore: eslint-plugin migration ([\#1505](https://github.com/liferay/alloy-editor/pull/1505))
+
 ## [v2.14.4](https://github.com/liferay/alloy-editor/tree/v2.14.4) (2021-09-14)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.3...v2.14.4)
