@@ -23,9 +23,55 @@ class ButtonAccessibilityImageAlt extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const selection = props.context.editor
-			.get('nativeEditor')
-			.getSelection();
+		this.state = this._getInitialState();
+	}
+
+	/**
+	 * Lifecycle. Invoked once, only on the client, immediately after the initial rendering occurs.
+	 *
+	 * Focuses on the link input to immediately allow editing. This should only happen if the component
+	 * is rendered in exclusive mode to prevent aggressive focus stealing.
+	 *
+	 * @instance
+	 * @memberof ButtonAccessibilityImageAlt
+	 * @method componentDidMount
+	 */
+	componentDidMount() {
+		if (this.props.renderExclusive || this.props.manualSelection) {
+			// We need to wait for the next rendering cycle before focusing to avoid undesired
+			// scrolls on the page
+
+			this._focusAltInput();
+		}
+	}
+
+	/**
+	 * Lifecycle. Invoked when a component is receiving new props.
+	 * This method is not called for the initial render.
+	 *
+	 * @instance
+	 * @memberof ButtonAccessibilityImageAlt
+	 * @method componentWillReceiveProps
+	 */
+	componentWillReceiveProps() {
+		this.setState(this._getInitialState());
+	}
+
+	/**
+	 * The return value will be used as the initial value of this.state.
+	 *
+	 * @instance
+	 * @memberof ButtonAccessibilityImageAlt
+	 * @method _getInitialState
+	 * @protected
+	 * @return {Object}
+	 */
+	_getInitialState() {
+		// Can't access context from contructor, so get editor from props.
+
+		const {editor} = this.props.context;
+
+		const selection = editor.get('nativeEditor').getSelection();
 
 		const element =
 			selection.getSelectedElement() || selection.getStartElement();
@@ -38,7 +84,7 @@ class ButtonAccessibilityImageAlt extends React.Component {
 			? imageElement.getAttribute('alt')
 			: this._element.getAttribute('alt');
 
-		this.state = {
+		return {
 			imageAlt,
 		};
 	}
