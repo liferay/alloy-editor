@@ -61,7 +61,7 @@ class ButtonOutdentBlock extends React.Component {
 				onClick={this.execCommand}
 				tabIndex={this.props.tabIndex}
 				title={AlloyEditor.Strings.outdent}>
-				<ButtonIcon symbol="indent-more" />
+				<ButtonIcon symbol="indent-less" />
 			</button>
 		);
 	}
