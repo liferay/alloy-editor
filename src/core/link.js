@@ -85,7 +85,7 @@ Link.prototype = {
 			{
 				'data-cke-saved-href': URI,
 				href: URI,
-				'rel': 'noopener noreferrer',
+				rel: 'noopener noreferrer',
 			},
 			attrs
 		);
