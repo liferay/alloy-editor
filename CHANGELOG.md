@@ -1,3 +1,12 @@
+## [v2.14.6](https://github.com/liferay/alloy-editor/tree/v2.14.6) (2022-05-11)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.5...v2.14.6)
+
+### :wrench: Bug fixes
+
+-   fix: #1524 indent and outdent icons are switched ([\#1525](https://github.com/liferay/alloy-editor/pull/1525))
+-   fix: add 'rel' attribute to the generated links ([\#1522](https://github.com/liferay/alloy-editor/pull/1522))
+
 ## [v2.14.5](https://github.com/liferay/alloy-editor/tree/v2.14.5) (2021-12-09)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.4...v2.14.5)
