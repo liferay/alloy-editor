@@ -22,14 +22,14 @@ describe('AutoLink', function() {
 	it('should create a link when pressing SPACE', function() {
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a></p>',
 			html: '<p>link www.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a> text</p>',
 			html: '<p>link www.liferay.com { }text</p>',
 			keyCode: KEY_SPACE,
 		});
@@ -38,14 +38,14 @@ describe('AutoLink', function() {
 	it('should create a link when pressing COMMA', function() {
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a></p>',
 			html: '<p>link www.liferay.com { }</p>',
 			keyCode: KEY_COMMA,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a> text</p>',
 			html: '<p>link www.liferay.com { }text</p>',
 			keyCode: KEY_COMMA,
 		});
@@ -54,14 +54,14 @@ describe('AutoLink', function() {
 	it('should create a link when pressing SEMICOLON', function() {
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a></p>',
 			html: '<p>link www.liferay.com { }</p>',
 			keyCode: KEY_SEMICOLON,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> text</p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a> text</p>',
 			html: '<p>link www.liferay.com { }text</p>',
 			keyCode: KEY_SEMICOLON,
 		});
@@ -71,11 +71,11 @@ describe('AutoLink', function() {
 		// FIXME: Is there a way to force CKEDITOR to generate consistent markup in case of pressing ENTER?
 		// Bender does not fix the generated markup neither.
 		var expected =
-			'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p><p>text</p>';
+			'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a></p><p>text</p>';
 
 		if (CKEDITOR.env.ie && CKEDITOR.env.version < 11) {
 			expected =
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a><br />&nbsp;</p><p>text</p>';
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a><br />&nbsp;</p><p>text</p>';
 		}
 
 		testLink.call(this, {
@@ -110,63 +110,63 @@ describe('AutoLink', function() {
 	it('creates a link when the last word is a URL', function() {
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+				'<p>link <a href="http://liferay.com" rel="noopener noreferrer">liferay.com</a></p>',
 			html: '<p>link liferay.com { }</p>',
 			keyCode: KEY_COMMA,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p><p>text</p>',
+				'<p>link <a href="http://ww.liferay.com" rel="noopener noreferrer">ww.liferay.com</a></p><p>text</p>',
 			html: '<p>link ww.liferay.com</p>{ }<p>text</p>',
 			keyCode: KEY_ENTER,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.org">www.liferay.org</a></p>',
+				'<p>link <a href="http://www.liferay.org" rel="noopener noreferrer">www.liferay.org</a></p>',
 			html: '<p>link www.liferay.org { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">http://www.liferay.com</a></p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">http://www.liferay.com</a></p>',
 			html: '<p>link http://www.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://liferay.com">http://liferay.com</a></p>',
+				'<p>link <a href="http://liferay.com" rel="noopener noreferrer">http://liferay.com</a></p>',
 			html: '<p>link http://liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="https://www.liferay.com">https://www.liferay.com</a></p>',
+				'<p>link <a href="https://www.liferay.com" rel="noopener noreferrer">https://www.liferay.com</a></p>',
 			html: '<p>link https://www.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.alloy-editor.com">http://www.alloy-editor.com</a></p>',
+				'<p>link <a href="http://www.alloy-editor.com" rel="noopener noreferrer">http://www.alloy-editor.com</a></p>',
 			html: '<p>link http://www.alloy-editor.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://ww.liferay.com">ww.liferay.com</a></p>',
+				'<p>link <a href="http://ww.liferay.com" rel="noopener noreferrer">ww.liferay.com</a></p>',
 			html: '<p>link ww.liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
 
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://liferay.com">liferay.com</a></p>',
+				'<p>link <a href="http://liferay.com" rel="noopener noreferrer">liferay.com</a></p>',
 			html: '<p>link liferay.com { }</p>',
 			keyCode: KEY_SPACE,
 		});
@@ -196,9 +196,9 @@ describe('AutoLink', function() {
 	it('should not remove a link that has not just been created', function() {
 		testLink.call(this, {
 			expected:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a></p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a></p>',
 			html:
-				'<p>link <a href="http://www.liferay.com">www.liferay.com</a> { }</p>',
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer">www.liferay.com</a> { }</p>',
 			keyCode: KEY_BACK,
 		});
 	});

@@ -23,7 +23,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="http://test.com" target="_blank">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="http://test.com" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -46,7 +46,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="http://test.com" target="_blank">http://test.com</a> and then convert it to a link.</p>'
+			'<p>set a <a href="http://test.com" rel="noopener noreferrer" target="_blank">http://test.com</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -69,7 +69,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="http://test.com" target="_blank">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="http://test.com" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -92,7 +92,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="//test.com" target="_blank">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="//test.com" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -115,7 +115,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="#bookmark" target="_blank">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="#bookmark" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -138,7 +138,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="mailto:test@example.com" target="_self">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="mailto:test@example.com" rel="noopener noreferrer" target="_self">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -161,7 +161,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="mailto:test@example.com" target="_self">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="mailto:test@example.com" rel="noopener noreferrer" target="_self">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -184,7 +184,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>set a <a href="http://medium.com/@whoever/something-else" target="_blank">selection</a> and then convert it to a link.</p>'
+			'<p>set a <a href="http://medium.com/@whoever/something-else" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
 		);
 	});
 
@@ -193,7 +193,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>get a link from {<a target="_blank" href="http://test.com">selection</a>}.</p>'
+			'<p>get a link from {<a rel="noopener noreferrer" target="_blank" href="http://test.com">selection</a>}.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -208,7 +208,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>get a link from <a href="http://test.com" target="_blank">se{lect}ion</a>.</p>'
+			'<p>get a link from <a href="http://test.com" rel="noopener noreferrer" target="_blank">se{lect}ion</a>.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -236,7 +236,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>remove a link from a {<a href="http://test.com" target="_blank">selection</a>}.</p>'
+			'<p>remove a link from a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">selection</a>}.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -257,7 +257,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>remove a link from a {<a href="http://test.com" target="_blank">selection</a>}.</p>'
+			'<p>remove a link from a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">selection</a>}.</p>'
 		);
 
 		link.remove();
@@ -275,7 +275,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+			'<p>update the URL of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -290,7 +290,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>'
+			'<p>update the url of a <a href="http://new.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 		);
 	});
 
@@ -299,7 +299,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>update the url of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+			'<p>update the url of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 		);
 
 		link.update('http://new.com');
@@ -311,7 +311,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>'
+			'<p>update the url of a <a href="http://new.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 		);
 	});
 
@@ -320,7 +320,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+			'<p>update the URL of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -341,7 +341,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>update the url of a <a href="http://new.com" target="_self">link</a>.</p>'
+			'<p>update the url of a <a href="http://new.com" rel="noopener noreferrer" target="_self">link</a>.</p>'
 		);
 	});
 
@@ -350,7 +350,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+			'<p>update the URL of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 		);
 
 		link.update({
@@ -365,7 +365,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>update the url of a <a href="http://new.com" target="_self">link</a>.</p>'
+			'<p>update the url of a <a href="http://new.com" rel="noopener noreferrer" target="_self">link</a>.</p>'
 		);
 	});
 
@@ -430,7 +430,7 @@ describe('Link', function() {
 
 		bender.tools.selection.setWithHtml(
 			this.nativeEditor,
-			'<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+			'<p>update the URL of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 		);
 
 		var linkEl = link.getFromSelection();
@@ -445,7 +445,7 @@ describe('Link', function() {
 
 		assert.strictEqual(
 			data,
-			'<p>update the url of a <a href="http://new.com" target="_blank">link</a>.</p>'
+			'<p>update the url of a <a href="http://new.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 		);
 	});
 
@@ -547,7 +547,7 @@ describe('Link', function() {
 
 			assert.strictEqual(
 				data,
-				'<p>create the url of a <a href="new.com">selection</a>.</p>'
+				'<p>create the url of a <a href="new.com" rel="noopener noreferrer">selection</a>.</p>'
 			);
 		});
 
@@ -558,7 +558,7 @@ describe('Link', function() {
 
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
-				'<p>update the URL of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+				'<p>update the URL of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 			);
 
 			var linkEl = link.getFromSelection();
@@ -573,7 +573,7 @@ describe('Link', function() {
 
 			assert.strictEqual(
 				data,
-				'<p>update the url of a <a href="new.com" target="_blank">link</a>.</p>'
+				'<p>update the url of a <a href="new.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 			);
 		});
 
@@ -584,7 +584,7 @@ describe('Link', function() {
 
 			bender.tools.selection.setWithHtml(
 				this.nativeEditor,
-				'<p>update the url of a {<a href="http://test.com" target="_blank">link</a>}.</p>'
+				'<p>update the url of a {<a href="http://test.com" rel="noopener noreferrer" target="_blank">link</a>}.</p>'
 			);
 
 			var linkEl = link.getFromSelection();
@@ -603,7 +603,7 @@ describe('Link', function() {
 
 			assert.strictEqual(
 				data,
-				'<p>update the url of a <a href="test.com" target="_blank">link</a>.</p>'
+				'<p>update the url of a <a href="test.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 			);
 		});
 	});
