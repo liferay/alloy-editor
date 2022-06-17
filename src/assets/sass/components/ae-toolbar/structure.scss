@@ -44,7 +44,7 @@
 }
 
 .ae-toolbar-add {
-    border: solid $toolbar-add-border-width transparent;
+    outline: solid $toolbar-add-border-width transparent;
     padding: $toolbar-add-padding;
 
     .ae-button {
