@@ -1,3 +1,11 @@
+## [v2.14.7](https://github.com/liferay/alloy-editor/tree/v2.14.7) (2022-06-17)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.6...v2.14.7)
+
+### :wrench: Bug fixes
+
+-   fix: modify the toolbar add button border to outline to avoid layout shift ([\#1530](https://github.com/liferay/alloy-editor/pull/1530))
+
 ## [v2.14.6](https://github.com/liferay/alloy-editor/tree/v2.14.6) (2022-05-11)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.5...v2.14.6)
