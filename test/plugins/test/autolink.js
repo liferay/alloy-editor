@@ -251,6 +251,20 @@ describe('AutoLink', function() {
 		testLinkAtEnd.call(this, KEY_ENTER);
 	});
 
+	it('should create a link with default target when pressing SPACE', function() {
+		this.nativeEditor.config.buttonCfg = {
+				linkEdit: {
+					defaultLinkTarget: '_blank'
+				}
+			};
+		testLink.call(this, {
+			expected:
+				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer" target="_blank">www.liferay.com</a></p>',
+			html: '<p>link www.liferay.com { }</p>',
+			keyCode: KEY_SPACE,
+		});
+	});
+
 	function testLink(config) {
 		bender.tools.selection.setWithHtml(this.nativeEditor, config.html);
 
@@ -280,7 +294,7 @@ describe('AutoLink', function() {
 
 		assert.doesNotThrow(
 			function() {
-				happen.keyup(this._editable, {keyCode: keyCode});
+				happen.keyup(this._editable, {keyCode});
 			}.bind(this)
 		);
 	}

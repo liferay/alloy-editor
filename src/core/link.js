@@ -90,6 +90,14 @@ Link.prototype = {
 			attrs
 		);
 
+		if(!linkAttrs.target) {
+			const buttonCfg = this._editor.config.buttonCfg || {};
+			const defaultLinkTarget = buttonCfg['linkEdit'] && buttonCfg['linkEdit']['defaultLinkTarget'];
+			if(defaultLinkTarget) {
+				linkAttrs.target = defaultLinkTarget;
+			}
+		}
+
 		const style = new CKEDITOR.style({
 			attributes: linkAttrs,
 			element: 'a',

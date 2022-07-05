@@ -606,5 +606,31 @@ describe('Link', function() {
 				'<p>update the url of a <a href="test.com" rel="noopener noreferrer" target="_blank">link</a>.</p>'
 			);
 		});
+
+	it('should create a link with a default target, when no target is given', function() {
+		this.nativeEditor.config.buttonCfg = {
+				linkEdit: {
+					defaultLinkTarget: '_blank'
+				}
+			};
+		var link = new CKEDITOR.Link(this.nativeEditor);
+
+		bender.tools.selection.setWithHtml(
+			this.nativeEditor,
+			'set a {selection} and then convert it to a link.'
+		);
+
+		link.create('http://test.com');
+
+		var data = bender.tools.getData(this.nativeEditor, {
+			fixHtml: true,
+			compatHtml: true,
+		});
+
+		assert.strictEqual(
+			data,
+			'<p>set a <a href="http://test.com" rel="noopener noreferrer" target="_blank">selection</a> and then convert it to a link.</p>'
+		);
+	});
 	});
 });
