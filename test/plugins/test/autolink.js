@@ -252,11 +252,9 @@ describe('AutoLink', function() {
 	});
 
 	it('should create a link with default target when pressing SPACE', function() {
-		this.nativeEditor.config.buttonCfg = {
-				linkEdit: {
-					defaultLinkTarget: '_blank'
-				}
-			};
+		this.nativeEditor.config.linkCfg = {
+			defaultTarget: '_blank'
+		};
 		testLink.call(this, {
 			expected:
 				'<p>link <a href="http://www.liferay.com" rel="noopener noreferrer" target="_blank">www.liferay.com</a></p>',

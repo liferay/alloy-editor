@@ -91,10 +91,10 @@ Link.prototype = {
 		);
 
 		if(!linkAttrs.target) {
-			const buttonCfg = this._editor.config.buttonCfg || {};
-			const defaultLinkTarget = buttonCfg['linkEdit'] && buttonCfg['linkEdit']['defaultLinkTarget'];
-			if(defaultLinkTarget) {
-				linkAttrs.target = defaultLinkTarget;
+			const linkCfg = this._editor.config.linkCfg || {};
+			const defaultTarget = linkCfg && linkCfg.defaultTarget;
+			if(defaultTarget) {
+				linkAttrs.target = defaultTarget;
 			}
 		}
 

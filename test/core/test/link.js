@@ -608,10 +608,8 @@ describe('Link', function() {
 		});
 
 	it('should create a link with a default target, when no target is given', function() {
-		this.nativeEditor.config.buttonCfg = {
-				linkEdit: {
-					defaultLinkTarget: '_blank'
-				}
+		this.nativeEditor.config.linkCfg = {
+				defaultTarget: '_blank'
 			};
 		var link = new CKEDITOR.Link(this.nativeEditor);
 
