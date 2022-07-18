@@ -253,7 +253,7 @@ describe('AutoLink', function() {
 
 	it('should create a link with default target when pressing SPACE', function() {
 		this.nativeEditor.config.linkCfg = {
-			defaultTarget: '_blank'
+			defaultTarget: '_blank',
 		};
 		testLink.call(this, {
 			expected:

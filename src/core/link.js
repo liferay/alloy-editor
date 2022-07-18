@@ -90,10 +90,10 @@ Link.prototype = {
 			attrs
 		);
 
-		if(!linkAttrs.target) {
+		if (!linkAttrs.target) {
 			const linkCfg = this._editor.config.linkCfg || {};
 			const defaultTarget = linkCfg && linkCfg.defaultTarget;
-			if(defaultTarget) {
+			if (defaultTarget) {
 				linkAttrs.target = defaultTarget;
 			}
 		}
