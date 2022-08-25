@@ -146,6 +146,8 @@ if (!CKEDITOR.plugins.get('ae_buttonbridge')) {
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
 		beforeInit(editor) {
+			BUTTON_DEFS[editor.name] = {};
+
 			editor.ui.addButton = function(buttonName, buttonDefinition) {
 				this.add(buttonName, CKEDITOR.UI_BUTTON, buttonDefinition);
 			};

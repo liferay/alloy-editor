@@ -197,6 +197,8 @@ if (!CKEDITOR.plugins.get('ae_panelmenubuttonbridge')) {
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
 		beforeInit(editor) {
+			PANEL_MENU_DEFS[editor.name] = {};
+
 			editor.ui.addPanelMenuButton = function(
 				panelMenuButtonName,
 				panelMenuButtonDefinition

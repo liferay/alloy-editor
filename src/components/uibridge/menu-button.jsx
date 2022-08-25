@@ -194,6 +194,8 @@ if (!CKEDITOR.plugins.get('ae_menubuttonbridge')) {
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
 		beforeInit(editor) {
+			MENUBUTTON_DEFS[editor.name] = {};
+
 			editor.ui.addMenuButton = function(
 				menuButtonName,
 				menuButtonDefinition
