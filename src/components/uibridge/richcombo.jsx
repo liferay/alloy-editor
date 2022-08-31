@@ -235,6 +235,8 @@ if (!CKEDITOR.plugins.get('ae_richcombobridge')) {
 		 * @param {Object} editor The CKEditor instance being initialized
 		 */
 		beforeInit(editor) {
+			RICH_COMBO_DEFS[editor.name] = {};
+
 			editor.ui.addRichCombo = function(
 				richComboName,
 				richComboDefinition
