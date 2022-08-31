@@ -1,3 +1,15 @@
+## [v2.14.8](https://github.com/liferay/alloy-editor/tree/v2.14.8) (2022-08-31)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.7...v2.14.8)
+
+### :wrench: Bug fixes
+
+-   fix: Reset uibridge definitions each time we destroy and create and editor (#1537) ([\#1538](https://github.com/liferay/alloy-editor/pull/1538))
+
+### :package: Miscellaneous
+
+-   use defaultLinkTarget when creating a link, fixes autolink ([\#1536](https://github.com/liferay/alloy-editor/pull/1536))
+
 ## [v2.14.7](https://github.com/liferay/alloy-editor/tree/v2.14.7) (2022-06-17)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.6...v2.14.7)
