@@ -171,13 +171,15 @@ extend(
 			const nativeEditor = this.get('nativeEditor');
 			const isMSSelection = typeof window.getSelection != 'function';
 
-			if (isMSSelection) {
-				nativeEditor.document.$.selection.empty();
-			} else {
-				nativeEditor.document
-					.getWindow()
-					.$.getSelection()
-					.removeAllRanges();
+			if (nativeEditor.document) {
+				if (isMSSelection) {
+					nativeEditor.document.$.selection.empty();
+				} else {
+					nativeEditor.document
+						.getWindow()
+						.$.getSelection()
+						.removeAllRanges();
+				}
 			}
 		},
 
