@@ -53,10 +53,13 @@ const centerToolbar = function(toolbar, rect) {
 
 	if (ranges && ranges.length === 1) {
 		let startContainer = ranges[0].startContainer;
-		let nodeName = startContainer.$.nodeName;
+
 		if (startContainer.$.nodeType !== Node.ELEMENT_NODE) {
 			startContainer = startContainer.getParent();
 		}
+
+		const nodeName = startContainer.$.nodeName;
+
 		if (nodeName === 'TD' || nodeName === 'TH') {
 			const startContainerClientRect = startContainer.getClientRect();
 			offsetHeight = startContainerClientRect.y - rect.top;
