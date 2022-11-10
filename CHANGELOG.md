@@ -1,3 +1,16 @@
+## [v2.14.9](https://github.com/liferay/alloy-editor/tree/v2.14.9) (2022-11-10)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.8...v2.14.9)
+
+### :wrench: Bug fixes
+
+-   fix: Calculate the offsetHeight for the toolbar only when the table is used ([\#1543](https://github.com/liferay/alloy-editor/pull/1543))
+-   fix: avoid null on init and destroy the editor too fast makes the DOM is not loaded ([\#1541](https://github.com/liferay/alloy-editor/pull/1541))
+
+### :house: Chores
+
+-   chore(deps-dev): bump karma from 4.0.0 to 6.4.1 ([\#1540](https://github.com/liferay/alloy-editor/pull/1540))
+
 ## [v2.14.8](https://github.com/liferay/alloy-editor/tree/v2.14.8) (2022-08-31)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.7...v2.14.8)
