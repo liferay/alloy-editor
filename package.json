@@ -12,7 +12,7 @@
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
 		"bourbon": "https://github.com/thoughtbot/bourbon.git#v4.2.6",
-		"chai": "4.2.0",
+		"chai": "4.3.7",
 		"del": "^3.0.0",
 		"eslint": "7.21.0",
 		"event-stream": "3.3.1",
