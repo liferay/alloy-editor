@@ -153,7 +153,9 @@ if (!CKEDITOR.plugins.get('ae_uicore')) {
 			editor.on('destroy', _event => {
 				ariaElement.parentNode.removeChild(ariaElement);
 
-				handleUI.detach();
+				if (handleUI.detach) {
+					handleUI.detach();
+				}
 			});
 		},
 

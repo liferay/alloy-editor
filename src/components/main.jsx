@@ -229,7 +229,10 @@ class UI extends React.Component {
 		}
 
 		if (this._keyDownListener) {
-			this._keyDownListener.detach();
+			if (this._keyDownListener.detach) {
+				this._keyDownListener.detach();
+			}
+
 			document.removeEventListener('keydown', this._keyDownListener);
 		}
 	}
