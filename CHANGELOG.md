@@ -1,3 +1,11 @@
+## [v2.14.10](https://github.com/liferay/alloy-editor/tree/v2.14.10) (2023-10-20)
+
+[Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.9...v2.14.10)
+
+### :wrench: Bug fixes
+
+-   fix: check if function is available ([\#1554](https://github.com/liferay/alloy-editor/pull/1554))
+
 ## [v2.14.9](https://github.com/liferay/alloy-editor/tree/v2.14.9) (2022-11-10)
 
 [Full changelog](https://github.com/liferay/alloy-editor/compare/v2.14.8...v2.14.9)
